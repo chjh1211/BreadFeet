@@ -139,7 +139,7 @@ const mockData = [
     subregion: "서구",
   },
   {
-    id: 1,
+    id: 8,
     name: "고구마빵집",
     distance: "3m",
     region: "대구",
