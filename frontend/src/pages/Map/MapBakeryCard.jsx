@@ -29,7 +29,8 @@ const MapBakeryCard = ({ bakery, userData = [] }) => {
   return (
     <li key={bakery.id} className="mapCard">
       <div className="mapMatchRate">
-        <MatchRateBar name={bakery.name} rate={rate} />
+        {console.log(bakery.id)}
+        <MatchRateBar bakeryId={bakery.id} name={bakery.name} rate={rate} />
       </div>
       <div className="mapCardMeta">
         <Stars rating={bakery.rating} />
