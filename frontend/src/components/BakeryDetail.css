@@ -1,0 +1,252 @@
+.bdw-wrap {
+  max-width: 570px;
+  min-height: 100vh;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 30px 20px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  background: #ebe4de;
+  color: #352310;
+}
+
+.bdw-header {
+  /* position: sticky; */
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: var(--bg);
+  padding-bottom: 8px;
+}
+
+.bdw-head-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.bdw-title {
+  margin: 0;
+  font-size: 24px;
+}
+
+.bdw-sub {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 5px;
+}
+
+.bdw-count {
+  font-size: 12px;
+  color: #352310;
+}
+
+.bdw-meta dl {
+  margin: 12px 0 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.bdw-meta dl div {
+  display: flex;
+  gap: 20px;
+}
+
+.bdw-meta dt {
+  display: inline-block;
+  display: flexbox;
+  font-weight: 700;
+  text-align: start;
+}
+
+.bdw-meta dd {
+  margin: 0;
+  display: inline;
+}
+
+.bakeryDetailPopMenus {
+  display: flex;
+  gap: 15px;
+  padding: 0;
+  list-style: none;
+}
+
+.bakeryDetailTags {
+  display: flex;
+  gap: 15px;
+  padding: 0;
+  list-style: none;
+}
+
+.bakeryDetailTags li {
+  border-radius: 4px;
+  background: #cab9ab;
+  padding: 3px 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.bdw-score {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 0;
+  margin: 10px 0 14px;
+}
+
+.bdw-score-number {
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.bdw-bars {
+  display: grid;
+  gap: 5px;
+  margin: 10px 0;
+  width: 80%;
+}
+
+.bdw-bar {
+  display: grid;
+  grid-template-columns: 16px 1fr 56px;
+  gap: 10px;
+  align-items: center;
+}
+
+.bdw-bar-track {
+  height: 8px;
+  background: #fdfbf9;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.bdw-bar-fill {
+  height: 100%;
+  background: #f0b400;
+  border-radius: 4px;
+}
+
+.bdw-reviews {
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.bdw-review-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bdw-sort {
+  position: relative;
+}
+
+.bdw-sort-btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background: #fdfbf9;
+  color: #352310;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 120px;
+  padding: 10px 20px;
+}
+
+.bdw-sort-menu {
+  position: absolute;
+  top: calc(100% - 15px);
+  min-width: 120px;
+  border-radius: 5px;
+  background: #fdfbf9;
+  padding: 5px;
+}
+
+.bdw-sort-item {
+  list-style: none;
+}
+
+.bdw-sort-option {
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: none;
+  border-radius: 10px;
+  background: none;
+  color: #352310;
+  font-weight: 600;
+  padding: 8px 10px;
+}
+
+.bdw-sort-option:hover {
+  background: #efe5dc;
+}
+
+.bdw-sort-option.is-active {
+  background: #eadfd6;
+}
+
+.bdw-sort-check {
+  font-weight: 800;
+}
+
+.bdw-review-btn {
+  cursor: pointer;
+  margin: 0;
+  border-radius: 10px;
+  border: none;
+  background: #cab9ab;
+  padding: 10px 30px;
+  font-weight: 700;
+}
+
+.bdw-review {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  background: var(--white);
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.bakeryDetailBar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bakeryDetailBarProfile {
+  display: flex;
+  gap: 5px;
+}
+
+.bakeryDetailBarProfileImg {
+  width: 25px;
+  height: 25px;
+  align-self: center;
+  /* border: 1px black solid; */
+  border-radius: 30px;
+  background: #b0afae;
+}
+
+.bakeryDetailBarNickName {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.bdw-review-stars {
+  color: #f0b400;
+}
+
+.bdw-empty {
+  margin-top: 8px;
+}

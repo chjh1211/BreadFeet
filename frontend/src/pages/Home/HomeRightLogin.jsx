@@ -12,7 +12,7 @@ const mockData = [
 ];
 
 const HomeRightLogin = () => {
-  const [isLoggedIn, _setIsLoggedIn] = useState(false); // NoLogin 컴포넌트 확인용
+  const [isLoggedIn, _setIsLoggedIn] = useState(true); // NoLogin 컴포넌트 확인용
 
   return (
     <div className="HomeRightWrapper">
@@ -20,7 +20,12 @@ const HomeRightLogin = () => {
         <h2 className="Title">이런 빵집은 어때요?</h2>
         <div className="MatchList">
           {mockData.map((item) => (
-            <MatchRateBar key={item.id} name={item.name} rate={item.rate} />
+            <MatchRateBar
+              key={item.id}
+              bakeryId={item.id}
+              name={item.name}
+              rate={item.rate}
+            />
           ))}
         </div>
       </div>

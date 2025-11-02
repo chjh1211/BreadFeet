@@ -1,10 +1,20 @@
 import "./MatchRateBar.css";
 
-const MatchRateBar = ({ name, rate }) => {
+const MatchRateBar = ({ bakeryId, name, rate }) => {
+  const openDetailPopup = (e) => {
+    e.stopPropagation();
+    window.open(
+      `/bakery/${bakeryId}`,
+      `resizable=yes,scrollbars=yes,noopener,noreferrer`
+    );
+  };
+
   return (
     <div className="MatchRateBar">
       <div className="MatchRateLabel">
-        <span className="BakeryName">{name}</span>
+        <button className="BakeryName" onClick={openDetailPopup}>
+          {name}
+        </button>
         <span className="MatchRateText">취향매칭률 {rate}%</span>
       </div>
       <div className="MatchRateTrack">
