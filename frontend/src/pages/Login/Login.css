@@ -1,40 +1,47 @@
-body {
-  color: #352310;
-}
+/* Login.css */
 
 .LoginBackGround {
-  min-height: calc(100dvh - var(--navbar-h));
+  /* 화면 전체를 차지하도록 설정 */
+  width: 100%;
+  min-height: 100vh;
+  
+  /* Flexbox를 사용하여 내부 요소들을 세로 중앙 정렬 */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
+  /* 배경색은 흰색 */
+  background-color: #ffffff;
+  
+  /* 배경 요소를 배치하기 위해 position: relative 설정 */
+  position: relative;
+  
+  /* 스크롤이 생길 경우를 대비해 overflow-x 숨김 */
+  overflow-x: hidden;
+}
+
+.Wrapper {
+  /* 로고와 문구를 감싸는 래퍼 */
+  text-align: center;
+  
+  /* 배경 요소보다 위에 보이도록 z-index 설정 */
+  z-index: 2;
+  
+  /* 로그인 버튼과의 간격 */
+  margin-bottom: 20px; 
 }
 
 .Logo {
-  font-size: 128px;
+  /* 스크린샷의 'BreadFeet' 폰트 스타일 */
+  font-size: 4rem; /* 폰트 크기 예시 */
+  font-weight: bold;
+  color: #3D2D1A; /* 진한 갈색 예시 */
 }
 
 .Phrase {
-  font-size: 40px;
-  margin: 0 auto 16px auto;
-}
-
-@media (max-width: 1024px) {
-  .Logo {
-    font-size: 96px;
-  }
-
-  .Phrase {
-    font-size: 24px;
-  }
-}
-
-@media (max-width: 480px) {
-  .Logo {
-    font-size: 64px;
-  }
-
-  .Phrase {
-    font-size: 20px;
-  }
+  /* '빵지순례...' 문구 폰트 스타일 */
+  font-size: 1.2rem; /* 폰트 크기 예시 */
+  color: #5A4D3C; /* 연한 갈색 예시 */
+  margin-top: 10px;
 }

@@ -2,26 +2,26 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import "./BakeryDetail.css";
 import BakeryReview from "./BakeryReview";
-import profileImage from "../assets/bakery1.jpg";
-
+//import profileImage from "../assets/bakery1.jpg";
 // HomeRightLogin & MapBakeryDetail 랑 같은 api 사용 할거
-const mockData = [
-  {
-    id: 1,
-    name: "감자빵집",
-    rating: 4.5,
-    reviewCount: 88,
-    address: "대구 북구 대학로 80",
-    phone: "053 123 4567",
-    hours: "매일 09:00 - 20:00",
-    popMenu: ["소금빵", "크림빵", "크루아상"],
-    tags: ["매장 내 취식 가능", "테이크아웃", "커피"],
-  },
-];
 
-function findBakeryById(id) {
-  return mockData.find((b) => b.id === id) || null;
-}
+// const mockData = [
+//   {
+//     id: 1,
+//     name: "감자빵집",
+//     rating: 4.5,
+//     reviewCount: 88,
+//     address: "대구 북구 대학로 80",
+//     phone: "053 123 4567",
+//     hours: "매일 09:00 - 20:00",
+//     popMenu: ["소금빵", "크림빵", "크루아상"],
+//     tags: ["매장 내 취식 가능", "테이크아웃", "커피"],
+//   },
+// ];
+
+// function findBakeryById(id) {
+//   return mockData.find((b) => b.id === id) || null;
+// }
 
 const Stars = ({ rating }) => {
   const full = Math.floor(rating);
@@ -73,79 +73,101 @@ const REVIEW_SORTS = [
 ];
 
 const BakeryDetail = () => {
-  const { bakeryId } = useParams(); // URL의 :bakeryId
+  // const { bakeryId } = useParams(); // URL의 :bakeryId
+  // const idNum = Number(bakeryId);
+  // const bakery = React.useMemo(() => findBakeryById(idNum), [idNum]);
+
+  // React.useEffect(() => {
+  //   if (bakery?.name) document.title = `${bakery.name} • BreadFeet`;
+  // }, [bakery?.name]);
+
+  // const reviews = React.useMemo(
+  //   () => [
+  //     {
+  //       id: 1,
+  //       nickname: "감자도리",
+  //       profile: profileImage,
+  //       rating: 4.5,
+  //       likes: 34,
+  //       dislikes: 2,
+  //       date: "2025-03-21",
+  //       text: "맛있네요",
+  //     },
+  //     {
+  //       id: 2,
+  //       nickname: "감돌이",
+  //       profile: profileImage,
+  //       rating: 4,
+  //       likes: 12,
+  //       dislikes: 1,
+  //       date: "2025-04-03",
+  //       text: "소금빵 맛있고 커피도 괜찮음.",
+  //     },
+  //     {
+  //       id: 3,
+  //       nickname: "미식감자",
+  //       profile: profileImage,
+  //       rating: 2.5,
+  //       likes: 4,
+  //       dislikes: 0,
+  //       date: "2025-02-10",
+  //       text: "기대보단 평범했어요.",
+  //     },
+  //     {
+  //       id: 4,
+  //       nickname: "감자도리토스",
+  //       profile: profileImage,
+  //       rating: 2,
+  //       likes: 2,
+  //       dislikes: 5,
+  //       date: "2025-05-02",
+  //       text: "대기 길고 재고가 빨리 떨어져요.",
+  //     },
+  //     {
+  //       id: 5,
+  //       nickname: "감자버터",
+  //       profile: profileImage,
+  //       rating: 5,
+  //       likes: 52,
+  //       dislikes: 3,
+  //       date: "2025-05-12",
+  //       text: "크로와상이 진짜 맛있음. 재방문 의사 100%",
+  //     },
+  //     {
+  //       id: 6,
+  //       nickname: "악플감자",
+  //       profile: profileImage,
+  //       rating: 1,
+  //       likes: 1,
+  //       dislikes: 10,
+  //       date: "2025-03-05",
+  //       text: "장사접으시길",
+  //     },
+  //   ],
+  //   []
+  // );
+
+  const { bakeryId } = useParams();
   const idNum = Number(bakeryId);
-  const bakery = React.useMemo(() => findBakeryById(idNum), [idNum]);
 
+  const [bakery, setBakery] = React.useState(null);
+  const [reviews, setReviews] = React.useState([]);
+
+  // Bakery 정보 가져오기
   React.useEffect(() => {
-    if (bakery?.name) document.title = `${bakery.name} • BreadFeet`;
-  }, [bakery?.name]);
+    fetch(`http://localhost:3001/bakery/${idNum}`)
+      .then((res) => res.json())
+      .then((data) => setBakery(data))
+      .catch(() => setBakery(null));
+  }, [idNum]);
 
-  const reviews = React.useMemo(
-    () => [
-      {
-        id: 1,
-        nickname: "감자도리",
-        profile: profileImage,
-        rating: 4.5,
-        likes: 34,
-        dislikes: 2,
-        date: "2025-03-21",
-        text: "맛있네요",
-      },
-      {
-        id: 2,
-        nickname: "감돌이",
-        profile: profileImage,
-        rating: 4,
-        likes: 12,
-        dislikes: 1,
-        date: "2025-04-03",
-        text: "소금빵 맛있고 커피도 괜찮음.",
-      },
-      {
-        id: 3,
-        nickname: "미식감자",
-        profile: profileImage,
-        rating: 2.5,
-        likes: 4,
-        dislikes: 0,
-        date: "2025-02-10",
-        text: "기대보단 평범했어요.",
-      },
-      {
-        id: 4,
-        nickname: "감자도리토스",
-        profile: profileImage,
-        rating: 2,
-        likes: 2,
-        dislikes: 5,
-        date: "2025-05-02",
-        text: "대기 길고 재고가 빨리 떨어져요.",
-      },
-      {
-        id: 5,
-        nickname: "감자버터",
-        profile: profileImage,
-        rating: 5,
-        likes: 52,
-        dislikes: 3,
-        date: "2025-05-12",
-        text: "크로와상이 진짜 맛있음. 재방문 의사 100%",
-      },
-      {
-        id: 6,
-        nickname: "악플감자",
-        profile: profileImage,
-        rating: 1,
-        likes: 1,
-        dislikes: 10,
-        date: "2025-03-05",
-        text: "장사접으시길",
-      },
-    ],
-    []
-  );
+  // 리뷰 가져오기
+  React.useEffect(() => {
+    fetch(`http://localhost:3001/reviews?bakeryId=${idNum}`)
+      .then((res) => res.json())
+      .then((data) => setReviews(data))
+      .catch(() => setReviews([]));
+  }, [idNum]);
 
   const [sortKey, setSortKey] = React.useState("helpful");
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -305,5 +327,6 @@ const BakeryDetail = () => {
     </div>
   );
 };
+
 
 export default BakeryDetail;

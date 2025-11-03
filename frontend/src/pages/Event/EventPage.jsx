@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 import EventCard from "../../components/EventCard";
 
 const EventPage = () => {
-  return (
+  return ( 
     <Container className="my-5">
       <EventCard 
         title="획득한 PPANG STICKER"
