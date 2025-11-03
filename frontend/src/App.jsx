@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home/Home";
 import Map from "./pages/Map/Map";
 import Login from "./pages/Login/Login";
+import Event from "./pages/Event/EventPage";
 import BakeryDetail from "./components/BakeryDetail";
 
 function AppShell() {
@@ -20,6 +21,7 @@ function AppShell() {
         <Route path="/" element={<Home />} />
         <Route path="/map" element={<Map />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/event" element={<Event/>}/>
         <Route path="/bakery/:bakeryId" element={<BakeryDetail />} />
       </Routes>
     </>

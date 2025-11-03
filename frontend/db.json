@@ -1,0 +1,54 @@
+{
+  "completed": [
+    {
+      "id": "1",
+      "title": "열정적인 붕어빵",
+      "img": "/img/badges/badge1.png",
+      "body": "일주일에 붕어빵 3번 먹기!"
+    },
+    {
+      "id": "2",
+      "title": "붕어빵 마스터",
+      "img": "/img/badges/badge2.png",
+      "body": "일주일에 붕어빵 7번 먹기!"
+    }
+  ],
+  "ongoing": [
+    {
+      "id": "3",
+      "title": "3회 연속 방문",
+      "img": "/img/badges/badge3.png",
+      "body": "body",
+      "progress": 2,
+      "total": 3
+    },
+    {
+      "id": "4",
+      "title": "한달 내 10회 방문",
+      "img": "/img/badges/badge4.png",
+      "body": "body",
+      "progress": 4,
+      "total": 10
+    }
+  ],
+  "recommended": [
+    {
+      "id": "5",
+      "title": "영상 리뷰 3회",
+      "img": "/img/badges/badge5.png",
+      "body": "body"
+    },
+    {
+      "id": "6",
+      "title": "대구 빵탐방 3회 방문",
+      "img": "/img/badges/badge6.png",
+      "body": "body"
+    },
+    {
+      "id": "7",
+      "title": "전국 빵탐방 10곳 방문",
+      "img": "/img/badges/badge7.png",
+      "body": "body"
+    }
+  ]
+}
