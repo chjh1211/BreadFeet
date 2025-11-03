@@ -68,7 +68,7 @@
     {
       "id": "1",
       "nickname": "감자도리",
-      "profile": "/img/profile/default.png",
+      "profile": "/img/profile/default.jpg",
       "rating": 4.5,
       "likes": 34,
       "dislikes": 2,
@@ -78,7 +78,7 @@
     {
       "id": "2",
       "nickname": "감돌이",
-      "profile": "/img/profile/default.png",
+      "profile": "/img/profile/default.jpg",
       "rating": 4,
       "likes": 12,
       "dislikes": 1,
@@ -88,7 +88,7 @@
     {
       "id": "3",
       "nickname": "미식감자",
-      "profile": "/img/profile/default.png",
+      "profile": "/img/profile/default.jpg",
       "rating": 2.5,
       "likes": 4,
       "dislikes": 0,
@@ -98,7 +98,7 @@
     {
       "id": "4",
       "nickname": "감자도리토스",
-      "profile": "/img/profile/default.png",
+      "profile": "/img/profile/default.jpg",
       "rating": 2,
       "likes": 2,
       "dislikes": 5,
@@ -108,7 +108,7 @@
     {
       "id": "5",
       "nickname": "감자버터",
-      "profile": "/img/profile/default.png",
+      "profile": "/img/profile/default.jpg",
       "rating": 5,
       "likes": 52,
       "dislikes": 3,
@@ -118,7 +118,7 @@
     {
       "id": "6",
       "nickname": "악플감자",
-      "profile": "/img/profile/default.png",
+      "profile": "/img/profile/default.jpg",
       "rating": 1,
       "likes": 1,
       "dislikes": 10,
