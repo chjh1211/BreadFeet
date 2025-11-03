@@ -1,29 +1,57 @@
 import "./HomeRightLogin.css";
 import MatchRateBar from "../../components/MatchRateBar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 const HomeRightLogin = () => {
   const [isLoggedIn, _setIsLoggedIn] = useState(true); // NoLogin 컴포넌트 확인용
-  const [reviews, setReviews] = useState([]);
+  const [bakerys, setBakerys] = useState([]);
+  const [userMatchRates, setUserMatchRates] = useState([]);
+  const userId = 1001;
 
   useEffect(() => {
-    fetch(`http://localhost:3001/matchRates`)
+    fetch(`http://localhost:3001/bakery`)
       .then((res) => res.json())
-      .then((data) => setReviews(data))
-      .catch(() => setReviews([]));
+      .then((data) => setBakerys(data))
+      .catch(() => setBakerys([]));
   }, []);
+
+  useEffect(() => {
+    fetch(`http://localhost:3001/matchRates?userId=${userId}`)
+      .then((res) => res.json())
+      .then((data) => setUserMatchRates(data))
+      .catch(() => setUserMatchRates([]));
+  }, []);
+
+  // userRate + bakery data
+  const bakeryMap = useMemo(
+    () => new Map(bakerys.map((b) => [String(b.id), b])),
+    [bakerys]
+  );
+
+  const joined = useMemo(() => {
+    const merged = userMatchRates.map((r) => {
+      const b = bakeryMap.get(String(r.bakeryId));
+      return {
+        ...r,
+        bakery: b || null,
+        name: b?.name ?? "",
+      };
+    });
+
+    return merged;
+  }, [userMatchRates, bakeryMap]);
 
   return (
     <div className="HomeRightWrapper">
       <div className="HomeRightLogin">
         <h2 className="Title">이런 빵집은 어때요?</h2>
         <div className="MatchList">
-          {reviews.map((item) => (
+          {joined.map((item) => (
             <MatchRateBar
               key={item.id}
               bakeryId={item.id}
               name={item.name}
-              rate={item.rate}
+              rate={item.matchScore}
             />
           ))}
         </div>
