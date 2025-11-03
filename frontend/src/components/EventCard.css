@@ -1,0 +1,93 @@
+
+.progress-bar {
+  display: flex;            /* 텍스트를 가운데 정렬하기 위해 flex 사용 */
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 0;                 /* 초기 width */
+  background-color: #f7b500 !important;
+  color: #000;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 0.75rem;   /* 컨테이너와 동일하게 */
+  transition: width 0.4s ease;
+}
+
+.progress-container {
+  margin-top: 0.5rem;
+  background-color: #fff7e6;
+  border-radius: 0.75rem;  /* 모서리 둥글게 */
+  overflow: hidden;
+  height: 1.5rem;
+  position: relative;
+}
+
+.hover-card {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.hover-card:hover {
+  transform: scale(1.12);
+  z-index: 2;
+
+}
+
+.card-img-top {
+  width: 100%;
+  max-width: 200px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  margin: 0 auto;
+  display: block;
+}
+
+/* body 내용 숨기기 */
+.card-body .badge-body {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* hover 시 body 보이기 */
+.hover-card:hover .badge-body {
+  opacity: 1;
+  max-height: 200px; /* 충분히 크게 설정 */
+  margin-top: 0.5rem;
+}
+.hover-card {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.hover-card:hover {
+  transform: scale(1.12);
+  z-index: 2;
+
+}
+
+.card-img-top {
+  width: 100%;
+  max-width: 200px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  margin: 0 auto;
+  display: block;
+}
+
+/* body 내용 숨기기 */
+.card-body .badge-body {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* hover 시 body 보이기 */
+.hover-card:hover .badge-body {
+  opacity: 1;
+  max-height: 200px; /* 충분히 크게 설정 */
+  margin-top: 0.5rem;
+}
+
