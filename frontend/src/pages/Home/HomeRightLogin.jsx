@@ -1,25 +1,24 @@
 import "./HomeRightLogin.css";
 import MatchRateBar from "../../components/MatchRateBar";
-import { useState } from "react";
-
-const mockData = [
-  { id: 1, name: "감자빵집", rate: 93 },
-  { id: 2, name: "대구빵집", rate: 85 },
-  { id: 3, name: "수성빵집", rate: 70 },
-  { id: 4, name: "북구빵집", rate: 60 },
-  { id: 5, name: "경북빵집", rate: 50 },
-  { id: 6, name: "한국빵집", rate: 30 },
-];
+import { useState, useEffect } from "react";
 
 const HomeRightLogin = () => {
   const [isLoggedIn, _setIsLoggedIn] = useState(true); // NoLogin 컴포넌트 확인용
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:3001/matchRates`)
+      .then((res) => res.json())
+      .then((data) => setReviews(data))
+      .catch(() => setReviews([]));
+  }, []);
 
   return (
     <div className="HomeRightWrapper">
       <div className="HomeRightLogin">
         <h2 className="Title">이런 빵집은 어때요?</h2>
         <div className="MatchList">
-          {mockData.map((item) => (
+          {reviews.map((item) => (
             <MatchRateBar
               key={item.id}
               bakeryId={item.id}
