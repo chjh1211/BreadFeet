@@ -19,7 +19,7 @@ const EventPage = () => {
 
       <EventCard 
         title="추천 PPANG STICKER"
-        subtitle = "감자님께 추천드리는 스티커"
+        subtitle = "감자님께서 획득하신 스티커"
         url="http://localhost:3001/recommended" // 추천 스티커 API
       />
     </Container>

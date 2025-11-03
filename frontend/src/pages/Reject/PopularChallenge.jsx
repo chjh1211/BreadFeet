@@ -1,3 +1,4 @@
+import axios from 'axios';
 import "./PopularChallenge.css";
 import Challenge from "./Challenge";
 import bakeryImage from "../../assets/bakery1.jpg";
