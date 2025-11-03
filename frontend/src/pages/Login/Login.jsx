@@ -14,13 +14,9 @@ const Login = () => {
   return (
     <div className="LoginBackGround">
 
-      {/* 1. 왼쪽 베이지색 원 */}
       <div className="Shape Shape-1"></div>
-      {/* 2. 오른쪽 상단 곡선 */}
       <div className="Shape Shape-2"></div>
-      {/* 3. 오른쪽 하단 곡선 */}
       <div className="Shape Shape-3"></div>
-      <div className="Shape Shape-4"></div>
 
 
       <div className="Wrapper">
