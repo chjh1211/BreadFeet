@@ -24,7 +24,6 @@
   flex-direction: column;
   align-items: center;
   gap: 5px;
-  
 }
 
 .TopBakeryImage {
@@ -54,12 +53,6 @@
   font-size: 20px;
   color: #352310;
   text-align: center;
-}
-
-@media (max-width: 768px) {
-  .TopBakeryImage {
-    max-width: 100%;
-  }
 }
 
 @media (max-width: 768px) {

@@ -3,6 +3,7 @@
   top: 0;
   width: 100%;
   z-index: 1;
+  background: rgba(253, 251, 249, 0.85);
 }
 
 .Navbar nav {
