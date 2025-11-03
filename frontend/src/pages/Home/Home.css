@@ -16,5 +16,6 @@
 @media (max-width: 768px) {
   .HomeContents {
     flex-direction: column;
+    gap: 60px;
   }
 }
