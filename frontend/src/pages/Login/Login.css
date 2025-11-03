@@ -34,7 +34,7 @@
 
 .Logo {
   /* 스크린샷의 'BreadFeet' 폰트 스타일 */
-  font-size: 4rem; /* 폰트 크기 예시 */
+  font-size: 7rem; /* 폰트 크기 예시 */
   font-weight: bold;
   color: #3D2D1A; /* 진한 갈색 예시 */
 }
@@ -44,4 +44,85 @@
   font-size: 1.2rem; /* 폰트 크기 예시 */
   color: #5A4D3C; /* 연한 갈색 예시 */
   margin-top: 10px;
+}
+
+
+/* --- 3. 배경 장식 요소들 (Shape) --- */
+
+/* 모든 Shape의 공통 스타일 */
+.Shape {
+  /* ★★★ 중요: 부모 기준 자유 배치 */
+  position: absolute;
+  border-radius: 50%; /* 모두 원 형태 */
+  
+  /* ★★★ 중요: 콘텐츠보다 뒤에 표시 */
+  z-index: 1;
+}
+/* Shape 1: 왼쪽 베이지색 원 */
+.Shape-1 {
+  width: 990px;
+  height: 990px;
+  border: 2px solid #C9B8A3; /* 스크린샷의 선 색상 */
+
+  /* background-color: #C9B8A3; 스크린샷의 베이지색 */
+  /* 위치 조정 */
+  left: -580px;
+  top: 10%;
+  transform: translateY(-50%); /* 세로 정중앙 */
+
+  /* 0.3초 동안 부드럽게 변하도록 설정 */
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Shape 2: 오른쪽 상단 곡선 */
+.Shape-2 {
+  width: 600px;
+  height: 600px;
+  border: 2px solid #96826b; /* 스크린샷의 선 색상 */
+  
+  /* 위치 조정 */
+  top: -200px;
+  right: -150px;
+
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Shape 3: 오른쪽 하단 곡선 */
+.Shape-3 {
+  width: 800px; /* 더 큰 원 */
+  height: 800px;
+  border: 2px solid #e5d7c7; /* 스크린샷의 선 색상 */
+  
+  /* 위치 조정 */
+  bottom: -500px;
+  left:300px;
+
+  transition: background-color 0.3s ease-in-out;
+}
+.Shape-4 {
+  width: 500px; /* 더 큰 원 */
+  height: 500px;
+  border: 2px solid #e5d7c7; /* 스크린샷의 선 색상 */
+  
+  /* 위치 조정 */
+  top: 1400px;
+  right: 700px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+
+/* Shape-1, Shape-2, 또는 Shape-3에 마우스가 올라가면 */
+.Shape-1:hover{
+  /* 배경색을 채웁니다. */
+  background-color: #C9B8A3;
+}
+
+.Shape-2:hover{
+  /* 배경색을 채웁니다. */
+  background-color: #96826b;
+}
+
+.Shape-3:hover {
+  /* 배경색을 채웁니다. */
+  background-color:#e5d7c7;
 }
