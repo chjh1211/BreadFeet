@@ -58,9 +58,70 @@
       "rating": 4.5,
       "reviewCount": 88,
       "address": "대구 북구 대학로 80",
+      "distanceMeters": 3,
       "phone": "053 123 4567",
       "hours": "매일 09:00 - 20:00",
       "popMenu": ["소금빵", "크림빵", "크루아상"],
+      "tags": ["매장 내 취식 가능", "테이크아웃", "커피"]
+    },
+    {
+      "id": "2",
+      "name": "감자빵집 본점",
+      "rating": 5,
+      "reviewCount": 152,
+      "address": "대구 북구 대학로 100",
+      "distanceMeters": 50,
+      "phone": "053 999 1234",
+      "hours": "매일 09:00 - 20:00",
+      "popMenu": ["크루아상", "크림빵", "식빵"],
+      "tags": ["매장 내 취식 불가능", "테이크아웃"]
+    },
+    {
+      "id": "3",
+      "name": "감자빵 연구소",
+      "rating": 4.3,
+      "reviewCount": 61,
+      "address": "대구 북구 대학로 12",
+      "distanceMeters": 10,
+      "phone": "053 321 7890",
+      "hours": "매일 09:00 - 20:00",
+      "popMenu": ["감자빵", "바게트", "크루아상"],
+      "tags": []
+    },
+    {
+      "id": "4",
+      "name": "감자빵집 수성점",
+      "rating": 3.6,
+      "reviewCount": 98,
+      "address": "대구 수성구 들안로 45",
+      "distanceMeters": 500,
+      "phone": "053 222 3333",
+      "hours": "매일 09:00 - 20:00",
+      "popMenu": ["식빵", "소시지빵", "크림빵"],
+      "tags": ["테이크아웃", "커피"]
+    },
+    {
+      "id": "5",
+      "name": "감자빵&커피",
+      "rating": 2.2,
+      "reviewCount": 37,
+      "address": "대구 중구 공평로 7",
+      "distanceMeters": 1000,
+      "phone": "053 777 0000",
+      "hours": "매일 09:00 - 20:00",
+      "popMenu": ["크루아상", "도넛", "소금빵"],
+      "tags": ["매장 내 취식 가능", "테이크아웃", "커피"]
+    },
+    {
+      "id": "6",
+      "name": "감자빵집 직영점",
+      "rating": 1.9,
+      "reviewCount": 312,
+      "address": "대구 남구 중앙대로 50",
+      "distanceMeters": 1500,
+      "phone": "053 456 7890",
+      "hours": "매일 09:00 - 20:00",
+      "popMenu": ["식빵", "바게트", "도넛"],
       "tags": ["매장 내 취식 가능", "테이크아웃", "커피"]
     }
   ],
@@ -127,11 +188,18 @@
     }
   ],
   "matchRates": [
-    { "id": 1, "name": "감자빵집", "rate": 93 },
-    { "id": 2, "name": "대구빵집", "rate": 85 },
-    { "id": 3, "name": "수성빵집", "rate": 70 },
-    { "id": 4, "name": "북구빵집", "rate": 60 },
-    { "id": 5, "name": "경북빵집", "rate": 50 },
-    { "id": 6, "name": "한국빵집", "rate": 30 }
+    { "id": 1, "userId": 1001, "bakeryId": 1, "matchScore": 93 },
+    { "id": 2, "userId": 1001, "bakeryId": 2, "matchScore": 85 },
+    { "id": 3, "userId": 1001, "bakeryId": 3, "matchScore": 70 },
+    { "id": 4, "userId": 1001, "bakeryId": 4, "matchScore": 60 },
+    { "id": 5, "userId": 1001, "bakeryId": 5, "matchScore": 50 },
+    { "id": 6, "userId": 1001, "bakeryId": 6, "matchScore": 30 },
+
+    { "id": 7, "userId": 2002, "bakeryId": 1, "matchScore": 44 },
+    { "id": 8, "userId": 2002, "bakeryId": 2, "matchScore": 72 },
+    { "id": 9, "userId": 2002, "bakeryId": 3, "matchScore": 55 },
+    { "id": 10, "userId": 2002, "bakeryId": 4, "matchScore": 88 },
+    { "id": 11, "userId": 2002, "bakeryId": 5, "matchScore": 33 },
+    { "id": 12, "userId": 2002, "bakeryId": 6, "matchScore": 61 }
   ]
 }
