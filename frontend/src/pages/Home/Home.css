@@ -1,4 +1,4 @@
-.HomeWrapper {
+/* .HomeWrapper {
   min-height: calc(100dvh - var(--navbar-h));
   display: flex;
   align-items: center;
@@ -10,7 +10,7 @@
   padding: 30px;
   display: flex;
   align-items: center;
-  /* gap: 60px; */
+  /* gap: 60px; 
 }
 
 @media (max-width: 768px) {
@@ -18,4 +18,4 @@
     flex-direction: column;
     gap: 60px;
   }
-}
+} 
