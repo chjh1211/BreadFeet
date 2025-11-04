@@ -1,10 +1,13 @@
 import axios from 'axios';
 import { Row, Col, Card } from "react-bootstrap";
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './EventCard.css'
 
-const EventCard = ({ title, subtitle, url }) => {
+const EventCard = ({ title, subtitle, type, url }) => {
   const [badges, setBadges] = useState([]);
+  const navigate = useNavigate();
+  const badgeType = type;
 
   const getBadges = async () => {
     try {
@@ -20,9 +23,10 @@ const EventCard = ({ title, subtitle, url }) => {
   }, [url]);
 
   return (
-    <section className="text-start mb-5">
+    <>
       <h3 className="mb-2">{title}</h3>
       <p className='mb-4'>{subtitle}</p>
+    <section className="text-start mb-5 event-section-frame">
       <Row className="justify-content">
         {badges.length > 0 ? (
   badges.map((badge) => {
@@ -30,7 +34,6 @@ const EventCard = ({ title, subtitle, url }) => {
       badge.progress && badge.total
         ? Math.min((Number(badge.progress) / Number(badge.total)) * 100, 100)
         : 0);
-    console.log(progressPercent);
     return (
       <Col
         key={badge.id}
@@ -38,7 +41,7 @@ const EventCard = ({ title, subtitle, url }) => {
         md={4}
         className="d-flex justify-content-center mb-3"
       >
-        <Card className="text-center hover-card" style={{ width: "14rem" }}>
+        <Card className="text-center hover-card" onClick={()=> navigate(`/Event/${badgeType}/${badge.id}`)}>
           <Card.Img variant="top" src={badge.img} />
           <Card.Body>
             <Card.Title>{badge.title}</Card.Title>
@@ -66,6 +69,7 @@ const EventCard = ({ title, subtitle, url }) => {
 
       </Row>
     </section>
+    </>
   );
 };
 

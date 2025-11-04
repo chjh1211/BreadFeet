@@ -23,6 +23,7 @@
 }
 
 .hover-card {
+  border: none !important;
   transition: all 0.3s ease;
   cursor: pointer;
 }
@@ -31,7 +32,6 @@
   transform: scale(1.12);
   z-index: 2;
   box-shadow: 0 4px 6px rgba(0,0,0,0.3)
-
 }
 
 .card-img-top {
@@ -92,3 +92,10 @@
   margin-top: 0.5rem;
 }
 
+.event-section-frame {
+  background-color: #ffffff; /* 흰색 배경 */
+  border-radius: 20px;       /* 둥근 모서리 */
+  padding: 2rem;             /* 넉넉한 내부 여백 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 은은한 그림자 */
+  border: none;              /* 테두리 제거 */
+}

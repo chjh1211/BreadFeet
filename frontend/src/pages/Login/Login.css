@@ -59,7 +59,7 @@
   /* ★★★ 중요: 부모 기준 자유 배치 */
   position: absolute;
   border-radius: 50%; /* 모두 원 형태 */
-  z-index: 1;
+  z-index: 3;
 }
 /* Shape 1: 왼쪽 베이지색 원 */
 .Shape-1 {
@@ -69,7 +69,7 @@
 
   /* background-color: #C9B8A3; 스크린샷의 베이지색 */
   /* 위치 조정 */
-  left: -40vw;
+  left: -46vw;
   top: 10%;
   transform: translateY(-50%); /* 세로 정중앙 */
 
