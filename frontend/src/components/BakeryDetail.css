@@ -208,43 +208,8 @@
   font-weight: 700;
 }
 
-.bdw-review {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-  background: var(--white);
-  border-radius: 12px;
-  padding: 10px;
-}
-
-.bakeryDetailBar {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.bakeryDetailBarProfile {
-  display: flex;
-  gap: 5px;
-}
-
-.bakeryDetailBarProfileImg {
-  width: 25px;
-  height: 25px;
-  align-self: center;
-  /* border: 1px black solid; */
-  border-radius: 30px;
-  background: #b0afae;
-}
-
-.bakeryDetailBarNickName {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.bdw-review-stars {
-  color: #f0b400;
+.bakery-detail-rewview-wrapper {
+  padding: 20px 0;
 }
 
 .bdw-empty {

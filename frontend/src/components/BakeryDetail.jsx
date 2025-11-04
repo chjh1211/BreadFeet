@@ -226,9 +226,11 @@ const BakeryDetail = () => {
           </button>
         </div>
 
-        {sortedReviews.map((r) => (
-          <BakeryReview key={r.id} review={r} />
-        ))}
+        <div className="bakery-detail-rewview-wrapper">
+          {sortedReviews.map((r) => (
+            <BakeryReview key={r.id} review={r} />
+          ))}
+        </div>
       </section>
     </div>
   );

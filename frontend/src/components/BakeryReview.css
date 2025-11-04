@@ -1,6 +1,106 @@
+.bdw-review {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.bdw-review::before {
+  content: "";
+  display: block;
+  width: 100%;
+  border-top: 1px solid #3523103d;
+  margin: 8px 0 12px;
+}
+
+.bakeryDetailBar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bakeryDetailBarProfile {
+  display: flex;
+  gap: 5px;
+}
+
+.bakeryDetailBarProfileImg {
+  width: 25px;
+  height: 25px;
+  align-self: center;
+  /* border: 1px black solid; */
+  border-radius: 30px;
+  background: #b0afae;
+}
+
+.bakeryDetailBarNickName {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.bdw-review-text {
+  --lines: 2;
+  position: relative;
+  line-height: 1.5;
+  margin: 5px 0;
+  text-align: left;
+}
+
+/* 접힘 상태: line-clamp */
+.bdw-review-text.is-collapsed {
+  display: -webkit-box;
+  -webkit-line-clamp: var(--lines);
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.toggleDiv {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+/* 토글 버튼(칩 형태) */
+.bdw-review-toggle {
+  appearance: none;
+  border: 1px solid var(--chip-border);
+  background: var(--chip-bg);
+  border-radius: 30px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+.bdw-review-toggle:hover {
+  border-color: var(--brand-brown);
+}
+.bdw-review-toggle[aria-expanded="true"] {
+  border-color: var(--brand-brown);
+  box-shadow: 0 0 0 1px var(--brand-brown) inset;
+}
+
+.bdw-review-stars {
+  color: #f0b400;
+}
+
 .bdw-review-meta {
   width: 100%;
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+}
+
+.bdw-review-meta > button {
+  border: none;
+  background: #fdfbf9;
+  border-radius: 30px;
+  padding: 1px 10px;
+}
+
+@media (min-width: 640px) {
+  .bdw-review-text {
+    --lines: 3;
+  }
 }
