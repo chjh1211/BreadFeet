@@ -70,9 +70,19 @@
 
 /* 텍스트 캡션 배경 (가독성을 위해) */
 .top-bakery-caption {
-  background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은색 배경 */
-  border-radius: 10px;
+  font-family: "Noto Sans";
+  background-color: rgba(253, 251, 249, 0.45);
+  border-radius: 8px;
   padding: 0.5rem 1rem;
+}
+.top-bakery-caption h4 {
+  color: #352310;
+}
+
+.top-bakery-caption h5 {
+  color: #352310;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 /* --- 화살표 버튼 커스텀 (핵심) --- */

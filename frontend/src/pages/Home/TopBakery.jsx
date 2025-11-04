@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { Carousel } from 'react-bootstrap'; // 1. Carousel을 import 합니다.
+import React, { useEffect, useState } from "react";
+import { Carousel } from "react-bootstrap"; // 1. Carousel을 import 합니다.
 import "./TopBakery.css";
-import bakeryImage from "../../assets/bakery1.jpg"; 
+import bakeryImage from "../../assets/bakery1.jpg";
 
 const TopbakeryList = () => {
-  const [bakeries, setBakeries] = useState([]); 
+  const [bakeries, setBakeries] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:3001/bakery?_sort=reviewCount&_order=desc&_limit=3`)
-      .then((res) => res.json()) 
-      .then((data) => setBakeries(data)) 
-      .catch((err) => console.error("❌ Top 빵집 로딩 실패:", err));
+      .then((res) => res.json())
+      .then((data) => setBakeries(data))
+      .catch((err) => console.error("Top 빵집 로딩 실패:", err));
   }, []);
 
   return (
@@ -21,10 +21,10 @@ const TopbakeryList = () => {
       </h3>
 
       {/* 2. [수정] <div className="TopBakeryContainer"> 대신 <Carousel> 사용 */}
-      <Carousel 
+      <Carousel
         className="top-bakery-carousel"
         indicators={false} /* 아래쪽 ... 인디케이터 숨김 */
-        interval={3000}    /* 3초마다 자동으로 넘어감 (null로 하면 자동 넘김 끔) */
+        interval={3000} /* 3초마다 자동으로 넘어감 (null로 하면 자동 넘김 끔) */
       >
         {bakeries.length > 0 ? (
           bakeries.map((bakery) => (
@@ -46,11 +46,7 @@ const TopbakeryList = () => {
         ) : (
           <Carousel.Item>
             {/* 로딩 중일 때 표시할 기본 슬라이드 */}
-            <img
-              className="d-block w-100"
-              src={bakeryImage}
-              alt="Loading"
-            />
+            <img className="d-block w-100" src={bakeryImage} alt="Loading" />
             <Carousel.Caption className="top-bakery-caption">
               <h4>Top 빵집을 불러오는 중입니다...</h4>
             </Carousel.Caption>
