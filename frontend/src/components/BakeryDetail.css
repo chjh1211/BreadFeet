@@ -160,8 +160,9 @@
 }
 
 .bdw-sort-menu {
+  z-index: 10;
   position: absolute;
-  top: calc(100% - 15px);
+  top: calc(100% - 10px);
   min-width: 120px;
   border-radius: 5px;
   background: #fdfbf9;
