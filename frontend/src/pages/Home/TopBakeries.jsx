@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./TopBakeries.css";
 
 export default function TopBakeries({
@@ -8,30 +9,26 @@ export default function TopBakeries({
 }) {
   const navigate = useNavigate();
 
-  const data = (
-    bakeries.length
-      ? bakeries
-      : [
-          {
-            id: 101,
-            name: "감자빵집",
-            location: "대구 북구 대학로 80",
-            tags: ["시그니처 감자빵", "테이크아웃", "커피"],
-          },
-          {
-            id: 102,
-            name: "감자빵집 본점",
-            location: "대구 북구 대학로 100",
-            tags: ["대표메뉴 크림빵", "매장 내 취식", "주차"],
-          },
-          {
-            id: 103,
-            name: "감자빵 연구소",
-            location: "대구 북구 대학로 12",
-            tags: ["한정 메뉴", "예약 가능"],
-          },
-        ]
-  ).slice(0, limit);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch("http://localhost:3001/topBakeries", { signal: controller.signal })
+      .then((res) => res.json())
+      .then((data) => setItems(Array.isArray(data) ? data : []))
+      .catch(() => setItems([]));
+    return () => controller.abort();
+  }, []);
+
+  // props가 있으면 그걸 우선 사용, 아니면 fetch 결과 사용
+  const data = (bakeries.length ? bakeries : items)
+    .slice(0, limit) // 서버가 이미 Top 순서로 준다고 가정
+    .map((b) => ({
+      id: b.id,
+      name: b.name,
+      location: b.location ?? b.address ?? "",
+      tags: Array.isArray(b.tags) ? b.tags : [],
+    }));
 
   const go = (id) => {
     if (!id) return;
