@@ -7,17 +7,12 @@ export default function CTAnoLogin() {
   const navigate = useNavigate();
 
   const goTaste = useCallback(() => {
-    // 취향 입력 페이지 제작시 변경하면 됨
-    try {
-      navigate("/taste"); // 나중에 실제 페이지 라우트 생성
-    } catch {
-      window.location.href = "/taste";
-    }
+    navigate('/taste');
   }, [navigate]);
 
   return (
     <div
-      className="cta-no-login"
+      className="cta-no-login mt-5"
       data-bs-theme="light"
       aria-label="AI 빵지순례 CTA"
     >
