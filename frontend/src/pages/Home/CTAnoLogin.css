@@ -1,0 +1,105 @@
+.cta-no-login {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.cta-hero {
+  position: relative;
+  min-height: 320px;
+  padding: calc(20px + env(safe-area-inset-top)) 20px 28px 20px;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+
+  /* 연한 격자 배경 */
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px;
+  background-color: #faf9f7;
+}
+
+.cta-lines {
+  transform: translateZ(0); /* iOS 렌더링 안정화 */
+  -webkit-font-smoothing: antialiased;
+  margin-bottom: 18px;
+}
+
+.line-sm {
+  font-family: inherit;
+  font-size: clamp(18px, 3.4vw, 24px);
+  line-height: 1.25;
+  margin: 0 0 6px 0;
+  color: #1f1a14;
+}
+
+.line-sm strong {
+  font-weight: 700;
+}
+
+.cta-button {
+  appearance: none;
+  border: 2px solid #1f1a14;
+  border-radius: 12px;
+  background: #fff;
+  padding: 10px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: clamp(16px, 3.5vw, 18px);
+  color: #1f1a14;
+  cursor: pointer;
+  transform: translateZ(0);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cta-button:hover {
+  transform: translateY(-1px);
+}
+.cta-button:active {
+  transform: translateY(0);
+}
+
+.cta-button:focus-visible {
+  outline: 3px solid #35231033;
+  outline-offset: 2px;
+}
+
+.cta-button-text {
+  font-family: inherit;
+}
+.cta-arrow {
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+/* Carousel 자체 여백 제거 */
+.cta-carousel .carousel-item {
+  transition: opacity 0.6s ease; /* fade 부드럽게 */
+}
+.cta-carousel .carousel-item img {
+  object-fit: cover;
+}
+
+/* 작은 화면 보정 */
+@media (max-width: 480px) {
+  .cta-hero {
+    min-height: 220px;
+    padding: 20px;
+  }
+}
+
+/* 모션 최소화 환경일 때 자동 슬라이드 멈춤 안내 (접근성) */
+@media (prefers-reduced-motion: reduce) {
+  .cta-carousel .carousel-item {
+    transition: none;
+  }
+}

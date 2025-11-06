@@ -1,0 +1,196 @@
+:root {
+  --brand-brown: #352310;
+  --ink: #1f1a14;
+  --line: rgba(53, 35, 16, 0.12);
+  --line-strong: rgba(53, 35, 16, 0.18);
+  --panel-bg: #fff;
+  --shadow: 0 10px 30px rgba(53, 35, 16, 0.08);
+  --radius: 16px;
+}
+
+/* 섹션 타이틀 */
+.tbl-title {
+  margin: 0 0 14px;
+  text-align: center;
+  color: var(--brand-brown);
+  font-weight: 800;
+  font-size: clamp(18px, 2.2vw, 24px);
+  font-family: inherit;
+}
+
+/* 외곽 패널 (스케치처럼 박스 안에 행들이 나열) */
+.tbl-panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* 리스트/행 */
+.tbl-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tbl-row {
+  display: grid;
+  grid-template-columns: 44px 1fr; /* 랭크/본문 */
+  gap: 10px;
+  padding: 16px 18px;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  cursor: pointer;
+  background: #fff;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+  font-family: inherit;
+}
+.tbl-row:first-child {
+  border-top: none;
+}
+
+.tbl-row:hover {
+  background: #ebe4de9c;
+}
+.tbl-row:active {
+  background: #ebe4de9c;
+}
+.tbl-row:focus-visible {
+  outline: 3px solid #35231033;
+  outline-offset: -3px;
+}
+
+/* 랭크 숫자 (미니멀) */
+.tbl-rank {
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--brand-brown);
+  line-height: 1;
+  transform: translateY(2px);
+}
+
+/* 본문 상단 */
+.tbl-name {
+  margin: 0;
+  font-weight: 700;
+  color: var(--ink);
+  font-size: clamp(16px, 1.9vw, 18px);
+  text-align: start;
+}
+.tbl-loc {
+  margin: 4px 0 0;
+  color: rgba(31, 26, 20, 0.7);
+  font-size: 13px;
+  text-align: start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tbl-divider {
+  height: 1px;
+  background: var(--line-strong);
+  margin: 8px 0;
+}
+
+.tbl-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.tbl-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--brand-brown);
+}
+.tbl-arrow {
+  transform: translateY(1px);
+}
+
+/* 태그 */
+.tbl-tags {
+  margin-left: auto; /* 오른쪽으로 붙이기 */
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  max-width: 60%;
+}
+.tbl-tag {
+  font-size: 12px;
+  line-height: 1;
+  padding: 6px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(53, 35, 16, 0.12);
+  background: #fff;
+  color: rgba(31, 26, 20, 0.86);
+}
+
+/* 헤더: 이름(왼) / 자세히보기(오) 2열 그리드 */
+.tbl-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 0 12px;
+}
+
+/* 위치 텍스트는 다음 줄로 전체 폭 차지 */
+.tbl-loc {
+  grid-column: 1 / -1;
+  margin: 4px 0 0;
+  color: rgba(31, 26, 20, 0.7);
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 링크 스타일 CTA (버튼이지만 링크처럼) */
+.tbl-cta {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--brand-brown);
+  cursor: pointer;
+}
+.tbl-cta:hover span:first-child {
+  border-bottom: 1px solid rgba(53, 35, 16, 0.45);
+}
+.tbl-cta span:first-child {
+  border-bottom: 1px solid rgba(53, 35, 16, 0.25);
+}
+.tbl-arrow {
+  transform: translateY(1px);
+}
+
+/* 태그 줄: 이름/CTA 아래에서 좌측 정렬 */
+.tbl-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .tbl-row {
+    grid-template-columns: 32px 1fr;
+    padding: 14px 14px;
+  }
+  .tbl-tags {
+    margin-left: 0;
+    max-width: 100%;
+  }
+  .tbl-foot {
+    flex-wrap: wrap;
+  }
+}
