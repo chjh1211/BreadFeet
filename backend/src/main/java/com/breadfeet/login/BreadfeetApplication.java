@@ -1,4 +1,4 @@
-package com.breadfeet.backend;
+package com.breadfeet.login;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
