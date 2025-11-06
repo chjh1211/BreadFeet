@@ -3,6 +3,7 @@ import "./Home.css";
 import TopBakery from "./TopBakery";
 import HomeRightLogin from "./HomeRightLogin";
 import WeakChallenge from "./WeakChallenge";
+import CTAnoLogin from "./CTAnoLogin";
 import { Row, Col } from "react-bootstrap";
 
 const Home = () => {
@@ -10,7 +11,8 @@ const Home = () => {
     <div>
       <Row className="m-4 justify-content-center">
         <Col md={6} className="m-3">
-          <TopBakery />
+          {/* <TopBakery /> */}
+          <CTAnoLogin />
         </Col>
         <Col md={4} className="m-3">
           <HomeRightLogin />
