@@ -2,6 +2,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import "./BakeryDetail.css";
 import BakeryReview from "./BakeryReview";
+//Review 모달 추가
+import Review from './Review';
 
 const Stars = ({ rating }) => {
   const full = Math.floor(rating);
@@ -58,7 +60,16 @@ const BakeryDetail = () => {
 
   const [bakery, setBakery] = React.useState(null);
   const [reviews, setReviews] = React.useState([]);
+  //모달 상태
+  const [showReviewModal, setShowReviewModal] = React.useState(false);
 
+  const fetchReviews = React.useCallback(() => {
+    fetch(`http://localhost:3001/reviews?bakeryId=${idNum}`)
+      .then((res) => res.json())
+      .then((data) => setReviews(data))
+      .catch(() => setReviews([]));
+  }, [idNum]); // idNum이 변경될 때만 함수가 다시 생성됨
+  
   // Bakery 정보 가져오기
   React.useEffect(() => {
     fetch(`http://localhost:3001/bakery/${idNum}`)
@@ -69,11 +80,8 @@ const BakeryDetail = () => {
 
   // 리뷰 가져오기
   React.useEffect(() => {
-    fetch(`http://localhost:3001/reviews?bakeryId=${idNum}`)
-      .then((res) => res.json())
-      .then((data) => setReviews(data))
-      .catch(() => setReviews([]));
-  }, [idNum]);
+      fetchReviews(); // 컴포넌트 마운트 시 최초 실행
+    }, [fetchReviews]); // fetchReviews가 의존성 배열에 있어야 경고가 발생하지 않습니다.
 
   const [sortKey, setSortKey] = React.useState("helpful");
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -220,7 +228,11 @@ const BakeryDetail = () => {
 
           <button
             className="bdw-review-btn"
-            onClick={() => alert("리뷰쓰기 (TODO)")} // 준나 onclick만 바꾸면대
+            //리뷰 모달 클릭시 보이기
+           onClick={() => {
+            //console.log("✅ 리뷰쓰기 버튼 클릭됨!");
+            setShowReviewModal(true);
+            }}
           >
             리뷰쓰기
           </button>
@@ -232,6 +244,19 @@ const BakeryDetail = () => {
           ))}
         </div>
       </section>
+
+      {/* 리뷰 모달 */}
+      {
+        //true일 때만 렌더링
+        showReviewModal && (
+          <Review
+            bakeryName = {bakery.name}
+            onClose={()=>setShowReviewModal(false)}
+            bakeryId={idNum}
+            onReviewSuccess={fetchReviews}
+          />
+        )
+      }
     </div>
   );
 };
