@@ -142,7 +142,7 @@
 
 /* --- 5. 제출 버튼 스타일 (색상 통일 반영) --- */
 .review-submit {
-  background: #ffb400; /* ⭐️ 활성화된 별점 색상과 통일 */
+  background: #cd9f6c; /* ⭐️ 활성화된 별점 색상과 통일 */
   color: white;
   font-weight: 600;
   padding: 12px 0;
@@ -154,7 +154,7 @@
 }
 
 .review-submit:hover {
-  background: #ffa000; /* 호버 색상 */
+  background: #8f6f44; /* 호버 색상 */
 }
 
 .review-submit:disabled {

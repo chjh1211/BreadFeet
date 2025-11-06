@@ -134,6 +134,9 @@ const BakeryDetail = () => {
             <span className="bdw-count">({bakery.reviewCount}개 리뷰)</span>
           </div>
         </div>
+        <button className="bdw-close-page" onClick={() => window.close()}>
+          ✕
+        </button>
       </header>
 
       <section className="bdw-meta">

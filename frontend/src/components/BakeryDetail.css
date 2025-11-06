@@ -19,6 +19,8 @@
   align-items: flex-start;
   background: var(--bg);
   padding-bottom: 8px;
+  position: relative; 
+  padding-right: 40px; /* 닫기 버튼 공간 확보 */
 }
 
 .bdw-head-left {
@@ -209,10 +211,33 @@
   font-weight: 700;
 }
 
+.bdw-review-btn:hover {
+    background: #937864;
+}
+
 .bakery-detail-rewview-wrapper {
   padding: 20px 0;
 }
 
 .bdw-empty {
   margin-top: 8px;
+}
+
+.bdw-close-page {
+  position: absolute;
+  top: 10px; /* 헤더 상단에서 띄우기 */
+  right: 10px; /* 우측 끝에 배치 */
+  
+  border: none;
+  background: none;
+  font-size: 24px; /* 적당한 크기 */
+  color: #333;
+  cursor: pointer;
+  padding: 5px;
+  line-height: 1; /* x 모양이 중앙에 오도록 */
+  transition: color 0.2s;
+}
+
+.bdw-close-page:hover {
+  color: #ff0000; /* 마우스 오버 시 색상 변경 */
 }
