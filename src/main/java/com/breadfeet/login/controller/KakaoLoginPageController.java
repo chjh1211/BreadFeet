@@ -1,4 +1,4 @@
-package com.breadfeet.backend.controller;
+package com.breadfeet.login.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

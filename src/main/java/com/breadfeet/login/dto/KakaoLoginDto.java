@@ -1,4 +1,4 @@
-package com.breadfeet.backend.dto;
+package com.breadfeet.login.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
