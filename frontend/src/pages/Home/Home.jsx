@@ -1,9 +1,10 @@
 import "./Home.css";
 // import PopularChallenge from "../Reject/PopularChallenge";
-import TopBakery from "./TopBakery";
-import HomeRightLogin from "./HomeRightLogin";
+// import TopBakery from "./TopBakery";
+// import HomeRightLogin from "./HomeRightLogin";
 import WeakChallenge from "./WeakChallenge";
 import CTAnoLogin from "./CTAnoLogin";
+import TopBakeries from "./TopBakeries";
 import { Row, Col } from "react-bootstrap";
 
 const Home = () => {
@@ -15,7 +16,7 @@ const Home = () => {
           <CTAnoLogin />
         </Col>
         <Col md={4} className="m-3">
-          <HomeRightLogin />
+          <TopBakeries />
         </Col>
       </Row>
       <Row className="m-4 justify-content-center">
