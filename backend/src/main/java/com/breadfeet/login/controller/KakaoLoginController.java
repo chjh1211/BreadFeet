@@ -1,7 +1,7 @@
-package com.breadfeet.backend.controller;
+package com.breadfeet.login.controller;
 
-import com.breadfeet.backend.dto.KakaoUserInfoResponseDto;
-import com.breadfeet.backend.service.KakaoService;
+import com.breadfeet.login.dto.KakaoUserInfoResponseDto;
+import com.breadfeet.login.service.KakaoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

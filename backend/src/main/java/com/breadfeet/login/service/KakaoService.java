@@ -1,7 +1,7 @@
-package com.breadfeet.backend.service;
+package com.breadfeet.login.service;
 
-import com.breadfeet.backend.dto.KakaoTokenResponseDto;
-import com.breadfeet.backend.dto.KakaoUserInfoResponseDto;
+import com.breadfeet.login.dto.KakaoTokenResponseDto;
+import com.breadfeet.login.dto.KakaoUserInfoResponseDto;
 import io.netty.handler.codec.http.HttpHeaderValues;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
