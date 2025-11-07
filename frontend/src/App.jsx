@@ -10,6 +10,7 @@ import BakeryDetail from "./components/BakeryDetail";
 import EventDetail from "./pages/Event/EventDetail";
 import MyPage from "./pages/MyPage/MyPage";
 import Taste from  "./pages/Taste/Taste";
+import TasteResult from "./pages/Taste/TasteResult";
 
 function AppShell() {
   // detail에서 navBar 안띄우려고 useLocation 사용(자식에서만 사용가능해서 함수 만들어줌)
@@ -27,6 +28,7 @@ function AppShell() {
         <Route path="/event" element={<Event/>}/>
         <Route path="/mypage" element={<MyPage/>}/>
         <Route path="/taste" element={<Taste />}/>
+        <Route path="/tasteResult" element={<TasteResult />}/>
         <Route path="/event/:eventType/:eventId" element={<EventDetail />}/>
         <Route path="/bakery/:bakeryId" element={<BakeryDetail />} />
       </Routes>
