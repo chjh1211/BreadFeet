@@ -9,7 +9,7 @@ import { Row, Col } from "react-bootstrap";
 
 const Home = () => {
   return (
-    <div>
+    <div className="homeWrapper">
       <Row className="m-4 justify-content-center">
         <Col md={6} className="m-3">
           {/* <TopBakery /> */}
