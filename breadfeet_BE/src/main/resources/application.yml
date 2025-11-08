@@ -1,0 +1,44 @@
+# ⬇️ ⬇️ ⬇️ 이 부분을 추가하세요 ⬇️ ⬇️ ⬇️
+logging:
+  level:
+    org.springframework.security: DEBUG
+# ⬆️ ⬆️ ⬆️ 이 부분을 추가하세요 ⬆️ ⬆️ ⬆️
+
+
+spring:
+  # 1. MySQL DB ??
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/breadfeet?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root # ?? DB ??
+    password: 1234 # ?? DB ????
+
+  # 2. JPA ??
+  jpa:
+    hibernate:
+      ddl-auto: update # (??) ? ?? ? User ???? ?? ??? ?? ??/??
+    properties:
+      hibernate:
+        format_sql: true # SQL ??? ??? ??
+    show-sql: true # ?? ?? ??
+
+  # 3. OAuth2 ????? ?? (???)
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao: # 'kakao'? ??? ?? ?? (Redirect URI? ??? ??? ??)
+            client-id: e5655138fc54844b5719e31d08e9a727 # 1???? ??? REST API ?
+            client-secret: # ???? ??? Client Secret? ???? ?? (???? ?)
+            scope: profile_nickname # ????? ??? ?? ??
+            client-name: Kakao
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}" # {baseUrl}? localhost:8080, {registrationId}? 'kakao'? ?
+
+        provider:
+          kakao: # 'kakao'? ? registration? 'kakao'? ??
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id # ??? ?? ?? ??? ?? ?? id ?
+
