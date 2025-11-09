@@ -14,6 +14,7 @@ public class BakeryDetailResponseDto {
     private String city;
     private String district;
     private String town;
+    private double avgRating;
 
     public BakeryDetailResponseDto(Bakery entity) {
         this.bakeryId = entity.getId();
@@ -26,5 +27,6 @@ public class BakeryDetailResponseDto {
         this.city = entity.getCity();
         this.district = entity.getDistrict();
         this.town = entity.getTown();
+        this.avgRating = entity.getAvgRating();
     }
 }

@@ -4,6 +4,7 @@ import com.example.breadfeet_BE.domain.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Entity
@@ -30,10 +31,7 @@ public class Bakery extends BaseEntity {
     private String district;   // 구, 군
     private String town;       // 읍, 면, 동
 
-//    // --- 연관 관계 ---
-//    @OneToMany(mappedBy = "bakery", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Review> reviews = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "bakery", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<LikeBakery> likes = new ArrayList<>();
+    @Transient
+    @Setter
+    private double avgRating;
 }
