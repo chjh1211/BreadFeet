@@ -26,17 +26,15 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
 
-        // ✅ 로그인 성공한 사용자 정보 가져오기
         CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
 
-        // 이메일과 역할 정보 추출
-        String email = oAuth2User.getEmail();
+        // ▼▼▼ [수정됨] getEmail() 대신 getUsername() (닉네임) 사용 ▼▼▼
+        String userIdentifier = oAuth2User.getUsername(); // ⬅️ 닉네임
         Role role = oAuth2User.getRole();
 
-        // ✅ JWT 토큰 생성 (Role.name() 대신 key 값 사용하면 ROLE_ 접두어 유지됨)
-        String token = jwtTokenProvider.createToken(email, role);
+        // ▼▼▼ [수정됨] 이메일 대신 닉네임(userIdentifier)으로 토큰 생성 ▼▼▼
+        String token = jwtTokenProvider.createToken(userIdentifier, role);
 
-        // ✅ 프론트엔드로 리다이렉트 (소문자 localhost + UTF-8 인코딩)
         String redirectUrl = "http://localhost:5175/login/success?token=" +
                 URLEncoder.encode(token, StandardCharsets.UTF_8);
 

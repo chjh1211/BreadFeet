@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-@Table(name = "users") // DB에 'User' 테이블이 생성됩니다.
+@Table(name = "users")
 public class User extends BaseEntity {
 
     @Id
@@ -20,7 +20,7 @@ public class User extends BaseEntity {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String kakaoSocialId; // 'kakaoId'가 아니라 'kakaoSocialId'입니다.
+    private String kakaoSocialId;
 
     @Column(nullable = false, unique = true, length = 50)
     private String nickname;
@@ -29,10 +29,12 @@ public class User extends BaseEntity {
     private String profileImageUrl;
 
     @Column(nullable = false, length = 20)
-    private String status = "ACTIVE";
+    private String status; // ⬅️ 기본값 "ACTIVE"는 빌더에서 설정
 
-    @Column(nullable = false, length = 20)
-    private String role = "USER";
+    // ▼▼▼ [수정됨] String -> Role Enum 타입으로 변경 ▼▼▼
+    @Enumerated(EnumType.STRING) // DB에 Enum 이름을 문자열로 저장
+    @Column(nullable = false)
+    private Role role; // ⬅️ 기본값 "USER"는 빌더에서 설정
 
     // --- (추가) 소셜 로그인을 위한 Builder ---
     @Builder
@@ -40,6 +42,10 @@ public class User extends BaseEntity {
         this.kakaoSocialId = kakaoSocialId;
         this.nickname = nickname;
         this.profileImageUrl = profileImageUrl;
+
+        // ▼▼▼ [추가됨] 엔티티 생성 시 기본값 설정 ▼▼▼
+        this.status = "ACTIVE";
+        this.role = Role.USER; // GUEST가 아닌 USER를 기본값으로 설정
     }
 
     // --- (추가) 사용자 정보 업데이트 ---
@@ -49,10 +55,5 @@ public class User extends BaseEntity {
         return this;
     }
 
-    // Review, Like 클래스가 아직 없으면 이 부분은 주석 처리하세요.
-    // @OneToMany(mappedBy = "user")
-    // private List<Review> reviews = new ArrayList<>();
-    //
-    // @OneToMany(mappedBy = "user")
-    // private List<Like> likes = new ArrayList<>();
+    // ... (Review, Like 주석) ...
 }

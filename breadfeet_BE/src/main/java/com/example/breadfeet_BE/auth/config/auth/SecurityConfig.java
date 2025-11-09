@@ -1,20 +1,21 @@
-package com.example.breadfeet_BE.auth.config.auth;
+package com.example.breadfeet_BE.auth.config.auth; // 본인 패키지명 확인
 
 import com.example.breadfeet_BE.domain.user.Role;
-import lombok.RequiredArgsConstructor;
+import lombok.RequiredArgsConstructor; // 1. @RequiredArgsConstructor import
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+// import org.springframework.security.web.authentication.AuthenticationSuccessHandler; // 5. 이 import는 이제 필요 없습니다.
 
 @Configuration
 @EnableWebSecurity // Spring Security 설정 활성화
-@RequiredArgsConstructor
+@RequiredArgsConstructor // 2. final 필드 주입을 위해 추가
 public class SecurityConfig {
 
     private final CustomOAuth2UserService customOAuth2UserService;
+    private final OAuth2SuccessHandler oAuth2SuccessHandler; // 3. JWT 성공 핸들러 주입
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -37,18 +38,20 @@ public class SecurityConfig {
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(customOAuth2UserService)
                         )
-                        // ▼▼▼ 이 줄을 여기에 추가하세요! ▼▼▼
-                        .successHandler(oauthSuccessHandler()) // 만든 핸들러를 등록
+                        // ▼▼▼ 4. 주입받은 JWT 핸들러(oAuth2SuccessHandler)로 교체 ▼▼▼
+                        .successHandler(oAuth2SuccessHandler)
                 );
 
         return http.build();
     }
 
+    // 5. 내부에 직접 정의했던 @Bean 핸들러는 삭제합니다.
+    /*
     @Bean
     public AuthenticationSuccessHandler oauthSuccessHandler() {
         return (request, response, authentication) -> {
-            // 로그인이 성공했으므로, 프론트엔드 메인 페이지로 리다이렉트
             response.sendRedirect("http://localhost:5175");
         };
     }
+    */
 }

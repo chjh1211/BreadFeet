@@ -1,5 +1,6 @@
 package com.example.breadfeet_BE.auth.config.auth; // 본인 패키지명 확인
 
+import com.example.breadfeet_BE.auth.config.auth.dto.CustomOAuth2User;
 import com.example.breadfeet_BE.auth.config.auth.dto.OAuthAttributes;
 import com.example.breadfeet_BE.auth.config.auth.dto.SessionUser;
 import com.example.breadfeet_BE.domain.user.User;
@@ -46,11 +47,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
             // ‼️ (의심 지점 3) 여기서 에러가 날 수 있습니다.
             httpSession.setAttribute("user", new SessionUser(user));
 
-            return new DefaultOAuth2User(
-                    Collections.singleton(new SimpleGrantedAuthority("ROLE_" + user.getRole())),
-                    attributes.getAttributes(),
-                    attributes.getNameAttributeKey());
 
+            return new CustomOAuth2User(user, attributes.getAttributes());
         } catch (Exception e) {
             // ‼️‼️‼️ 로그인 처리 중 어디선가 에러 발생 ‼️‼️‼️
             System.out.println("!!!!!!!!!!!!! OAuth2 로그인 처리 중 치명적 에러 !!!!!!!!!!");
