@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 public class Bakery extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bakeryId;
+    @Column(name = "bakery_id")
+    private Long Id;
 
     @Column(nullable = false)
     private String name; // 빵집 이름

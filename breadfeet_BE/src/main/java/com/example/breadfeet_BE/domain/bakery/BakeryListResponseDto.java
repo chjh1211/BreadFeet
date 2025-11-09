@@ -6,11 +6,15 @@ import lombok.Getter;
 public class BakeryListResponseDto {
     private Long bakeryId;
     private String name;
-    private String addres;;
+    private String city;
+    private String district;
+    private String town;
 
     public BakeryListResponseDto(Bakery entity) {
-        this.bakeryId = entity.getBakeryId();
+        this.bakeryId = entity.getId();
         this.name = entity.getName();
-        this.addres = entity.getCity();
+        this.city = entity.getCity();
+        this.district = entity.getDistrict();
+        this.town = entity.getTown();
     }
 }
