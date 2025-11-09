@@ -28,5 +28,11 @@ public class BakeryService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
+    public BakeryDetailResponseDto findBakeryById(Long bakeryId){
+        Bakery bakery = bakeryRepository.findById(bakeryId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 빵집을 찾을 수 없습니다. id=" + bakeryId));
 
+        return new BakeryDetailResponseDto(bakery);
+    }
 }

@@ -2,10 +2,7 @@ package com.example.breadfeet_BE.domain.bakery;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +17,11 @@ public class BakeryContoller {
         List<BakeryListResponseDto> bakeryList = bakeryService.findAllBakeries(search);
 
         return ResponseEntity.ok(bakeryList);
+    }
+
+    @GetMapping("/{bakeryId}")
+    public ResponseEntity<BakeryDetailResponseDto> getBakeryDetail(@PathVariable Long bakeryId){
+        BakeryDetailResponseDto bakeryDetail = bakeryService.findBakeryById(bakeryId);
+        return ResponseEntity.ok(bakeryDetail);
     }
 }
