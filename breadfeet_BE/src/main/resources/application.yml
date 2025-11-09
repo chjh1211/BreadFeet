@@ -11,7 +11,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/breadfeet?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root # ?? DB ??
-    password: 1234 # ?? DB ????
+    password: chjh8800 # ?? DB ????
 
   # 2. JPA ??
   jpa:
