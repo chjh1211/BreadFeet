@@ -18,4 +18,16 @@ public class MyPageService {
                 .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
         return new MyPageResponseDto(user);
     }
+
+    @Transactional
+    public MyPageResponseDto updateMyProfile(Long userId, MyProfileUpdateRequestDto requestDto) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
+
+        user.update(requestDto.getNickname(), requestDto.getProfileImageUrl());
+        // user 객체는 영속성 컨텍스트에 의해 관리되므로, 별도의 save 호출 없이 변경 사항이 DB에 반영됩니다.
+        // 하지만 명시적인 save를 원한다면 userRepository.save(user); 를 호출할 수 있습니다.
+
+        return new MyPageResponseDto(user);
+    }
 }
