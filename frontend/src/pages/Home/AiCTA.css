@@ -1,0 +1,60 @@
+.aiCTA {
+  height: 100%;
+  min-height: 300px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px;
+  background-color: #faf9f7;
+}
+
+.aiCTA__title {
+  margin: 0 0 10px;
+  text-align: center;
+  font-size: 20px;
+  color: var(--brand);
+}
+.aiCTA__subtitle {
+  margin: 0 0 18px;
+  text-align: center;
+  color: var(--brand);
+  font-weight: 600;
+}
+
+.aiCTA__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border: 2px dashed var(--tan);
+  border-radius: 16px;
+  padding: 18px;
+}
+.aiCTA__desc {
+  margin: 0;
+  color: var(--brand);
+}
+.aiCTA__btn {
+  border: none;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.aiCTA__btn:hover {
+  transform: translateY(-1px);
+}
+.aiCTA__btn:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
