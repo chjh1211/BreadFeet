@@ -1,15 +1,22 @@
 package com.example.breadfeet_BE.domain.mypage;
 
 import com.example.breadfeet_BE.auth.config.auth.dto.CustomOAuth2User;
-import com.example.breadfeet_BE.domain.mypage.MyPageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping; // Add this import
-import org.springframework.web.bind.annotation.RequestBody; // Add this import
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+// All DTOs and the Service need to be imported
+import com.example.breadfeet_BE.domain.mypage.MyPageService;
+import com.example.breadfeet_BE.domain.mypage.MyPageResponseDto;
+import com.example.breadfeet_BE.domain.mypage.MyProfileUpdateRequestDto;
+import com.example.breadfeet_BE.domain.mypage.MyReviewResponseDto;
 
 @RestController
 @RequestMapping("/api/mypage")
@@ -20,7 +27,6 @@ public class MyPageController {
 
     @GetMapping("/profile")
     public ResponseEntity<MyPageResponseDto> getMyProfile(@AuthenticationPrincipal CustomOAuth2User customOAuth2User) {
-        // customOAuth2User.getUser().getId()를 통해 User 엔티티의 ID를 가져옵니다.
         Long userId = customOAuth2User.getUser().getId();
         MyPageResponseDto myProfile = myPageService.getMyProfile(userId);
         return ResponseEntity.ok(myProfile);
@@ -33,5 +39,12 @@ public class MyPageController {
         Long userId = customOAuth2User.getUser().getId();
         MyPageResponseDto updatedProfile = myPageService.updateMyProfile(userId, requestDto);
         return ResponseEntity.ok(updatedProfile);
+    }
+
+    @GetMapping("/reviews")
+    public ResponseEntity<List<MyReviewResponseDto>> getMyReviews(@AuthenticationPrincipal CustomOAuth2User customOAuth2User) {
+        Long userId = customOAuth2User.getUser().getId();
+        List<MyReviewResponseDto> myReviews = myPageService.getMyReviews(userId);
+        return ResponseEntity.ok(myReviews);
     }
 }
