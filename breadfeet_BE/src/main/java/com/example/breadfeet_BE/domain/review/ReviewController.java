@@ -23,8 +23,10 @@ public class ReviewController {
         // reviewList.size()와 별도 계산 로직을 Service에 추가해야 합니다.
         return ResponseEntity.ok(reviewList);
     }
-    @PostMapping("/api/reviews") // ⬅️ API 명세서 4번
+    @PostMapping("/api/reviews/{bakeryId}/reviews") // ⬅️ API 명세서 4번
     public ResponseEntity<ReviewCreateResponseDto> createReview(
+
+            @PathVariable Long bakeryId,
             // 1. @RequestBody: 프론트가 보낸 JSON을 DTO로 변환
             @RequestBody ReviewCreateRequestDto requestDto,
 
@@ -34,7 +36,7 @@ public class ReviewController {
             @AuthenticationPrincipal String userId
     ) {
         // 3. 서비스에게 DTO와 사용자 ID를 넘겨 리뷰 생성 요청
-        Long newReviewId = reviewService.createReview(requestDto, userId);
+        Long newReviewId = reviewService.createReview(requestDto, userId,bakeryId);
 
         // 4. 성공 응답 (HTTP 201 Created)과 함께 생성된 ID를 DTO에 담아 반환
         return ResponseEntity

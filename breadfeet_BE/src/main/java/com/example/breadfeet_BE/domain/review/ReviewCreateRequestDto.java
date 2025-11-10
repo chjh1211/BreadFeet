@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class ReviewCreateRequestDto {
-    private Long bakeryId;
     private String content;
     private double rating;
 }

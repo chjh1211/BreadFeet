@@ -7,7 +7,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
-    List<Review> findAllByBakeryId(Long bakeryId);
+    @Query("SELECT r FROM Review r JOIN FETCH r.user WHERE r.bakery.Id = :bakeryId")
+    List<Review> findAllWithUserByBakeryId(@Param("bakeryId") Long bakeryId);
 
     @Query("SELECT AVG(r.rating) FROM Review r WHERE r.bakery.Id = :bakeryId")
     Double findAverageRatingByBakeryId(@Param("bakeryId") Long bakeryId);

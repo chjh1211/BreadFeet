@@ -22,22 +22,22 @@ public class ReviewService {
 
     @Transactional(readOnly = true)
     public List<ReviewResponseDto> findReviewsByBakeryId(Long bakeryId){
-        return reviewRepository.findAllByBakeryId(bakeryId)
+        return reviewRepository.findAllWithUserByBakeryId(bakeryId)
                 .stream()
                 .map(ReviewResponseDto::new)
                 .collect(Collectors.toList());
     }
 
     @Transactional
-    public Long createReview(ReviewCreateRequestDto requestDto, String userId){
+    public Long createReview(ReviewCreateRequestDto requestDto, String userId, Long bakeyId){
         // 1. "누가" 썼는지, JWT에서 받은 userId로 User 엔티티를 조회
         //    (주의! JWT는 String을 주므로 Long으로 변환)
         User user = userRepository.findById(Long.parseLong(userId))
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저를 찾을 수 없습니다. id=" + userId));
 
         // 2. "어느 빵집"에 썼는지, DTO에서 받은 bakeryId로 Bakery 엔티티를 조회
-        Bakery bakery = bakeryRepository.findById(requestDto.getBakeryId())
-                .orElseThrow(() -> new IllegalArgumentException("해당 빵집을 찾을 수 없습니다. id=" + requestDto.getBakeryId()));
+        Bakery bakery = bakeryRepository.findById(bakeyId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 빵집을 찾을 수 없습니다. id=" + bakeyId));
 
         // 3. Review 엔티티 생성 (Builder 사용)
         Review newReview = Review.builder()
