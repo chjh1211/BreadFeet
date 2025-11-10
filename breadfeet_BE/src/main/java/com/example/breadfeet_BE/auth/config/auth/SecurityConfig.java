@@ -33,6 +33,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         // 4. [수정] /api/v1/** 경로는 Role.USER.name() 대신 "ROLE_USER" 사용
                         .requestMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/testdb","/api/v1/bakeries/**").permitAll()
+                        .requestMatchers("/api/favorite/**").hasRole(Role.USER.name())
                         .requestMatchers("/api/v1/**").hasRole(Role.USER.name())
                         .anyRequest().authenticated()
                 )
