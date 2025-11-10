@@ -4,6 +4,7 @@ import com.example.breadfeet_BE.domain.bakery.Bakery;
 import com.example.breadfeet_BE.domain.base.BaseEntity;
 import com.example.breadfeet_BE.domain.user.User;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,4 +32,12 @@ public class Review extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Builder
+    public Review(String content, double rating, User user, Bakery bakery) {
+        this.content = content;
+        this.rating = rating;
+        this.user = user;
+        this.bakery = bakery;
+    }
 }

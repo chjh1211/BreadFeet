@@ -31,8 +31,10 @@ public class User extends BaseEntity {
     @Column(nullable = false, length = 20)
     private String status = "ACTIVE";
 
-    @Column(nullable = false, length = 20)
-    private String role = "USER";
+    // ▼▼▼ [수정됨] String -> Role Enum 타입으로 변경 ▼▼▼
+    @Enumerated(EnumType.STRING) // DB에 Enum 이름을 문자열로 저장
+    @Column(nullable = false)
+    private Role role; // ⬅️ 기본값 "USER"는 빌더에서 설정
 
     // --- (추가) 소셜 로그인을 위한 Builder ---
     @Builder
@@ -40,6 +42,9 @@ public class User extends BaseEntity {
         this.kakaoSocialId = kakaoSocialId;
         this.nickname = nickname;
         this.profileImageUrl = profileImageUrl;
+
+        this.status = "ACTIVE";
+        this.role = Role.USER;
     }
 
     // --- (추가) 사용자 정보 업데이트 ---
