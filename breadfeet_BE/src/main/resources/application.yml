@@ -11,7 +11,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/breadfeet?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root # ?? DB ??
-    password: 1234 # ?? DB ????
+    password: chjh8800 # ?? DB ????
 
   # 2. JPA ??
   jpa:
@@ -29,7 +29,8 @@ spring:
         registration:
           kakao: # 'kakao'? ??? ?? ?? (Redirect URI? ??? ??? ??)
             client-id: e5655138fc54844b5719e31d08e9a727 # 1???? ??? REST API ?
-            client-secret: # ???? ??? Client Secret? ???? ?? (???? ?)
+            client-secret: kJev9Mt9ozGjL8cBfagSacv5GR0jnbeO
+            client-authentication-method: client_secret_post
             scope: profile_nickname # ????? ??? ?? ??
             client-name: Kakao
             authorization-grant-type: authorization_code

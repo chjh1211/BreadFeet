@@ -6,15 +6,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy; // 1. import 추가
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter; // 2. import 추가
 
 @Configuration
-@EnableWebSecurity // Spring Security 설정 활성화
+@EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
 
     private final CustomOAuth2UserService customOAuth2UserService;
+    private final OAuth2SuccessHandler oAuth2SuccessHandler;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter; // 3. JWT 필터 주입
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -22,33 +25,30 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
 
+                // ▼▼▼ [수정] 세션 관리를 STATELESS(무상태)로 변경 ▼▼▼
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**","/testdb").permitAll()
+                        // 4. [수정] /api/v1/** 경로는 Role.USER.name() 대신 "ROLE_USER" 사용
+                        .requestMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/testdb","/api/v1/bakeries/**").permitAll()
                         .requestMatchers("/api/v1/**").hasRole(Role.USER.name())
                         .anyRequest().authenticated()
                 )
 
-                .logout(logout -> logout
-                        .logoutSuccessUrl("/")
-                )
 
-                // 3. OAuth2 로그인 설정
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(customOAuth2UserService)
                         )
-                        // ▼▼▼ 이 줄을 여기에 추가하세요! ▼▼▼
-                        .successHandler(oauthSuccessHandler()) // 만든 핸들러를 등록
+                        .successHandler(oAuth2SuccessHandler)
                 );
 
-        return http.build();
-    }
+        // ▼▼▼ [필수 추가] ▼▼▼
+        // 6. OAuth2 로그인 필터 전에 JWT 인증 필터를 먼저 실행하도록 등록
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
-    @Bean
-    public AuthenticationSuccessHandler oauthSuccessHandler() {
-        return (request, response, authentication) -> {
-            // 로그인이 성공했으므로, 프론트엔드 메인 페이지로 리다이렉트
-            response.sendRedirect("http://localhost:5175");
-        };
+        return http.build();
     }
 }
