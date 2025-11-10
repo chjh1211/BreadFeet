@@ -4,7 +4,7 @@
   padding: 28px 24px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   background-image: linear-gradient(
       to right,
       rgba(0, 0, 0, 0.06) 1px,
