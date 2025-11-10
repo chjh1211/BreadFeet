@@ -1,6 +1,7 @@
 package com.example.breadfeet_BE.domain.mypage;
 
 import com.example.breadfeet_BE.domain.review.Review;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,7 @@ public class MyReviewResponseDto {
     private Long bakeryId;
     private String bakeryName;
 
+    // Existing constructor
     public MyReviewResponseDto(Review review) {
         this.reviewId = review.getReviewid();
         this.content = review.getContent();
@@ -23,5 +25,16 @@ public class MyReviewResponseDto {
         this.createdAt = review.getCreatedAt();
         this.bakeryId = review.getBakery().getId();
         this.bakeryName = review.getBakery().getName();
+    }
+
+    // Add this builder constructor for easier testing
+    @Builder
+    public MyReviewResponseDto(Long reviewId, String content, double rating, LocalDateTime createdAt, Long bakeryId, String bakeryName) {
+        this.reviewId = reviewId;
+        this.content = content;
+        this.rating = rating;
+        this.createdAt = createdAt;
+        this.bakeryId = bakeryId;
+        this.bakeryName = bakeryName;
     }
 }
