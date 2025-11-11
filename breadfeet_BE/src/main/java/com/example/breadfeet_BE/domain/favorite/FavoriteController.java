@@ -19,14 +19,14 @@ public class FavoriteController {
 
     // 즐겨찾기 추가
     @PostMapping("/{bakeryId}/favorite")
-    public ResponseEntity<Map<String,String>> addFavorite(@PathVariable Long bakeryId) {
+    public ResponseEntity<FavoriteResponseDto> addFavorite(@PathVariable Long bakeryId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Long userId = Long.parseLong(authentication.getName());
 
         FavoriteResponseDto favoriteResponseDto = favoriteService.addFavorite(userId, bakeryId);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(Map.of("message", "추가 완료"));
+                .body(favoriteResponseDto);
     }
 
     // 즐겨찾기 삭제
