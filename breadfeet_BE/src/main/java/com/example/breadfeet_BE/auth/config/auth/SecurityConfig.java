@@ -35,6 +35,7 @@ public class SecurityConfig {
                         .requestMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/testdb","/api/v1/bakeries/**").permitAll()
                         .requestMatchers("/api/favorite/**").hasRole(Role.USER.name())
                         .requestMatchers("/api/v1/**").hasRole(Role.USER.name())
+                        .requestMatchers("/api/mypage/**").authenticated() // Add this line for mypage endpoints
                         .anyRequest().authenticated()
                 )
 
