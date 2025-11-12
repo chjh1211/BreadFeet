@@ -3,6 +3,7 @@ package com.example.breadfeet_BE.domain.review;
 import com.example.breadfeet_BE.auth.config.auth.dto.SessionUser;
 import com.example.breadfeet_BE.domain.bakery.Bakery;
 import com.example.breadfeet_BE.domain.bakery.BakeryRepository;
+import com.example.breadfeet_BE.domain.challenge.ChallengeService;
 import com.example.breadfeet_BE.domain.user.User;
 import com.example.breadfeet_BE.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
     private final BakeryRepository bakeryRepository;
+    private final ChallengeService challengeService;
 
 
     @Transactional(readOnly = true)
@@ -50,7 +52,10 @@ public class ReviewService {
         // 4. DB에 리뷰 저장
         Review savedReview = reviewRepository.save(newReview);
 
-        // 5. 생성된 리뷰의 ID 반환
+        // 5. 챌린지 진행도 업데이트
+        challengeService.updateChallengeProgress(user, bakery);
+
+        // 6. 생성된 리뷰의 ID 반환
         return savedReview.getReviewid();
     }
 }
