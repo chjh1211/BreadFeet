@@ -36,4 +36,35 @@ out/
 ### VS Code ###
 .vscode/
 
+### macOS ###
+# General macOS files
+.DS_Store
+.AppleDouble
+.LSOverride
 
+
+# ==================================
+# ### Node.js / Frontend ###
+
+# 1. 의존성 라이브러리 폴더 (필수!)
+# (용량이 매우 크고, npm install로 복구 가능)
+/node_modules/
+/frontend/node_modules/
+
+# 2. 빌드 결과물 (컴파일된 파일)
+# (npm run build 시 생성됨)
+/frontend/dist/
+/frontend/.vite/
+
+# 3. 로그 파일
+# (에러 발생 시 자동으로 생성됨)
+npm-debug.log*
+yarn-error.log*
+yarn-debug.log*
+
+# 4. 로컬 환경 변수 파일 (중요!)
+# (개인 API 키 등이 담기므로 절대 공유 금지)
+.env.local
+.env.*.local
+frontend/.env.local
+frontend/.env.*.local
