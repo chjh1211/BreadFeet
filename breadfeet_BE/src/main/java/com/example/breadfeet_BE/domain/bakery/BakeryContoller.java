@@ -1,10 +1,9 @@
 package com.example.breadfeet_BE.domain.bakery;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -13,8 +12,8 @@ public class BakeryContoller {
     private final BakeryService bakeryService;
 
     @GetMapping
-    public ResponseEntity<List<BakeryListResponseDto>> getBakeryList(@RequestParam(required = false) String search) {
-        List<BakeryListResponseDto> bakeryList = bakeryService.findAllBakeries(search);
+    public ResponseEntity<BakeryPageResponseDto> getBakeryList(@RequestParam(required = false) String search, Pageable pageable) {
+        BakeryPageResponseDto bakeryList = bakeryService.findAllBakeries(search, pageable);
 
         return ResponseEntity.ok(bakeryList);
     }
