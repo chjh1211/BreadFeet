@@ -1,5 +1,6 @@
 package com.example.breadfeet_BE.domain.favorite;
 
+import com.example.breadfeet_BE.domain.favorite.dto.FavoriteListResponseDto;
 import com.example.breadfeet_BE.domain.favorite.dto.FavoriteResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -37,5 +39,15 @@ public class FavoriteController {
 
         favoriteService.deleteFavorite(userId, bakeryId);
         return ResponseEntity.noContent().build();
+    }
+
+    // 즐겨찾기 목록 조회
+    @GetMapping("/favorites/my")
+    public ResponseEntity<List<FavoriteListResponseDto>> getUserFavorites() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long userId = Long.parseLong(authentication.getName());
+
+        List<FavoriteListResponseDto> favoriteBakeries = favoriteService.getUserFavorites(userId);
+        return ResponseEntity.ok(favoriteBakeries);
     }
 }
