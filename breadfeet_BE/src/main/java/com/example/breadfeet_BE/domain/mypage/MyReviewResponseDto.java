@@ -19,7 +19,7 @@ public class MyReviewResponseDto {
 
     // Existing constructor
     public MyReviewResponseDto(Review review) {
-        this.reviewId = review.getReviewid();
+        this.reviewId = review.getId();
         this.content = review.getContent();
         this.rating = review.getRating();
         this.createdAt = review.getCreatedAt();

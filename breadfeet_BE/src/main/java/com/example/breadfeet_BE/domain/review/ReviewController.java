@@ -43,4 +43,14 @@ public class ReviewController {
                 .status(HttpStatus.CREATED)
                 .body(new ReviewCreateResponseDto(newReviewId));
     }
+
+    @PutMapping("/api/reviews/{reviewId}")
+    public ResponseEntity<String> updateReview(
+            @PathVariable Long reviewId,
+            @RequestBody ReviewUpdateRequestDto requestDto,
+            @AuthenticationPrincipal String userId
+    ) {
+        reviewService.updateReview(reviewId, requestDto, userId);
+        return ResponseEntity.ok("리뷰가 성공적으로 수정되었습니다.");
+    }
 }
