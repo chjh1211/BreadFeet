@@ -1,31 +1,22 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState } from "react";
 import "./MapBakeryList.css";
 import MapBakeryCard from "./MapBakeryCard";
 
-const MapBakeryList = () => {
+const MapBakeryList = ({
+  bakerys = [],
+  userMatchRates = [],
+  selectedBakeryId,
+  onSelectBakery,
+}) => {
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState("distance"); // 'distance' | 'reviews' | 'match'
-  const [bakerys, setBakerys] = useState([]);
-  const [userMatchRates, setuserMatchRates] = useState([]);
-  const userId = 1001;
-
-  useEffect(() => {
-    fetch(`http://localhost:3001/bakery`)
-      .then((res) => res.json())
-      .then((data) => setBakerys(data))
-      .catch(() => setBakerys([]));
-  }, []);
-
-  useEffect(() => {
-    fetch(`http://localhost:3001/matchRates?userId=${userId}`)
-      .then((res) => res.json())
-      .then((data) => setuserMatchRates(data))
-      .catch(() => setuserMatchRates([]));
-  }, [userId]);
 
   const scoreMap = useMemo(() => {
     return new Map(
-      userMatchRates.map(({ bakeryId, matchScore }) => [bakeryId, matchScore])
+      userMatchRates.map(({ bakeryId, matchScore }) => [
+        String(bakeryId),
+        matchScore,
+      ])
     );
   }, [userMatchRates]);
 
@@ -43,7 +34,7 @@ const MapBakeryList = () => {
   const results = useMemo(() => {
     const withMatch = filtered.map((b) => ({
       ...b,
-      matchScore: scoreMap.get(b.id) ?? 0,
+      matchScore: scoreMap.get(String(b.id)) ?? 0,
     }));
 
     switch (sortBy) {
@@ -60,6 +51,10 @@ const MapBakeryList = () => {
     }
     return withMatch;
   }, [filtered, sortBy, scoreMap]);
+
+  const handleBakerySelect = (bakeryId) => {
+    onSelectBakery?.(bakeryId);
+  };
 
   return (
     <div className="mapBakeryListWrapper">
@@ -102,11 +97,17 @@ const MapBakeryList = () => {
       <ul className="mapBakeryList" aria-live="polite">
         {results.map((bakery) => (
           <MapBakeryCard
+            key={bakery.id}
             id={bakery.id}
             bakery={bakery}
             userData={userMatchRates}
+            isSelected={bakery.id === selectedBakeryId}
+            onSelect={handleBakerySelect}
           />
         ))}
+        {results.length === 0 && (
+          <li className="mapBakeryEmpty">검색 결과가 없습니다.</li>
+        )}
       </ul>
     </div>
   );

@@ -1,4 +1,96 @@
 .Map {
+  display: grid;
+  grid-template-columns: minmax(320px, 360px) minmax(0, 1fr) minmax(360px, 520px);
   min-height: calc(100dvh - var(--navbar-h));
+  background: #fdfbf9;
+}
+
+.MapSidebar {
   display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #f5eadc 0%, #fefaf6 100%);
+  border-right: 1px solid rgba(53, 35, 16, 0.08);
+  box-shadow: inset -1px 0 0 rgba(53, 35, 16, 0.06);
+  max-height: calc(100dvh - var(--navbar-h));
+  overflow-y: auto;
+}
+
+.MapMainPane {
+  position: relative;
+  background: #fff;
+  overflow: hidden;
+}
+
+.MapListPane {
+  border-right: 1px solid rgba(53, 35, 16, 0.08);
+  background: #fdfbf9;
+  max-height: calc(100dvh - var(--navbar-h));
+  overflow-y: auto;
+}
+
+.MapCanvasWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 640px;
+  background: #f7efe2;
+}
+
+.MapCanvas {
+  width: 100%;
+  height: 100%;
+}
+
+.MapCanvasOverlay {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(53, 35, 16, 0.9);
+  color: #fdfbf9;
+  padding: 14px 18px;
+  border-radius: 16px;
+  font-size: 15px;
+  line-height: 1.4;
+  box-shadow: 0 12px 32px rgba(53, 35, 16, 0.25);
+  max-width: min(480px, 80%);
+  text-align: center;
+}
+
+.MapDistanceInfo {
+  background: rgba(245, 229, 208, 0.95);
+  border: 1px solid rgba(107, 74, 38, 0.4);
+  color: #6b4a26;
+  padding: 10px 16px;
+  border-radius: 18px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 10px 24px rgba(53, 35, 16, 0.18);
+  backdrop-filter: blur(6px);
+  white-space: nowrap;
+}
+
+@media (max-width: 1440px) {
+  .Map {
+    grid-template-columns: minmax(280px, 320px) minmax(0, 1fr) minmax(320px, 420px);
+  }
+}
+
+@media (max-width: 1080px) {
+  .Map {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .MapSidebar,
+  .MapListPane {
+    max-height: none;
+    border-right: none;
+    border-left: none;
+    box-shadow: none;
+  }
+
+  .MapCanvasWrapper {
+    min-height: 420px;
+  }
 }
