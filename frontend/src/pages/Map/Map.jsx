@@ -220,11 +220,24 @@ const Map = () => {
 
   return (
     <div className="Map">
-      <aside className="MapSidebar" aria-label="순례길 추천">
+      {/* 순례길 추천 영역 */}
+      <div className="MapSidebar" aria-label="순례길 추천">
         <MapPath />
+      </div>
+
+     
+    {/* 빵집 리스트 영역 */}
+      <aside className="MapListPane" aria-label="빵집 목록">
+        <MapBakeryList
+          bakerys={bakeriesWithDistance}
+          userMatchRates={userMatchRates}
+          selectedBakeryId={selectedBakeryId}
+          onSelectBakery={handleSelectBakery}
+        />
       </aside>
 
-      <section className="MapMainPane" aria-label="지도 영역">
+      {/* 지도 영역 */}
+       <section className="MapMainPane" aria-label="지도 영역">
         <MapView
           kakao={kakao}
           bakeries={bakeriesWithDistance}
@@ -237,15 +250,6 @@ const Map = () => {
           mapErrorMessage={mapErrorMessage}
         />
       </section>
-
-      <aside className="MapListPane" aria-label="빵집 목록">
-        <MapBakeryList
-          bakerys={bakeriesWithDistance}
-          userMatchRates={userMatchRates}
-          selectedBakeryId={selectedBakeryId}
-          onSelectBakery={handleSelectBakery}
-        />
-      </aside>
     </div>
   );
 };

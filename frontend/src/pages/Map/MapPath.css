@@ -1,5 +1,4 @@
 .MapPath {
-  width: 200px;
   min-height: calc(100dvh - var(--navbar-h));
   background-color: #ebe4de;
   padding: 15px;
