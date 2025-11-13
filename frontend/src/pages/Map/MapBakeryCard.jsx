@@ -1,10 +1,12 @@
 import React, { useMemo } from "react";
-import "../../components/MatchRateBar";
 import "./MapBakeryCard.css";
 import MatchRateBar from "../../components/MatchRateBar";
 
-const formatDistance = (m) =>
-  m < 1000 ? `${m}m` : `${(m / 1000).toFixed(1)}km`;
+const formatDistance = (meters) => {
+  if (!Number.isFinite(meters)) return "-";
+  if (meters < 1000) return `${Math.round(meters)}m`;
+  return `${(meters / 1000).toFixed(1)}km`;
+};
 
 const Stars = ({ rating }) => {
   const full = Math.floor(rating);
@@ -20,30 +22,55 @@ const Stars = ({ rating }) => {
   );
 };
 
-const MapBakeryCard = ({ bakery, userData = [] }) => {
+const MapBakeryCard = ({
+  bakery,
+  userData = [],
+  isSelected = false,
+  onSelect,
+}) => {
   const rate = useMemo(() => {
-    const item = userData.find((x) => x.bakeryId === bakery.id);
+    const targetId = String(bakery.id);
+    const item = userData.find((x) => String(x.bakeryId) === targetId);
     return item?.matchScore ?? 0;
   }, [bakery.id, userData]);
 
+  const handleSelect = () => {
+    onSelect?.(bakery.id);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      onSelect?.(bakery.id);
+    }
+  };
+
   return (
-    <li key={bakery.id} className="mapCard">
-      <div className="mapMatchRate">
-        {console.log(bakery.id)}
-        <MatchRateBar bakeryId={bakery.id} name={bakery.name} rate={rate} />
-      </div>
-      <div className="mapCardMeta">
-        <Stars rating={bakery.rating} />
-        <div className="mapCardDistance">
-          {formatDistance(bakery.distanceMeters)}
+    <li
+      className={`mapCard ${isSelected ? "is-selected" : ""}`}
+      onClick={handleSelect}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="button"
+      aria-pressed={isSelected}
+    >
+      <div className="mapCardBody">
+        <div className="mapMatchRate">
+          <MatchRateBar bakeryId={bakery.id} name={bakery.name} rate={rate} />
         </div>
-      </div>
-      <div className="mapCardInfo">
-        <div className="mapCardInfo-row">{bakery.address}</div>
-        <div className="mapCardInfo-row">
-          리뷰 <strong>{bakery.reviewCount}</strong>개
+        <div className="mapCardMeta">
+          <Stars rating={bakery.rating} />
+          <div className="mapCardDistance">
+            {formatDistance(bakery.distanceMeters)}
+          </div>
         </div>
-        <div className="mapCardInfo-row">{bakery.phone}</div>
+        <div className="mapCardInfo">
+          <div className="mapCardInfo-row">{bakery.address}</div>
+          <div className="mapCardInfo-row">
+            리뷰 <strong>{bakery.reviewCount}</strong>개
+          </div>
+          <div className="mapCardInfo-row">{bakery.phone}</div>
+        </div>
       </div>
     </li>
   );
