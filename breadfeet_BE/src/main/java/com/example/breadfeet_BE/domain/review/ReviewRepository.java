@@ -1,9 +1,11 @@
 package com.example.breadfeet_BE.domain.review;
 
+import com.example.breadfeet_BE.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
@@ -13,5 +15,9 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query("SELECT AVG(r.rating) FROM Review r WHERE r.bakery.Id = :bakeryId")
     Double findAverageRatingByBakeryId(@Param("bakeryId") Long bakeryId);
 
-    List<Review> findByUser_Id(Long userId); // Add this method
+    List<Review> findByUser_Id(Long userId);
+
+    long countByUserAndBakery_CityAndBakery_District(User user, String city, String district);
+
+    long countByUserAndCreatedAtAfter(User user, LocalDateTime dateTime);
 }

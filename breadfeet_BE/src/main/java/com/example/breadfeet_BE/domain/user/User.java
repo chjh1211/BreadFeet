@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 // import java.util.ArrayList; // Review, Like 클래스가 없으면 임시 주석 처리
 // import java.util.List;
 
