@@ -1,6 +1,7 @@
 package com.example.breadfeet_BE.domain.challenge;
 
 import com.example.breadfeet_BE.domain.bakery.Bakery;
+import com.example.breadfeet_BE.domain.challenge.dto.MyChallengeResponseDto;
 import com.example.breadfeet_BE.domain.challenge.dto.UserChallengeResponseDto;
 import com.example.breadfeet_BE.domain.review.ReviewRepository;
 import com.example.breadfeet_BE.domain.user.User;
@@ -67,6 +68,14 @@ public class ChallengeService {
         List<UserChallenge> userChallenges = userChallengeRepository.findAllByUser(user);
         return userChallenges.stream()
                 .map(UserChallengeResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<MyChallengeResponseDto> getMyAchievedChallenges(User user) {
+        List<UserChallenge> userChallenges = userChallengeRepository.findAllByUser(user);
+        return userChallenges.stream()
+                .map(MyChallengeResponseDto::new)
                 .collect(Collectors.toList());
     }
 }

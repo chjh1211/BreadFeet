@@ -1,6 +1,11 @@
 package com.example.breadfeet_BE.domain.challenge;
 
+import com.example.breadfeet_BE.auth.config.auth.dto.CustomOAuth2User;
+import com.example.breadfeet_BE.domain.challenge.ChallengeService;
+import com.example.breadfeet_BE.domain.challenge.dto.MyChallengeResponseDto;
 import com.example.breadfeet_BE.domain.challenge.dto.UserChallengeResponseDto;
+import com.example.breadfeet_BE.domain.user.User;
+import com.example.breadfeet_BE.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -17,13 +22,25 @@ import java.util.List;
 public class ChallengeController {
 
     private final ChallengeService challengeService;
+    private final UserRepository userRepository;
 
     @GetMapping("/my")
     public ResponseEntity<List<UserChallengeResponseDto>> getMyChallenges() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Long userId = Long.parseLong(authentication.getName());
+        CustomOAuth2User customOAuth2User = (CustomOAuth2User) authentication.getPrincipal();
+        User user = customOAuth2User.getUser();
 
-        List<UserChallengeResponseDto> myChallenges = challengeService.getUserChallenges(userId);
+        List<UserChallengeResponseDto> myChallenges = challengeService.getUserChallenges(user.getId());
         return ResponseEntity.ok(myChallenges);
+    }
+
+    @GetMapping("/my-achieved")
+    public ResponseEntity<List<MyChallengeResponseDto>> getMyAchievedChallenges() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomOAuth2User customOAuth2User = (CustomOAuth2User) authentication.getPrincipal();
+        User user = customOAuth2User.getUser();
+
+        List<MyChallengeResponseDto> myAchievedChallenges = challengeService.getMyAchievedChallenges(user);
+        return ResponseEntity.ok(myAchievedChallenges);
     }
 }
