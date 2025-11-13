@@ -8,9 +8,10 @@
 
 .mapToolbar {
   position: sticky;
-  top: var(--nav-bar);
+  top: 0;
   padding: 0;
   background: #f5e6cc;
+  z-index: 10;
 }
 
 .searchWrapper {

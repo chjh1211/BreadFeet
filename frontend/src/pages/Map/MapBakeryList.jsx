@@ -62,7 +62,6 @@ const MapBakeryList = ({
         <div className="searchWrapper">
           <div className="mapSearch">
             <span className="mapSearchIcon" aria-hidden>
-              <img></img>
             </span>
             <input
               value={query}

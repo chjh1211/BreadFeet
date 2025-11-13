@@ -317,12 +317,19 @@ const MapView = ({
       return;
     }
 
-    if (!polylineRef.current) {
+   if (!polylineRef.current) {
+      new kakao.maps.Polyline({
+        strokeWeight: 7, // dot은 굵기를 더 줘야 잘 보입니다.
+        strokeColor: "#62321aff",
+        strokeOpacity: 0.9,
+        strokeStyle: "dot", 
+      });
+
       polylineRef.current = new kakao.maps.Polyline({
-        strokeWeight: 5,
-        strokeColor: "#d9c2a6",
-        strokeOpacity: 0.95,
-        strokeStyle: "solid",
+        strokeWeight: 5, 
+        strokeColor: "#62321aff", 
+        strokeOpacity: 0.5, 
+        strokeStyle: "dash", 
       });
     }
 
@@ -340,11 +347,12 @@ const MapView = ({
 
     const content = document.createElement("div");
     content.className = "MapDistanceInfo";
-    content.textContent = `현재 위치에서 ${distanceText}`;
+    content.textContent = `빵집까지 ${distanceText}!`;
 
     if (!distanceOverlayRef.current) {
       distanceOverlayRef.current = new kakao.maps.CustomOverlay({
         yAnchor: 1.4,
+        zIndex: 8,
       });
     }
 
