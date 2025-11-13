@@ -1,7 +1,7 @@
-.row {
+/* .row {
   display: flex;
   align-items: center;
-}
+} */
 
 @media (max-width: 900px) {
   .tbl-panel {
@@ -78,8 +78,8 @@
   }
 }
 
-@media (max-width: 425px) {
+/* @media (max-width: 425px) {
   .row {
     flex-direction: column;
   }
-}
+} */

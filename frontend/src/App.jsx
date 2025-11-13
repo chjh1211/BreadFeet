@@ -1,5 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home/Home";
@@ -9,7 +10,7 @@ import Event from "./pages/Event/EventPage";
 import BakeryDetail from "./components/BakeryDetail";
 import EventDetail from "./pages/Event/EventDetail";
 import MyPage from "./pages/MyPage/MyPage";
-import Taste from  "./pages/Taste/Taste";
+import Taste from "./pages/Taste/Taste";
 import TasteResult from "./pages/Taste/TasteResult";
 
 function AppShell() {
@@ -25,11 +26,11 @@ function AppShell() {
         <Route path="/" element={<Home />} />
         <Route path="/map" element={<Map />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/event" element={<Event/>}/>
-        <Route path="/mypage" element={<MyPage/>}/>
-        <Route path="/taste" element={<Taste />}/>
-        <Route path="/tasteResult" element={<TasteResult />}/>
-        <Route path="/event/:eventType/:eventId" element={<EventDetail />}/>
+        <Route path="/event" element={<Event />} />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/taste" element={<Taste />} />
+        <Route path="/tasteResult" element={<TasteResult />} />
+        <Route path="/event/:eventType/:eventId" element={<EventDetail />} />
         <Route path="/bakery/:bakeryId" element={<BakeryDetail />} />
       </Routes>
     </>
@@ -37,6 +38,14 @@ function AppShell() {
 }
 
 function App() {
+  // 카카오 초기화 코드
+  useEffect(() => {
+    if (window.Kakao && !window.Kakao.isInitialized()) {
+      window.Kakao.init(import.meta.env.VITE_KAKAO_JS_KEY);
+      // console.log("Kakao initialized:", window.Kakao.isInitialized());
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       <AppShell />
