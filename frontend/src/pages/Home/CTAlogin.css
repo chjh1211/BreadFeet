@@ -1,0 +1,94 @@
+:root {
+  --brand: #352310;
+  --tan: #efd8c3;
+  --bg: #ffffff;
+}
+
+.ctaLogin {
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--tan);
+  border-radius: 16px;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+/* 슬라이드 뷰포트 (AiCTA/BestCourseCTA가 충분히 보이도록 높이 확보) */
+.ctaLogin__viewport {
+  position: relative;
+  min-height: 320px; /* 필요 시 조정 */
+  isolation: isolate;
+}
+
+/* 각 슬라이드 */
+.ctaLogin__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateX(var(--dx, 0px)) scale(0.985);
+  transition: opacity 360ms ease, transform 360ms ease;
+  pointer-events: none;
+  padding: 0; /* 자식 컴포넌트에서 패딩 처리 */
+}
+.ctaLogin__slide.is-active {
+  opacity: 1;
+  transform: translateX(var(--dx, 0px)) scale(1);
+  pointer-events: auto;
+}
+
+/* 좌/우 네비 버튼 */
+.ctaLogin__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.185);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.ctaLogin__nav.prev {
+  left: 10px;
+}
+.ctaLogin__nav.next {
+  right: 10px;
+}
+.ctaLogin__nav:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* 하단 점 네비 */
+.ctaLogin__dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.ctaLogin__dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 30px;
+  border: 0;
+  background: rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+}
+.ctaLogin__dots .dot.is-active {
+  background: rgba(0, 0, 0, 0.6);
+  transform: scale(1.2);
+}
+
+@media (max-width: 640px) {
+  .ctaLogin__nav {
+    display: none;
+  }
+  .ctaLogin__viewport {
+    min-height: 300px;
+  }
+}

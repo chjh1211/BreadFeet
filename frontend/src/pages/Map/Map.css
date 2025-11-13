@@ -1,0 +1,4 @@
+.Map {
+  min-height: calc(100dvh - var(--navbar-h));
+  display: flex;
+}

@@ -1,0 +1,120 @@
+.MapPath {
+  width: 200px;
+  min-height: calc(100dvh - var(--navbar-h));
+  background-color: #ebe4de;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.MapPathTitle {
+  font-size: 26px;
+  font-weight: 700;
+  color: #352310;
+  margin-bottom: 10px;
+}
+
+.MapPathControls {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 0 0 30px 0;
+}
+
+.MapPathLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b5a4a;
+}
+
+.MapPathSelect {
+  font-size: 13px;
+  color: #352310;
+  padding: 8px 10px;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid #d6c9bd;
+  background-color: #fdfbf9;
+  /* 드롭바 꺼내는 화살표 */
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, #8a7a6c 50%),
+    linear-gradient(135deg, #8a7a6c 50%, transparent 50%),
+    linear-gradient(to right, #fff, #fff);
+  background-position: calc(100% - 16px) calc(1em - 2px),
+    calc(100% - 11px) calc(1em - 2px), 100% 0;
+  background-size: 5px 5px, 5px 5px, 2.5em 2.5em;
+  background-repeat: no-repeat;
+}
+
+.MapPathSelect:focus {
+  border-color: #b9a694;
+}
+
+.MapPathList {
+  list-style: none;
+  padding: 10px 15px;
+  margin: 0;
+  position: relative;
+}
+
+.MapPathItem {
+  position: relative;
+  display: flex;
+  padding: 10px 0;
+}
+
+.MapPathItem::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -10px;
+  width: 6px;
+  background-color: #c7baad;
+}
+
+.MapPathItem:first-child::before {
+  top: 25px;
+}
+
+.MapPathItem:last-child::before {
+  bottom: 35px;
+}
+
+.MapPathDot {
+  position: absolute;
+  left: -12px; /* 중앙으로 맞추기 위함 */
+  top: 15px;
+  width: 10px;
+  height: 10px;
+  background: #352310;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px #c7baad;
+}
+
+.MapPathContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 15px;
+}
+
+.MapPathName {
+  font-size: 16px;
+  font-weight: 600;
+  color: #352310;
+  margin-bottom: 2px;
+}
+
+.MapPathInfo {
+  font-size: 12px;
+  color: #7a6b5e;
+  display: flex;
+  gap: 15px;
+}
+
+.MapPathEmpty {
+  font-size: 13px;
+  color: #7a6b5e;
+  padding: 10px 0;
+  text-align: center;
+}

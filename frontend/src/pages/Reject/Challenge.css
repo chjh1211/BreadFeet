@@ -1,0 +1,93 @@
+.ChallengeCard {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.ChallengeImage {
+  width: 225px;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+.ChallengeContent {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.ChallengeName {
+  font-size: 24px;
+  color: #4a3a2e;
+  margin: 0;
+}
+
+.ChallengeButton {
+  width: 165px;
+  border: none;
+  border-radius: 10px;
+  background-color: #f5e6cc;
+  color: #352310;
+  font-weight: 500;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px 0;
+}
+
+.ChallengeButton:hover {
+  background-color: #e7dccb;
+}
+
+@media (max-width: 1024px) {
+  .ChallengeImage {
+    width: 200px;
+    height: 120px;
+  }
+
+  .ChallengeName {
+    font-size: 22px;
+  }
+
+  .ChallengeButton {
+    font-size: 20px;
+    width: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ChallengeCard {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ChallengeImage {
+    width: 100%;
+    height: auto;
+  }
+
+  .ChallengeName {
+    font-size: 20px;
+  }
+
+  .ChallengeButton {
+    width: 100%;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ChallengeCard {
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .ChallengeName {
+    font-size: 18px;
+  }
+
+  .ChallengeButton {
+    font-size: 16px;
+    padding: 8px 0;
+  }
+}

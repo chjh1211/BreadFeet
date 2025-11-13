@@ -1,0 +1,90 @@
+:root {
+  --brand: #352310;
+  --cream: #fff8f0;
+  --tan: #ebe4de;
+}
+
+.bestCTA {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+
+  /* 격자 무늬 배경 */
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px;
+  background-color: #faf9f7;
+}
+
+.bestCTA__header h3 {
+  margin: 0;
+  margin-bottom: 15px;
+  font-size: 22px;
+  color: var(--brand);
+  /* text-align: start; */
+}
+.bestCTA__subtitle {
+  margin: 6px 0 0;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-weight: 600;
+}
+.bestCTA__course {
+  font-size: 18px;
+}
+.bestCTA__author {
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+/* 코스 요약 카드 */
+.bestCTA__body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.bestCTA__route {
+  list-style: none;
+  margin: 0;
+  padding: 12px 14px;
+  background: #fff;
+  border: 2px dashed var(--tan);
+  border-radius: 12px;
+}
+.bestCTA__route li + li {
+  margin-top: 6px;
+}
+
+.bestCTA__btn {
+  align-self: flex-start;
+  border: 2px solid #1f1a14;
+  border-radius: 12px;
+  background: #fff;
+  font-weight: 700;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+.bestCTA__btn .toMap {
+  margin-left: 2px;
+  opacity: 0.9;
+}
+.bestCTA__btn:hover {
+  transform: translateY(-1px);
+}
+.bestCTA__btn:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+/* @media (max-width: 320px) {
+  .bestCTA__route {
+    font-size: 12px;
+  }
+} */

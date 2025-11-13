@@ -1,0 +1,163 @@
+/* Review.css */
+
+/* --- 1. 모달 오버레이 및 기본 구조 --- */
+.review-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.review-modal {
+  background: #fff;
+  width: 90%;
+  max-width: 500px; /* 최대 너비 설정 */
+  min-height: 600px; /* ⭐️ 사진 영역을 고려하여 높이 증가 */
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  padding: 24px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.review-close {
+  border: none;
+  background: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #555;
+}
+
+/* --- 2. 별점 스타일 --- */
+.review-rating {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.star {
+  font-size: 28px;
+  color: #ccc;
+  cursor: pointer;
+  margin: 0 3px;
+  transition: color 0.2s;
+}
+
+.star.active {
+  color: #ffb400; /* 활성화된 별점 색상 */
+}
+
+/* --- 3. 텍스트 영역 스타일 (크기 확장 반영) --- */
+.review-textarea {
+  flex: 1; /* 부모 컨테이너의 남은 공간을 채우려 시도 */
+  min-height: 150px; /* ⭐️ 최소 높이 설정 */
+  resize: vertical; /* ⭐️ 사용자가 수직으로 크기 조절 가능하게 함 */
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 15px;
+  line-height: 1.4;
+  margin-bottom: 20px;
+
+  /* ⭐️ 부모의 padding(24px)을 고려하여 너비 100%를 유지 */
+  width: 100%; 
+  box-sizing: border-box; 
+}
+
+/* --- 4. 사진 첨부 UI 스타일 --- */
+.review-image-upload {
+  margin-bottom: 20px;
+  border: 1px dashed #e0e0e0; 
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  position: relative;
+}
+
+.image-upload-label {
+  display: inline-block;
+  background-color: #f0f0f0;
+  color: #555;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.image-upload-label:hover {
+  background-color: #e6e6e6;
+}
+
+.image-preview-container {
+  margin-top: 15px;
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.image-preview {
+  max-width: 100%;
+  max-height: 150px; /* 미리보기 이미지 최대 높이 */
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.remove-image-btn {
+  position: absolute;
+  top: -10px; 
+  right: -10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.remove-image-btn:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+
+/* --- 5. 제출 버튼 스타일 (색상 통일 반영) --- */
+.review-submit {
+  background: #cd9f6c; /* ⭐️ 활성화된 별점 색상과 통일 */
+  color: white;
+  font-weight: 600;
+  padding: 12px 0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%; /* 버튼을 가득 채우도록 100% 추가 */
+}
+
+.review-submit:hover {
+  background: #8f6f44; /* 호버 색상 */
+}
+
+.review-submit:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}

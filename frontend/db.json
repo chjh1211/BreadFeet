@@ -1,0 +1,297 @@
+{
+  "completed": [
+    {
+      "id": "1",
+      "title": "열정적인 붕어빵",
+      "img": "/img/badges/badge1.png",
+      "body": "일주일에 붕어빵 3번 먹기!"
+    },
+    {
+      "id": "2",
+      "title": "붕어빵 마스터",
+      "img": "/img/badges/badge2.png",
+      "body": "일주일에 붕어빵 7번 먹기!"
+    }
+  ],
+  "ongoing": [
+    {
+      "id": "3",
+      "title": "3회 연속 방문",
+      "img": "/img/badges/badge3.png",
+      "body": "body",
+      "progress": 2,
+      "total": 3
+    },
+    {
+      "id": "4",
+      "title": "한달 내 10회 방문",
+      "img": "/img/badges/badge4.png",
+      "body": "body",
+      "progress": 4,
+      "total": 10
+    }
+  ],
+  "recommended": [
+    {
+      "id": "5",
+      "title": "영상 리뷰 3회",
+      "img": "/img/badges/badge5.png",
+      "body": "body"
+    },
+    {
+      "id": "6",
+      "title": "대구 빵탐방 3회 방문",
+      "img": "/img/badges/badge6.png",
+      "body": "body"
+    },
+    {
+      "id": "7",
+      "title": "전국 빵탐방 10곳 방문",
+      "img": "/img/badges/badge7.png",
+      "body": "body"
+    }
+  ],
+  "bakery": [
+    {
+      "id": "1",
+      "name": "감자빵집",
+      "rating": 4.5,
+      "reviewCount": 88,
+      "address": "대구 북구 대학로 80",
+      "distanceMeters": 3,
+      "phone": "053 123 4567",
+      "hours": "매일 09:00 - 20:00",
+      "popMenu": ["소금빵", "크림빵", "크루아상"],
+      "tags": ["매장 내 취식 가능", "테이크아웃", "커피"]
+    },
+    {
+      "id": "2",
+      "name": "감자빵집 본점",
+      "rating": 5,
+      "reviewCount": 152,
+      "address": "대구 북구 대학로 100",
+      "distanceMeters": 50,
+      "phone": "053 999 1234",
+      "hours": "매일 09:00 - 20:00",
+      "popMenu": ["크루아상", "크림빵", "식빵"],
+      "tags": ["매장 내 취식 불가능", "테이크아웃"]
+    },
+    {
+      "id": "3",
+      "name": "감자빵 연구소",
+      "rating": 4.3,
+      "reviewCount": 61,
+      "address": "대구 북구 대학로 12",
+      "distanceMeters": 10,
+      "phone": "053 321 7890",
+      "hours": "매일 09:00 - 20:00",
+      "popMenu": ["감자빵", "바게트", "크루아상"],
+      "tags": ["한정 메뉴", "예약 가능"]
+    },
+    {
+      "id": "4",
+      "name": "감자빵집 수성점",
+      "rating": 3.6,
+      "reviewCount": 98,
+      "address": "대구 수성구 들안로 45",
+      "distanceMeters": 500,
+      "phone": "053 222 3333",
+      "hours": "매일 09:00 - 20:00",
+      "popMenu": ["식빵", "소시지빵", "크림빵"],
+      "tags": ["테이크아웃", "커피"]
+    },
+    {
+      "id": "5",
+      "name": "감자빵&커피",
+      "rating": 2.2,
+      "reviewCount": 37,
+      "address": "대구 중구 공평로 7",
+      "distanceMeters": 1000,
+      "phone": "053 777 0000",
+      "hours": "매일 09:00 - 20:00",
+      "popMenu": ["크루아상", "도넛", "소금빵"],
+      "tags": ["매장 내 취식 가능", "테이크아웃", "커피"]
+    },
+    {
+      "id": "6",
+      "name": "감자빵집 직영점",
+      "rating": 1.9,
+      "reviewCount": 312,
+      "address": "대구 남구 중앙대로 50",
+      "distanceMeters": 1500,
+      "phone": "053 456 7890",
+      "hours": "매일 09:00 - 20:00",
+      "popMenu": ["식빵", "바게트", "도넛"],
+      "tags": ["매장 내 취식 가능", "테이크아웃", "커피"]
+    }
+  ],
+  "reviews": [
+    {
+      "id": "1",
+      "nickname": "감자도리",
+      "profile": "/img/profile/default.jpg",
+      "rating": 4.5,
+      "likes": 34,
+      "dislikes": 2,
+      "date": "2025-03-21",
+      "text": "맛있네요"
+    },
+    {
+      "id": "2",
+      "nickname": "감돌이",
+      "profile": "/img/profile/default.jpg",
+      "rating": 4,
+      "likes": 12,
+      "dislikes": 1,
+      "date": "2025-04-03",
+      "text": "소금빵 맛있고 커피도 괜찮음. 소금빵 맛있고 커피도 괜찮음. 소금빵 맛있고 커피도 괜찮음. 소금빵 맛있고 커피도 괜찮음. 소금빵 맛있고 커피도 괜찮음. 소금빵 맛있고 커피도 괜찮음. 소금빵 맛있고 커피도 괜찮음. 소금빵 맛있고 커피도 괜찮음. 소금빵 맛있고 커피도 괜찮음. 소금빵 맛있고 커피도 괜찮음. 소금빵 맛있고 커피도 괜찮음. 소금빵 맛있고 커피도 괜찮음. 소금빵 맛있고 커피도 괜찮음. 소금빵 맛있고 커피도 괜찮음. 소금빵 맛있고 커피도 괜찮음. 소금빵 맛있고 커피도 괜찮음."
+    },
+    {
+      "id": "3",
+      "nickname": "미식감자",
+      "profile": "/img/profile/default.jpg",
+      "rating": 2.5,
+      "likes": 4,
+      "dislikes": 0,
+      "date": "2025-02-10",
+      "text": "기대보단 평범했어요."
+    },
+    {
+      "id": "4",
+      "nickname": "감자도리토스",
+      "profile": "/img/profile/default.jpg",
+      "rating": 2,
+      "likes": 2,
+      "dislikes": 5,
+      "date": "2025-05-02",
+      "text": "대기 길고 재고가 빨리 떨어져요."
+    },
+    {
+      "id": "5",
+      "nickname": "감자버터",
+      "profile": "/img/profile/default.jpg",
+      "rating": 5,
+      "likes": 52,
+      "dislikes": 3,
+      "date": "2025-05-12",
+      "text": "크로와상이 진짜 맛있음. 재방문 의사 100%"
+    },
+    {
+      "id": "6",
+      "nickname": "악플감자",
+      "profile": "/img/profile/default.jpg",
+      "rating": 1,
+      "likes": 1,
+      "dislikes": 10,
+      "date": "2025-03-05",
+      "text": "장사접으시길"
+    }
+  ],
+  "matchRates": [
+    { "id": 1, "userId": 1001, "bakeryId": 1, "matchScore": 93 },
+    { "id": 2, "userId": 1001, "bakeryId": 2, "matchScore": 85 },
+    { "id": 3, "userId": 1001, "bakeryId": 3, "matchScore": 70 },
+    { "id": 4, "userId": 1001, "bakeryId": 4, "matchScore": 60 },
+    { "id": 5, "userId": 1001, "bakeryId": 5, "matchScore": 50 },
+    { "id": 6, "userId": 1001, "bakeryId": 6, "matchScore": 30 },
+
+    { "id": 7, "userId": 2002, "bakeryId": 1, "matchScore": 44 },
+    { "id": 8, "userId": 2002, "bakeryId": 2, "matchScore": 72 },
+    { "id": 9, "userId": 2002, "bakeryId": 3, "matchScore": 55 },
+    { "id": 10, "userId": 2002, "bakeryId": 4, "matchScore": 88 },
+    { "id": 11, "userId": 2002, "bakeryId": 5, "matchScore": 33 },
+    { "id": 12, "userId": 2002, "bakeryId": 6, "matchScore": 61 }
+  ],
+  "topBakeries": [
+    {
+      "id": "1",
+      "name": "감자빵집",
+      "rating": 4.5,
+      "reviewCount": 88,
+      "address": "대구 북구 대학로 80",
+      "distanceMeters": 3,
+      "phone": "053 123 4567",
+      "hours": "매일 09:00 - 20:00",
+      "popMenu": ["소금빵", "크림빵", "크루아상"],
+      "tags": ["매장 내 취식 가능", "테이크아웃", "커피"]
+    },
+    {
+      "id": "2",
+      "name": "감자빵집 본점",
+      "rating": 5,
+      "reviewCount": 152,
+      "address": "대구 북구 대학로 100",
+      "distanceMeters": 50,
+      "phone": "053 999 1234",
+      "hours": "매일 09:00 - 20:00",
+      "popMenu": ["크루아상", "크림빵", "식빵"],
+      "tags": ["매장 내 취식 불가능", "테이크아웃"]
+    },
+    {
+      "id": "3",
+      "name": "감자빵 연구소",
+      "rating": 4.3,
+      "reviewCount": 61,
+      "address": "대구 북구 대학로 12",
+      "distanceMeters": 10,
+      "phone": "053 321 7890",
+      "hours": "매일 09:00 - 20:00",
+      "popMenu": ["감자빵", "바게트", "크루아상"],
+      "tags": ["한정 메뉴", "예약 가능"]
+    }
+  ],
+  "editor": {
+    "id": 1,
+    "title": "BEST 빵지순례 코스",
+    "courseTitle": "① 대구 소금빵 둘레길",
+    "author": "by. 감자 에디터",
+    "bullets": [
+      "소금빵 명소 5곳 · 도보 2.4km",
+      "평균 대기 10분 · 오전 방문 추천",
+      "현지인 팁 · 사진 스팟 수록"
+    ],
+    "mapUrl": "/map?courseId=1"
+  },
+   "Questions": [
+    {
+      "id": 1,
+      "question": "버터 풍미가 느껴지는 빵을 얼마나 선호하십니까?"
+    },
+    {
+      "id": 2,
+      "question": "페이스트리류(크루아상 등 겹겹이 결이 있는 버터 반죽 빵)을 얼마나 선호하십니까?"
+    },
+    {
+      "id": 3,
+      "question": "단맛(설탕, 크림 등)이 강한 빵을 얼마나 선호하십니까?"
+    },
+    {
+      "id": 4,
+      "question": "짭짤하거나 고소한(치즈, 소시지 등) 속 재료가 있는 빵을 얼마나 선호하십니까?"
+    },
+    {
+      "id": 5,
+      "question": "씹을 때 바삭한 식감을 얼마나 선호하십니까?"
+    },
+    {
+      "id": 6,
+      "question": "빵의 속이 촉촉하고 부드러운 식감을 얼마나 선호하십니까?"
+    },
+    {
+      "id": 7,
+      "question": "쫄깃한 식감을 얼마나 선호하십니까?"
+    },
+    {
+      "id": 8,
+      "question": "건강(통밀, 저당, 곡물 함유 등) 또는 기능성 빵을 얼마나 선호하십니까?"
+    },
+    {
+      "id": 9,
+      "question": "속에 재료(밤, 초코칩, 견과류 등)가 들어 있는 빵을 얼마나 선호하십니까?"
+    },
+    {
+      "id": 10,
+      "question": "신선한(당일 제조된 빵)을 얼마나 중시하십니까?"
+    }
+  ]
+}

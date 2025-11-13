@@ -1,0 +1,26 @@
+.PopularChallenge {
+  max-width: 480px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.PopularChallengeTitle {
+  font-size: 36px;
+  font-weight: 700;
+  color: #352310;
+  margin: 0 0 15px 0;
+}
+
+.ChallengeList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .PopularChallengeTitle {
+    font-size: 30px;
+  }
+}

@@ -1,0 +1,42 @@
+.MatchRateBar {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.MatchRateLabel {
+  color: #352310;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.BakeryName {
+  border: none;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  background: none;
+}
+
+.BakeryName:hover {
+  text-decoration: underline;
+  text-underline-position: under;
+}
+
+.MatchRateText {
+  color: #d9d3cf;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.MatchRateTrack {
+  height: 10px;
+  background: #d9d3cf;
+  overflow: hidden;
+}
+
+.MatchRateFill {
+  height: 100%;
+  background: #c7baad;
+}
