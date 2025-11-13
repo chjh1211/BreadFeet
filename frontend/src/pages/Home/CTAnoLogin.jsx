@@ -7,12 +7,12 @@ export default function CTAnoLogin() {
   const navigate = useNavigate();
 
   const goTaste = useCallback(() => {
-    navigate('/taste');
+    navigate("/taste");
   }, [navigate]);
 
   return (
     <div
-      className="cta-no-login mt-5"
+      className="cta-no-login mt-2 mt-md-5"
       data-bs-theme="light"
       aria-label="AI 빵지순례 CTA"
     >
