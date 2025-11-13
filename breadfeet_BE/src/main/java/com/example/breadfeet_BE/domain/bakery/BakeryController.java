@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/bakeries")
-public class BakeryContoller {
+public class BakeryController {
     private final BakeryService bakeryService;
 
     @GetMapping

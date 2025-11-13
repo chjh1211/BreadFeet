@@ -58,4 +58,23 @@ public class ReviewService {
         // 6. 생성된 리뷰의 ID 반환
         return savedReview.getReviewid();
     }
+
+    @Transactional
+    public void updateReview(Long reviewId, ReviewUpdateRequestDto requestDto, String userId) {
+        // 1. "어떤 리뷰"를 수정할지, reviewId로 Review 엔티티를 조회
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 리뷰를 찾을 수 없습니다. id=" + reviewId));
+
+        // 2. "누가" 수정을 요청했는지, JWT에서 받은 userId로 User 엔티티를 조회
+        User user = userRepository.findById(Long.parseLong(userId))
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저를 찾을 수 없습니다. id=" + userId));
+
+        // 3. "수정 권한"이 있는지 확인 (리뷰 작성자와 요청자가 동일한지)
+        if (!review.getUser().getId().equals(user.getId())) {
+            throw new SecurityException("리뷰를 수정할 권한이 없습니다.");
+        }
+
+        // 4. Review 엔티티의 update 메서드를 호출하여 내용과 평점 수정
+        review.update(requestDto.getContent(), requestDto.getRating());
+    }
 }
