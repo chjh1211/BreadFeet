@@ -56,7 +56,7 @@ public class ReviewService {
         challengeService.updateChallengeProgress(user, bakery);
 
         // 6. 생성된 리뷰의 ID 반환
-        return savedReview.getReviewid();
+        return savedReview.getId();
     }
 
     @Transactional

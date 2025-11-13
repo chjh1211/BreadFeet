@@ -15,7 +15,7 @@ public class Bakery extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bakery_id")
-    private Long Id;
+    private Long id;
 
     @Column(nullable = false)
     private String name; // 빵집 이름
