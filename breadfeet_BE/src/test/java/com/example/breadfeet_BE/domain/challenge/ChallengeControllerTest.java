@@ -57,12 +57,12 @@ class ChallengeControllerTest {
         Authentication auth = new UsernamePasswordAuthenticationToken(principal, "password", principal.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(auth);
 
-        Challenge mockChallenge1 = new Challenge("챌린지1", ChallengeType.REGION, "서울 강남", 1, "설명1");
+        Challenge mockChallenge1 = new Challenge("챌린지1", ChallengeType.REGION, "서울 강남", 1, "설명1", "/img/badges/badge1.png");
         ReflectionTestUtils.setField(mockChallenge1, "id", 101L);
         UserChallenge mockUserChallenge1 = new UserChallenge(mockUser, mockChallenge1);
         ReflectionTestUtils.setField(mockUserChallenge1, "achievedAt", LocalDateTime.of(2023, 1, 1, 10, 0));
 
-        Challenge mockChallenge2 = new Challenge("챌린지2", ChallengeType.FREQUENCY, null, 5, "설명2");
+        Challenge mockChallenge2 = new Challenge("챌린지2", ChallengeType.FREQUENCY, null, 5, "설명2", "/img/badges/badge2.png");
         ReflectionTestUtils.setField(mockChallenge2, "id", 102L);
         UserChallenge mockUserChallenge2 = new UserChallenge(mockUser, mockChallenge2);
         ReflectionTestUtils.setField(mockUserChallenge2, "achievedAt", LocalDateTime.of(2023, 2, 1, 11, 0));

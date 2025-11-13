@@ -1,6 +1,8 @@
 package com.example.breadfeet_BE.domain.challenge;
 
 import com.example.breadfeet_BE.domain.bakery.Bakery;
+import com.example.breadfeet_BE.domain.challenge.dto.ChallengeDto;
+import com.example.breadfeet_BE.domain.challenge.dto.ChallengeListResponseDto;
 import com.example.breadfeet_BE.domain.challenge.dto.MyChallengeResponseDto;
 import com.example.breadfeet_BE.domain.challenge.dto.UserChallengeResponseDto;
 import com.example.breadfeet_BE.domain.review.ReviewRepository;
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -61,6 +64,54 @@ public class ChallengeService {
         }
     }
 
+    @Transactional(readOnly = true)
+    public ChallengeListResponseDto getAllChallengesForUser(User user) {
+        List<UserChallenge> userChallenges = userChallengeRepository.findAllByUser(user);
+
+        List<ChallengeDto> completedChallenges = userChallenges.stream()
+                .filter(uc -> uc.getAchievedAt() != null)
+                .map(uc -> new ChallengeDto(uc.getChallenge())) // Completed challenges don't need progress/total
+                .collect(Collectors.toList());
+
+        List<ChallengeDto> ongoingChallenges = userChallenges.stream()
+                .filter(uc -> uc.getAchievedAt() == null)
+                .map(uc -> {
+                    int progress = calculateProgress(user, uc.getChallenge());
+                    return new ChallengeDto(uc, progress);
+                })
+                .collect(Collectors.toList());
+
+        Set<Long> userChallengeIds = userChallenges.stream()
+                .map(uc -> uc.getChallenge().getId())
+                .collect(Collectors.toSet());
+
+        List<ChallengeDto> recommendedChallenges = challengeRepository.findAll().stream()
+                .filter(challenge -> !userChallengeIds.contains(challenge.getId()))
+                .map(ChallengeDto::new)
+                .collect(Collectors.toList());
+
+        return ChallengeListResponseDto.builder()
+                .completed(completedChallenges)
+                .ongoing(ongoingChallenges)
+                .recommended(recommendedChallenges)
+                .build();
+    }
+
+    private int calculateProgress(User user, Challenge challenge) {
+        if (challenge.getType() == ChallengeType.REGION) {
+            String region = challenge.getRegion();
+            String[] parts = region.split(" ");
+            String city = parts[0];
+            String district = parts[1];
+            return (int) reviewRepository.countByUserAndBakery_CityAndBakery_District(user, city, district);
+        } else if (challenge.getType() == ChallengeType.FREQUENCY) {
+            LocalDateTime thirtyDaysAgo = LocalDateTime.now().minusDays(30);
+            return (int) reviewRepository.countByUserAndCreatedAtAfter(user, thirtyDaysAgo);
+        }
+        return 0;
+    }
+
+    // 기존 메서드들은 그대로 유지
     @Transactional(readOnly = true)
     public List<UserChallengeResponseDto> getUserChallenges(Long userId) {
         User user = userRepository.findById(userId)

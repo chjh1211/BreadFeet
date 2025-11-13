@@ -1,7 +1,7 @@
 package com.example.breadfeet_BE.domain.challenge;
 
 import com.example.breadfeet_BE.auth.config.auth.dto.CustomOAuth2User;
-import com.example.breadfeet_BE.domain.challenge.ChallengeService;
+import com.example.breadfeet_BE.domain.challenge.dto.ChallengeListResponseDto;
 import com.example.breadfeet_BE.domain.challenge.dto.MyChallengeResponseDto;
 import com.example.breadfeet_BE.domain.challenge.dto.UserChallengeResponseDto;
 import com.example.breadfeet_BE.domain.user.User;
@@ -23,6 +23,16 @@ public class ChallengeController {
 
     private final ChallengeService challengeService;
     private final UserRepository userRepository;
+
+    @GetMapping("/all")
+    public ResponseEntity<ChallengeListResponseDto> getAllChallenges() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomOAuth2User customOAuth2User = (CustomOAuth2User) authentication.getPrincipal();
+        User user = customOAuth2User.getUser();
+
+        ChallengeListResponseDto challengeList = challengeService.getAllChallengesForUser(user);
+        return ResponseEntity.ok(challengeList);
+    }
 
     @GetMapping("/my")
     public ResponseEntity<List<UserChallengeResponseDto>> getMyChallenges() {

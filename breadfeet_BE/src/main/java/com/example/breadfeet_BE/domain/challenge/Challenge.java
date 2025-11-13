@@ -31,11 +31,15 @@ public class Challenge extends BaseEntity {
     @Column(nullable = false)
     private String description; // 챌린지 설명
 
-    public Challenge(String name, ChallengeType type, String region, int threshold, String description) {
+    @Column(nullable = false)
+    private String imgUrl; // 챌린지 뱃지 이미지 URL
+
+    public Challenge(String name, ChallengeType type, String region, int threshold, String description, String imgUrl) {
         this.name = name;
         this.type = type;
         this.region = region;
         this.threshold = threshold;
         this.description = description;
+        this.imgUrl = imgUrl;
     }
 }
