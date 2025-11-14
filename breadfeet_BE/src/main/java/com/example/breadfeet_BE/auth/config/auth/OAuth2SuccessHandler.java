@@ -40,7 +40,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         // ▼▼▼ [수정됨] 이메일 대신 닉네임(userIdentifier)으로 토큰 생성 ▼▼▼
         String token = jwtTokenProvider.createToken(userIdentifier, role);
 
-        String redirectUrl = "http://localhost:5175/login/success?token=" +
+        String redirectUrl = "http://localhost:5173/login/success?token=" +
                 URLEncoder.encode(token, StandardCharsets.UTF_8);
 
         response.sendRedirect(redirectUrl);

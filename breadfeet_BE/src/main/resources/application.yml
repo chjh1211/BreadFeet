@@ -1,7 +1,8 @@
 # ⬇️ ⬇️ ⬇️ 이 부분을 추가하세요 ⬇️ ⬇️ ⬇️
 logging:
   level:
-    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: TRACE
+    org.springframework.web.reactive.function.client: TRACE
 # ⬆️ ⬆️ ⬆️ 이 부분을 추가하세요 ⬆️ ⬆️ ⬆️
 
 
@@ -27,19 +28,18 @@ spring:
     oauth2:
       client:
         registration:
-          kakao: # 'kakao'? ??? ?? ?? (Redirect URI? ??? ??? ??)
-            client-id: e5655138fc54844b5719e31d08e9a727 # 1???? ??? REST API ?
-            client-secret: kJev9Mt9ozGjL8cBfagSacv5GR0jnbeO
+          kakao:
+            client-id: "e5655138fc54844b5719e31d08e9a727"
+            client-secret: "RLdqBGt3NSQCjxYru94edyXfaxaVpM4o"
             client-authentication-method: client_secret_post
-            scope: profile_nickname # ????? ??? ?? ??
-            client-name: Kakao
+            scope: profile_nickname
+            client-name: kakao
             authorization-grant-type: authorization_code
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}" # {baseUrl}? localhost:8080, {registrationId}? 'kakao'? ?
+            redirect-uri: "http://localhost:8080/login/oauth2/code/kakao"
 
         provider:
-          kakao: # 'kakao'? ? registration? 'kakao'? ??
+          kakao:
             authorization-uri: https://kauth.kakao.com/oauth/authorize
             token-uri: https://kauth.kakao.com/oauth/token
             user-info-uri: https://kapi.kakao.com/v2/user/me
-            user-name-attribute: id # ??? ?? ?? ??? ?? ?? id ?
-
+            user-name-attribute: id

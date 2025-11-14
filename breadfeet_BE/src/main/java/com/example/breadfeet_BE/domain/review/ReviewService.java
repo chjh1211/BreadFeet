@@ -6,6 +6,8 @@ import com.example.breadfeet_BE.domain.bakery.BakeryRepository;
 import com.example.breadfeet_BE.domain.challenge.ChallengeService;
 import com.example.breadfeet_BE.domain.user.User;
 import com.example.breadfeet_BE.domain.user.UserRepository;
+import com.example.breadfeet_BE.global.CustomRuntimeException;
+import com.example.breadfeet_BE.global.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,11 +37,11 @@ public class ReviewService {
         // 1. "누가" 썼는지, JWT에서 받은 userId로 User 엔티티를 조회
         //    (주의! JWT는 String을 주므로 Long으로 변환)
         User user = userRepository.findById(Long.parseLong(userId))
-                .orElseThrow(() -> new IllegalArgumentException("해당 유저를 찾을 수 없습니다. id=" + userId));
+                .orElseThrow(() -> new CustomRuntimeException(ErrorCode.DO_NOT_EXIST_USER));
 
         // 2. "어느 빵집"에 썼는지, DTO에서 받은 bakeryId로 Bakery 엔티티를 조회
         Bakery bakery = bakeryRepository.findById(bakeyId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 빵집을 찾을 수 없습니다. id=" + bakeyId));
+                .orElseThrow(() -> new CustomRuntimeException(ErrorCode.DO_NOT_EXIST_BAKERY));
 
         // 3. Review 엔티티 생성 (Builder 사용)
         Review newReview = Review.builder()
