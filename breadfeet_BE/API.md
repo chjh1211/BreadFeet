@@ -188,3 +188,215 @@
 - **실패 응답 (200 OK):**
     - "❌ DB 저장 실패! ..." (string)
     - "❌ DB 저장 중 에러 발생: ..." (string)
+
+## 9. DTO JSON 형식
+
+### BakeryPageResponseDto
+```json
+{
+  "content": [
+    {
+      "bakeryId": 1,
+      "name": "성심당",
+      "city": "대전",
+      "district": "중구",
+      "town": "은행동"
+    }
+  ],
+  "pageNumber": 0,
+  "pageSize": 10,
+  "totalElements": 1,
+  "totalPages": 1,
+  "last": true
+}
+```
+
+### BakeryListResponseDto
+```json
+{
+  "bakeryId": 1,
+  "name": "성심당",
+  "city": "대전",
+  "district": "중구",
+  "town": "은행동"
+}
+```
+
+### BakeryDetailResponseDto
+```json
+{
+  "bakeryId": 1,
+  "name": "성심당",
+  "bestBread": "튀김소보로",
+  "phoneNumber": "1588-8069",
+  "businessHours": "08:00 - 22:00",
+  "xCoordinate": 127.4272,
+  "yCoordinate": 36.3277,
+  "city": "대전",
+  "district": "중구",
+  "town": "은행동",
+  "avgRating": 4.5
+}
+```
+
+### ChallengeListResponseDto
+```json
+{
+  "completed": [
+    {
+      "id": 1,
+      "title": "대전 빵지순례",
+      "img": "image_url",
+      "body": "대전의 모든 빵집 방문하기",
+      "progress": null,
+      "total": null
+    }
+  ],
+  "ongoing": [
+    {
+      "id": 2,
+      "title": "서울 빵지순례",
+      "img": "image_url",
+      "body": "서울의 모든 빵집 방문하기",
+      "progress": 5,
+      "total": 10
+    }
+  ],
+  "recommended": [
+    {
+      "id": 3,
+      "title": "부산 빵지순례",
+      "img": "image_url",
+      "body": "부산의 모든 빵집 방문하기",
+      "progress": null,
+      "total": null
+    }
+  ]
+}
+```
+
+### ChallengeDto
+```json
+{
+  "id": 1,
+  "title": "대전 빵지순례",
+  "img": "image_url",
+  "body": "대전의 모든 빵집 방문하기",
+  "progress": 5,
+  "total": 10
+}
+```
+
+### UserChallengeResponseDto
+```json
+{
+  "challengeId": 1,
+  "challengeName": "대전 빵지순례",
+  "challengeDescription": "대전의 모든 빵집 방문하기",
+  "achievedAt": "2025-11-14T10:00:00"
+}
+```
+
+### MyChallengeResponseDto
+```json
+{
+  "challengeId": 1,
+  "challengeName": "대전 빵지순례",
+  "challengeType": "VISIT_COUNT",
+  "challengeRegion": "대전",
+  "challengeThreshold": 10,
+  "challengeDescription": "대전의 모든 빵집 방문하기",
+  "achievedAt": "2025-11-14T10:00:00"
+}
+```
+
+### FavoriteResponseDto
+```json
+{
+  "favoriteId": 1,
+  "bakeryId": 1,
+  "userId": 1
+}
+```
+
+### FavoriteListResponseDto
+```json
+{
+  "bakeryId": 1,
+  "name": "성심당",
+  "address": "대전 중구 은행동"
+}
+```
+
+### MenuResponseDto
+```json
+{
+  "menuId": 1,
+  "name": "튀김소보로",
+  "price": 1700
+}
+```
+
+### MyPageResponseDto
+```json
+{
+  "nickname": "빵순이",
+  "profileImageUrl": "image_url"
+}
+```
+
+### MyProfileUpdateRequestDto (Request)
+```json
+{
+  "nickname": "빵돌이",
+  "profileImageUrl": "new_image_url"
+}
+```
+
+### MyReviewResponseDto
+```json
+{
+  "reviewId": 1,
+  "content": "너무 맛있어요!",
+  "rating": 5.0,
+  "createdAt": "2025-11-14T10:00:00",
+  "bakeryId": 1,
+  "bakeryName": "성심당"
+}
+```
+
+### ReviewResponseDto
+```json
+{
+  "reviewid": 1,
+  "content": "너무 맛있어요!",
+  "rating": 5.0,
+  "authorNickname": "빵순이",
+  "createdAt": "2025-11-14T10:00:00",
+  "likesCount": 10,
+  "dislikesCount": 0
+}
+```
+
+### ReviewCreateRequestDto (Request)
+```json
+{
+  "content": "너무 맛있어요!",
+  "rating": 5.0
+}
+```
+
+### ReviewCreateResponseDto
+```json
+{
+  "reviewId": 1
+}
+```
+
+### ReviewUpdateRequestDto (Request)
+```json
+{
+  "content": "정말 맛있어요!",
+  "rating": 4.5
+}
+```
