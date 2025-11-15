@@ -20,4 +20,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     long countByUserAndBakery_CityAndBakery_District(User user, String city, String district);
 
     long countByUserAndCreatedAtAfter(User user, LocalDateTime dateTime);
+
+    @Query("SELECT r.bakery.id, AVG(r.rating) FROM Review r WHERE r.bakery.id IN :bakeryIds GROUP BY r.bakery.id")
+    List<Object[]> findAverageRatingsByBakeryIds(@Param("bakeryIds") List<Long> bakeryIds);
 }

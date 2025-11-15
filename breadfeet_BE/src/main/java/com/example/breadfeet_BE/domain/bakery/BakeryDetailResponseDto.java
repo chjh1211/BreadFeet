@@ -11,9 +11,9 @@ public class BakeryDetailResponseDto {
     private String businessHours;
     private Double xCoordinate;
     private Double yCoordinate;
+    private String roadAddress;
     private String city;
     private String district;
-    private String town;
     private double avgRating;
 
     public BakeryDetailResponseDto(Bakery entity) {
@@ -26,7 +26,7 @@ public class BakeryDetailResponseDto {
         this.yCoordinate = entity.getYCoordinate();
         this.city = entity.getCity();
         this.district = entity.getDistrict();
-        this.town = entity.getTown();
+        this.roadAddress = entity.getRoadAddress();
         this.avgRating = entity.getAvgRating();
     }
 }

@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Entity
 @Getter
 @NoArgsConstructor
@@ -27,9 +26,9 @@ public class Bakery extends BaseEntity {
     private Double xCoordinate;
     private Double yCoordinate;
 
+    private String roadAddress;       // 읍, 면, 동
     private String city;       // 시, 광역시
     private String district;   // 구, 군
-    private String town;       // 읍, 면, 동
 
     @Transient
     @Setter

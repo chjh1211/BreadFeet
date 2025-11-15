@@ -15,6 +15,6 @@ public class FavoriteListResponseDto {
     public FavoriteListResponseDto(Bakery bakery) {
         this.bakeryId = bakery.getId();
         this.name = bakery.getName();
-        this.address = bakery.getCity() + " " + bakery.getDistrict() + " " + bakery.getTown();
+        this.address = bakery.getRoadAddress();
     }
 }

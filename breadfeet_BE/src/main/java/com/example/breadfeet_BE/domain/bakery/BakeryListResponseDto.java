@@ -8,13 +8,15 @@ public class BakeryListResponseDto {
     private String name;
     private String city;
     private String district;
-    private String town;
+    private String roadAddress;
+    private double avgRating;
 
-    public BakeryListResponseDto(Bakery entity) {
+    public BakeryListResponseDto(Bakery entity, double avgRating) {
         this.bakeryId = entity.getId();
         this.name = entity.getName();
+        this.roadAddress = entity.getRoadAddress();
         this.city = entity.getCity();
         this.district = entity.getDistrict();
-        this.town = entity.getTown();
+        this.avgRating = avgRating;
     }
 }

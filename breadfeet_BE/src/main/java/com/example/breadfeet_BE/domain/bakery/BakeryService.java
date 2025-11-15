@@ -7,6 +7,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class BakeryService {
@@ -24,7 +29,27 @@ public class BakeryService {
             bakeries = bakeryRepository.findByNameContaining(searchQuery, pageable);
         }
 
-        Page<BakeryListResponseDto> dtoPage = bakeries.map(BakeryListResponseDto::new);
+        // N+1 문제를 해결하기 위한 최적화
+        List<Long> bakeryIds = bakeries.stream()
+                .map(Bakery::getId)
+                .toList();
+
+        Map<Long, Double> avgRatingsMap = new HashMap<>();
+        if(!bakeryIds.isEmpty()){
+            List<Object[]> avgRatings = reviewRepository.findAverageRatingsByBakeryIds(bakeryIds);
+            avgRatingsMap = avgRatings.stream()
+                    .collect(Collectors.toMap(
+                            rating -> (Long) rating[0],
+                            rating -> (Double) rating[1]
+                    ));
+        }
+
+
+        Map<Long, Double> finalAvgRatingsMap = avgRatingsMap;
+        Page<BakeryListResponseDto> dtoPage = bakeries.map(bakery -> {
+            double finalRating = finalAvgRatingsMap.getOrDefault(bakery.getId(), 0.0);
+            return new BakeryListResponseDto(bakery, finalRating);
+        });
         return new BakeryPageResponseDto(dtoPage);
     }
 
