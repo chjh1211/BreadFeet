@@ -68,7 +68,7 @@ export const useKakaoLoader = () => {
 
   useEffect(() => {
     let cancelled = false;
-    const appKey = import.meta.env.VITE_KAKAO_MAP_KEY;
+    const appKey = import.meta.env.VITE_KAKAO_JS_KEY;
 
     setState({ status: "loading", error: null });
 
@@ -95,5 +95,3 @@ export const useKakaoLoader = () => {
     error: state.error,
   };
 };
-
-
