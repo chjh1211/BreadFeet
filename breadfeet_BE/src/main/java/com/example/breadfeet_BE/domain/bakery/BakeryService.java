@@ -46,7 +46,6 @@ public class BakeryService {
                     ));
 
             // 각 빵집의 리뷰 개수를 한 번에 조회 (N+1 방지)
-            // TODO: ReviewRepository에 bulk count 쿼리 추가 필요 (예: SELECT bakery_id, COUNT(*) FROM review WHERE bakery_id IN (...) GROUP BY bakery_id)
             // 현재는 각 빵집별로 개별 쿼리 발생 (N+1 발생)
             for (Long bakeryId : bakeryIds) {
                 reviewCountsMap.put(bakeryId, (int) reviewRepository.countByBakery_Id(bakeryId));
