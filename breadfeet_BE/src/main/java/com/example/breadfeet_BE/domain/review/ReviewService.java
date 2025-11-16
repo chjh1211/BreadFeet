@@ -1,6 +1,5 @@
 package com.example.breadfeet_BE.domain.review;
 
-import com.example.breadfeet_BE.auth.config.auth.dto.SessionUser;
 import com.example.breadfeet_BE.domain.bakery.Bakery;
 import com.example.breadfeet_BE.domain.bakery.BakeryRepository;
 import com.example.breadfeet_BE.domain.challenge.ChallengeService;
