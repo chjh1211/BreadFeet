@@ -29,13 +29,12 @@ public class BakeryService {
             bakeries = bakeryRepository.findByNameContaining(searchQuery, pageable);
         }
 
-        // N+1 문제를 해결하기 위한 최적화
         List<Long> bakeryIds = bakeries.stream()
                 .map(Bakery::getId)
                 .toList();
 
         Map<Long, Double> avgRatingsMap = new HashMap<>();
-        Map<Long, Integer> reviewCountsMap = new HashMap<>(); // 리뷰 개수 맵 추가
+        Map<Long, Long> reviewCountsMap = new HashMap<>(); // 리뷰 개수 맵 (Long으로 변경)
 
         if(!bakeryIds.isEmpty()){
             List<Object[]> avgRatings = reviewRepository.findAverageRatingsByBakeryIds(bakeryIds);
@@ -45,20 +44,20 @@ public class BakeryService {
                             rating -> (Double) rating[1]
                     ));
 
-            // 각 빵집의 리뷰 개수를 한 번에 조회 (N+1 방지)
-            // 현재는 각 빵집별로 개별 쿼리 발생 (N+1 발생)
-            for (Long bakeryId : bakeryIds) {
-                reviewCountsMap.put(bakeryId, (int) reviewRepository.countByBakery_Id(bakeryId));
-            }
+            List<Object[]> reviewCounts = reviewRepository.findReviewCountsByBakeryIds(bakeryIds);
+            reviewCountsMap = reviewCounts.stream()
+                    .collect(Collectors.toMap(
+                            count -> (Long) count[0],
+                            count -> (Long) count[1]
+                    ));
         }
 
-
         Map<Long, Double> finalAvgRatingsMap = avgRatingsMap;
-        Map<Long, Integer> finalReviewCountsMap = reviewCountsMap; // 람다에서 사용하기 위해 final 변수 선언
+        Map<Long, Long> finalReviewCountsMap = reviewCountsMap;
         Page<BakeryListResponseDto> dtoPage = bakeries.map(bakery -> {
             double finalRating = finalAvgRatingsMap.getOrDefault(bakery.getId(), 0.0);
-            int finalReviewCount = finalReviewCountsMap.getOrDefault(bakery.getId(), 0); // 리뷰 개수 가져오기
-            return new BakeryListResponseDto(bakery, finalRating, finalReviewCount); // reviewCount 전달
+            int finalReviewCount = finalReviewCountsMap.getOrDefault(bakery.getId(), 0L).intValue();
+            return new BakeryListResponseDto(bakery, finalRating, finalReviewCount);
         });
         return new BakeryPageResponseDto(dtoPage);
     }
@@ -71,8 +70,8 @@ public class BakeryService {
         double finalRating = (avgRating == null) ? 0.0 : avgRating;
         bakery.setAvgRating(finalRating);
 
-        int reviewCount = (int) reviewRepository.countByBakery_Id(bakeryId); // 리뷰 개수 조회
+        int reviewCount = (int) reviewRepository.countByBakery_Id(bakeryId);
 
-        return new BakeryDetailResponseDto(bakery, reviewCount); // reviewCount 전달
+        return new BakeryDetailResponseDto(bakery, reviewCount);
     }
 }
