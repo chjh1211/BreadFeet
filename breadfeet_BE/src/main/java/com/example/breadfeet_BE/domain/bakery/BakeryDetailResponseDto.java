@@ -15,8 +15,9 @@ public class BakeryDetailResponseDto {
     private String city;
     private String district;
     private double avgRating;
+    private int reviewCount; // 리뷰 개수 추가
 
-    public BakeryDetailResponseDto(Bakery entity) {
+    public BakeryDetailResponseDto(Bakery entity, int reviewCount) {
         this.bakeryId = entity.getId();
         this.name = entity.getName();
         this.bestBread = entity.getBestBread();
@@ -28,5 +29,6 @@ public class BakeryDetailResponseDto {
         this.district = entity.getDistrict();
         this.roadAddress = entity.getRoadAddress();
         this.avgRating = entity.getAvgRating();
+        this.reviewCount = reviewCount;
     }
 }

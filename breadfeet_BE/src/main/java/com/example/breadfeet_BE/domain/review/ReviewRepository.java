@@ -23,4 +23,9 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     @Query("SELECT r.bakery.id, AVG(r.rating) FROM Review r WHERE r.bakery.id IN :bakeryIds GROUP BY r.bakery.id")
     List<Object[]> findAverageRatingsByBakeryIds(@Param("bakeryIds") List<Long> bakeryIds);
+
+    long countByBakery_Id(Long bakeryId); // 특정 빵집의 리뷰 개수를 세는 메서드 추가
+
+    @Query("SELECT r.bakery.id, COUNT(r.id) FROM Review r WHERE r.bakery.id IN :bakeryIds GROUP BY r.bakery.id")
+    List<Object[]> findReviewCountsByBakeryIds(@Param("bakeryIds") List<Long> bakeryIds);
 }

@@ -35,6 +35,8 @@ public class BakeryService {
                 .toList();
 
         Map<Long, Double> avgRatingsMap = new HashMap<>();
+        Map<Long, Integer> reviewCountsMap = new HashMap<>(); // 리뷰 개수 맵 추가
+
         if(!bakeryIds.isEmpty()){
             List<Object[]> avgRatings = reviewRepository.findAverageRatingsByBakeryIds(bakeryIds);
             avgRatingsMap = avgRatings.stream()
@@ -42,13 +44,22 @@ public class BakeryService {
                             rating -> (Long) rating[0],
                             rating -> (Double) rating[1]
                     ));
+
+            // 각 빵집의 리뷰 개수를 한 번에 조회 (N+1 방지)
+            // TODO: ReviewRepository에 bulk count 쿼리 추가 필요 (예: SELECT bakery_id, COUNT(*) FROM review WHERE bakery_id IN (...) GROUP BY bakery_id)
+            // 현재는 각 빵집별로 개별 쿼리 발생 (N+1 발생)
+            for (Long bakeryId : bakeryIds) {
+                reviewCountsMap.put(bakeryId, (int) reviewRepository.countByBakery_Id(bakeryId));
+            }
         }
 
 
         Map<Long, Double> finalAvgRatingsMap = avgRatingsMap;
+        Map<Long, Integer> finalReviewCountsMap = reviewCountsMap; // 람다에서 사용하기 위해 final 변수 선언
         Page<BakeryListResponseDto> dtoPage = bakeries.map(bakery -> {
             double finalRating = finalAvgRatingsMap.getOrDefault(bakery.getId(), 0.0);
-            return new BakeryListResponseDto(bakery, finalRating);
+            int finalReviewCount = finalReviewCountsMap.getOrDefault(bakery.getId(), 0); // 리뷰 개수 가져오기
+            return new BakeryListResponseDto(bakery, finalRating, finalReviewCount); // reviewCount 전달
         });
         return new BakeryPageResponseDto(dtoPage);
     }
@@ -61,6 +72,8 @@ public class BakeryService {
         double finalRating = (avgRating == null) ? 0.0 : avgRating;
         bakery.setAvgRating(finalRating);
 
-        return new BakeryDetailResponseDto(bakery);
+        int reviewCount = (int) reviewRepository.countByBakery_Id(bakeryId); // 리뷰 개수 조회
+
+        return new BakeryDetailResponseDto(bakery, reviewCount); // reviewCount 전달
     }
 }
