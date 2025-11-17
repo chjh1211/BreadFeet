@@ -1,10 +1,9 @@
 package com.example.breadfeet_BE.domain.challenge;
 
 import com.example.breadfeet_BE.domain.bakery.Bakery;
-import com.example.breadfeet_BE.domain.challenge.dto.ChallengeDto;
-import com.example.breadfeet_BE.domain.challenge.dto.ChallengeListResponseDto;
-import com.example.breadfeet_BE.domain.challenge.dto.MyChallengeResponseDto;
-import com.example.breadfeet_BE.domain.challenge.dto.UserChallengeResponseDto;
+import com.example.breadfeet_BE.domain.challenge.dto.AllMyChallengesResponseDto;
+import com.example.breadfeet_BE.domain.challenge.dto.ChallengeInfoResponseDto;
+import com.example.breadfeet_BE.domain.challenge.dto.OngoingChallengeInfoResponseDto;
 import com.example.breadfeet_BE.domain.review.ReviewRepository;
 import com.example.breadfeet_BE.domain.user.User;
 import com.example.breadfeet_BE.domain.user.UserRepository;
@@ -65,36 +64,40 @@ public class ChallengeService {
     }
 
     @Transactional(readOnly = true)
-    public ChallengeListResponseDto getAllChallengesForUser(User user) {
-        List<UserChallenge> userChallenges = userChallengeRepository.findAllByUser(user);
+    public AllMyChallengesResponseDto getAllMyChallenges(User user) {
+        // 1. 'completed' 챌린지 조회
+        List<UserChallenge> completedUserChallenges = userChallengeRepository.findAllByUser(user);
+        List<Challenge> completedChallenges = completedUserChallenges.stream()
+                .map(UserChallenge::getChallenge)
+                .toList();
+        List<ChallengeInfoResponseDto> completedDto = completedChallenges.stream()
+                .map(ChallengeInfoResponseDto::new)
+                .toList();
 
-        List<ChallengeDto> completedChallenges = userChallenges.stream()
-                .filter(uc -> uc.getAchievedAt() != null)
-                .map(uc -> new ChallengeDto(uc.getChallenge())) // Completed challenges don't need progress/total
-                .collect(Collectors.toList());
-
-        List<ChallengeDto> ongoingChallenges = userChallenges.stream()
-                .filter(uc -> uc.getAchievedAt() == null)
-                .map(uc -> {
-                    int progress = calculateProgress(user, uc.getChallenge());
-                    return new ChallengeDto(uc, progress);
-                })
-                .collect(Collectors.toList());
-
-        Set<Long> userChallengeIds = userChallenges.stream()
-                .map(uc -> uc.getChallenge().getId())
+        Set<Long> completedChallengeIds = completedChallenges.stream()
+                .map(Challenge::getId)
                 .collect(Collectors.toSet());
 
-        List<ChallengeDto> recommendedChallenges = challengeRepository.findAll().stream()
-                .filter(challenge -> !userChallengeIds.contains(challenge.getId()))
-                .map(ChallengeDto::new)
-                .collect(Collectors.toList());
+        // 2. 'ongoing' 및 'recommended' 챌린지 후보 조회 (완료되지 않은 모든 챌린지)
+        List<Challenge> allOtherChallenges = challengeRepository.findAll().stream()
+                .filter(c -> !completedChallengeIds.contains(c.getId()))
+                .toList();
 
-        return ChallengeListResponseDto.builder()
-                .completed(completedChallenges)
-                .ongoing(ongoingChallenges)
-                .recommended(recommendedChallenges)
-                .build();
+        List<OngoingChallengeInfoResponseDto> ongoingDto = new java.util.ArrayList<>();
+        List<ChallengeInfoResponseDto> recommendedDto = new java.util.ArrayList<>();
+
+        // 3. 진행도에 따라 'ongoing'과 'recommended'로 분류
+        for (Challenge challenge : allOtherChallenges) {
+            int progress = calculateProgress(user, challenge);
+            if (progress > 0) {
+                ongoingDto.add(new OngoingChallengeInfoResponseDto(challenge, progress));
+            } else {
+                recommendedDto.add(new ChallengeInfoResponseDto(challenge));
+            }
+        }
+
+        // 4. 최종 DTO 조립 및 반환
+        return new AllMyChallengesResponseDto(recommendedDto, ongoingDto, completedDto);
     }
 
     private int calculateProgress(User user, Challenge challenge) {
@@ -111,22 +114,5 @@ public class ChallengeService {
         return 0;
     }
 
-    // 기존 메서드들은 그대로 유지
-    @Transactional(readOnly = true)
-    public List<UserChallengeResponseDto> getUserChallenges(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 유저를 찾을 수 없습니다. id=" + userId));
-        List<UserChallenge> userChallenges = userChallengeRepository.findAllByUser(user);
-        return userChallenges.stream()
-                .map(UserChallengeResponseDto::new)
-                .collect(Collectors.toList());
-    }
 
-    @Transactional(readOnly = true)
-    public List<MyChallengeResponseDto> getMyAchievedChallenges(User user) {
-        List<UserChallenge> userChallenges = userChallengeRepository.findAllByUser(user);
-        return userChallenges.stream()
-                .map(MyChallengeResponseDto::new)
-                .collect(Collectors.toList());
-    }
 }
