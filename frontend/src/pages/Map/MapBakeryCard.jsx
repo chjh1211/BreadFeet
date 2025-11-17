@@ -1,4 +1,3 @@
-import React, { useMemo } from "react";
 import "./MapBakeryCard.css";
 import MatchRateBar from "../../components/MatchRateBar";
 
@@ -24,15 +23,15 @@ const Stars = ({ rating }) => {
 
 const MapBakeryCard = ({
   bakery,
-  userData = [],
+  // userData = [],
   isSelected = false,
   onSelect,
 }) => {
-  const rate = useMemo(() => {
-    const targetId = String(bakery.id);
-    const item = userData.find((x) => String(x.bakeryId) === targetId);
-    return item?.matchScore ?? 0;
-  }, [bakery.id, userData]);
+  // const rate = useMemo(() => {
+  //   const targetId = String(bakery.id);
+  //   const item = userData.find((x) => String(x.bakeryId) === targetId);
+  //   return item?.matchScore ?? 0;
+  // }, [bakery.id, userData]);
 
   const handleSelect = () => {
     onSelect?.(bakery.id);
@@ -56,7 +55,7 @@ const MapBakeryCard = ({
     >
       <div className="mapCardBody">
         <div className="mapMatchRate">
-          <MatchRateBar bakeryId={bakery.id} name={bakery.name} rate={rate} />
+          <MatchRateBar bakeryId={bakery.id} name={bakery.name} />
         </div>
         <div className="mapCardMeta">
           <Stars rating={bakery.rating} />
