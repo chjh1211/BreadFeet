@@ -55,7 +55,9 @@ const Map = () => {
   const [userLocation, setUserLocation] = useState(null);
   const [locationStatus, setLocationStatus] = useState("idle");
   const [locationErrorMessage, setLocationErrorMessage] = useState(null);
-  const initialSelectionRef = useRef(false);
+  
+  // 🟢 AI 경로 빵집 목록을 위한 State 추가
+  const [aiPathBakeries, setAiPathBakeries] = useState([]); 
 
   useEffect(() => {
     const controller = new AbortController();
@@ -76,11 +78,8 @@ const Map = () => {
         }));
 
         setBakeries(normalized);
-
-        if (!initialSelectionRef.current && normalized.length > 0) {
-          setSelectedBakeryId(normalized[0].id);
-          initialSelectionRef.current = true;
-        }
+        // 🟢 빵집 데이터 로드 시 선택 상태 초기화 (이전 단계에서 논의된 문제 해결)
+        setSelectedBakeryId(null); 
       } catch (error) {
         if (error.name === "AbortError") return;
         console.error(error);
@@ -110,6 +109,8 @@ const Map = () => {
         lng: longitude,
       });
       setLocationStatus("ready");
+      // 🟢 위치 로드 성공 시 선택 상태 초기화 (이전 단계에서 논의된 문제 해결)
+      setSelectedBakeryId(null); 
     };
 
     const handleError = (error) => {
@@ -183,6 +184,13 @@ const Map = () => {
 
   const handleSelectBakery = useCallback((bakeryId) => {
     setSelectedBakeryId(bakeryId);
+    setAiPathBakeries([]); // 🟢 일반 빵집 선택 시 AI 경로 해제
+  }, []);
+  
+  // 🟢 AI 경로 목록을 업데이트하는 콜백 함수 정의
+  const handleAiPathUpdate = useCallback((bakeries) => {
+    setAiPathBakeries(bakeries);
+    setSelectedBakeryId(null); // 🟢 AI 경로 업데이트 시 선택 상태 해제
   }, []);
 
   const mapErrorMessage = useMemo(() => {
@@ -196,12 +204,17 @@ const Map = () => {
         return kakaoError.message;
     }
   }, [kakaoError]);
+  
 
   return (
     <div className="Map">
       {/* 순례길 추천 영역 */}
       <div className="MapSidebar" aria-label="순례길 추천">
-        <MapPath />
+        {/* 🟢 MapPath에 AI 경로 업데이트 함수 및 현재 추천 목록 전달 */}
+        <MapPath 
+            onAiPathUpdate={handleAiPathUpdate} 
+            currentAiPath={aiPathBakeries} 
+        />
       </div>
 
       {/* 빵집 리스트 영역 */}
@@ -225,6 +238,8 @@ const Map = () => {
           locationErrorMessage={locationErrorMessage}
           mapStatus={kakaoStatus}
           mapErrorMessage={mapErrorMessage}
+          // 🟢 MapView에 AI 경로 목록 전달
+          aiPathBakeries={aiPathBakeries} 
         />
       </section>
     </div>

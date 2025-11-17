@@ -1,0 +1,16 @@
+.AIPathNumberOverlay {
+    background-color: #62321a; /* 빵/커피 색상 */
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 24px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 3px solid #f0a35e; /* 밝은 테두리로 강조 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    cursor: default;
+    transform: translate(-50%, -50%); /* 정확히 중앙 정렬 */
+}

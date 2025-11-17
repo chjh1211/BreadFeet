@@ -55,15 +55,20 @@ const MapView = ({
   locationErrorMessage,
   mapStatus = "idle",
   mapErrorMessage,
+  aiPathBakeries = []
 }) => {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const markersRef = useRef(new Map());
   const userMarkerRef = useRef(null);
   const userCircleRef = useRef(null);
-  const polylineRef = useRef(null);
+  const polylineRef = useRef(null); // 기존: 거리 측정용
   const distanceOverlayRef = useRef(null);
   const hasAutoCenteredRef = useRef(false);
+  
+  const aiPathPolylineRef = useRef(null);
+  // 🟢 AI 경로 순번 오버레이 배열 Ref
+  const aiPathOverlaysRef = useRef([]); 
 
   const markerImages = useMemo(() => {
     if (!kakao) return null;
@@ -98,14 +103,13 @@ const MapView = ({
 
     const centerLatLng =
       formatLatLng(userLocation?.lat, userLocation?.lng, kakao) ??
-      formatLatLng(bakeries[0]?.lat, bakeries[0]?.lng, kakao) ??
       new kakao.maps.LatLng(DEFAULT_CENTER.lat, DEFAULT_CENTER.lng);
 
     mapRef.current = new kakao.maps.Map(containerRef.current, {
       center: centerLatLng,
       level: 4,
     });
-  }, [kakao, bakeries, userLocation]);
+  }, [kakao, userLocation, mapStatus]);
 
   useEffect(() => {
     if (!kakao || !mapRef.current) return;
@@ -126,7 +130,7 @@ const MapView = ({
         position,
         clickable: true,
         image: markerImages?.defaultImage ?? null,
-        zIndex: bakery.id === selectedBakeryId ? 5 : 1,
+        zIndex: bakery.id === selectedBakeryId ? 5 : 1, 
       });
 
       kakao.maps.event.addListener(marker, "click", () => {
@@ -156,6 +160,8 @@ const MapView = ({
     }
   }, [bakeries, kakao, onSelectBakery, selectedBakeryId, userLocation, markerImages]);
 
+  // ... (선택 마커 이미지 변경, 선택 마커로 지도 이동, 사용자 위치 마커/원 표시 로직은 변경 없이 유지)
+
   useEffect(() => {
     if (!mapRef.current || !markerImages) return;
 
@@ -182,7 +188,7 @@ const MapView = ({
     if (!kakao || !mapRef.current || !markerImages) return;
 
     const position = formatLatLng(userLocation?.lat, userLocation?.lng, kakao);
-
+    
     if (!position) {
       if (userMarkerRef.current) {
         userMarkerRef.current.setMap(null);
@@ -232,6 +238,95 @@ const MapView = ({
     }
   }, [kakao, markerImages, userLocation]);
 
+  // 🟢 AI 경로 (Polyline 및 순번 오버레이) 표시 로직
+  useEffect(() => {
+    if (!kakao || !mapRef.current) return;
+
+    const clearAiPathElements = () => {
+        if (aiPathPolylineRef.current) {
+            aiPathPolylineRef.current.setMap(null);
+        }
+        aiPathOverlaysRef.current.forEach(overlay => overlay.setMap(null));
+        aiPathOverlaysRef.current = [];
+    };
+
+    // AI 경로가 없으면 기존 Polyline과 오버레이를 제거
+    if (aiPathBakeries.length < 2) {
+      clearAiPathElements();
+      return;
+    }
+
+    // 경로를 구성할 LatLng 배열 (AI 경로 빵집들의 좌표)
+    const path = aiPathBakeries.map(bakery => 
+      formatLatLng(bakery.lat, bakery.lng, kakao)
+    ).filter(latlng => latlng !== null); 
+
+    if (path.length < 2) {
+        clearAiPathElements();
+        return;
+    }
+    
+    // Polyline 객체 생성 또는 업데이트
+    if (!aiPathPolylineRef.current) {
+      aiPathPolylineRef.current = new kakao.maps.Polyline({
+        path: path,
+        strokeWeight: 4, 
+        strokeColor: '#62321a', // 빵 컨셉에 맞게 짙은 갈색 계열로 변경
+        strokeOpacity: 0.8, 
+        strokeStyle: 'solid', 
+        zIndex: 2, 
+      });
+      aiPathPolylineRef.current.setMap(mapRef.current);
+    } else {
+      aiPathPolylineRef.current.setPath(path);
+      aiPathPolylineRef.current.setMap(mapRef.current);
+    }
+    
+    // 경로에 순번 오버레이 추가 및 지도 이동
+    clearAiPathElements(); // 기존 오버레이 삭제 후 새로 생성
+    aiPathPolylineRef.current.setMap(mapRef.current);
+    const bounds = new kakao.maps.LatLngBounds();
+
+    path.forEach((latlng, index) => {
+        bounds.extend(latlng);
+        
+        // 🟢 순번 오버레이 생성
+        const content = document.createElement('div');
+        content.className = 'AIPathNumberOverlay';
+        content.textContent = index + 1;
+        // 💡 CSS를 통해 이 div를 동그란 뱃지 형태로 꾸며야 합니다. (Map.css에 추가 필요)
+        
+        const overlay = new kakao.maps.CustomOverlay({
+            content: content,
+            position: latlng,
+            xAnchor: 0.5,
+            yAnchor: 1.2, // 마커 이미지 위쪽에 위치하도록 조정
+            zIndex: 3 // Polyline보다 위, 선택 마커보다 아래
+        });
+        
+        overlay.setMap(mapRef.current);
+        aiPathOverlaysRef.current.push(overlay);
+    });
+
+    mapRef.current.setBounds(
+        bounds,
+        BOUNDS_PADDING.top,
+        BOUNDS_PADDING.right,
+        BOUNDS_PADDING.bottom,
+        BOUNDS_PADDING.left
+    );
+    
+    // AI 경로가 활성화되면 거리 측정 경로를 숨깁니다.
+    if (polylineRef.current) {
+      polylineRef.current.setMap(null);
+    }
+    if (distanceOverlayRef.current) {
+      distanceOverlayRef.current.setMap(null);
+    }
+
+  }, [kakao, aiPathBakeries]); // aiPathBakeries가 변경될 때마다 실행
+
+
   useEffect(() => {
     return () => {
       markersRef.current.forEach((marker) => marker.setMap(null));
@@ -248,6 +343,14 @@ const MapView = ({
         polylineRef.current.setMap(null);
         polylineRef.current = null;
       }
+      if (aiPathPolylineRef.current) {
+        aiPathPolylineRef.current.setMap(null);
+        aiPathPolylineRef.current = null;
+      }
+      // 🟢 AI 경로 순번 오버레이 cleanup
+      aiPathOverlaysRef.current.forEach(overlay => overlay.setMap(null));
+      aiPathOverlaysRef.current = [];
+      
       if (distanceOverlayRef.current) {
         distanceOverlayRef.current.setMap(null);
         distanceOverlayRef.current = null;
@@ -283,8 +386,11 @@ const MapView = ({
     mapStatus,
   ]);
 
+  // ⚠️ 기존 거리 측정 useEffect 수정 (AI 경로 활성화 시 실행하지 않도록 보호)
   useEffect(() => {
     if (!kakao || !mapRef.current) return;
+    
+    const isAiPathActive = aiPathBakeries.length >= 2;
 
     const clearDistanceOverlay = () => {
       if (polylineRef.current) {
@@ -294,6 +400,12 @@ const MapView = ({
         distanceOverlayRef.current.setMap(null);
       }
     };
+    
+    // 🟢 AI 경로가 활성화되면 거리 측정 경로를 표시하지 않음
+    if (isAiPathActive) {
+        clearDistanceOverlay();
+        return;
+    }
 
     const selectedBakery = bakeries.find(
       (bakery) => bakery.id === selectedBakeryId
@@ -318,13 +430,6 @@ const MapView = ({
     }
 
    if (!polylineRef.current) {
-      new kakao.maps.Polyline({
-        strokeWeight: 7, // dot은 굵기를 더 줘야 잘 보입니다.
-        strokeColor: "#62321aff",
-        strokeOpacity: 0.9,
-        strokeStyle: "dot", 
-      });
-
       polylineRef.current = new kakao.maps.Polyline({
         strokeWeight: 5, 
         strokeColor: "#62321aff", 
@@ -359,7 +464,7 @@ const MapView = ({
     distanceOverlayRef.current.setContent(content);
     distanceOverlayRef.current.setPosition(bakeryPosition);
     distanceOverlayRef.current.setMap(mapRef.current);
-  }, [bakeries, kakao, selectedBakeryId, userLocation]);
+  }, [bakeries, kakao, selectedBakeryId, userLocation, aiPathBakeries]); 
 
   return (
     <div className="MapCanvasWrapper">
@@ -374,5 +479,3 @@ const MapView = ({
 };
 
 export default MapView;
-
-

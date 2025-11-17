@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import "./MapBakeryList.css";
 import MapBakeryCard from "./MapBakeryCard";
 
-const MapBakeryList = ({ bakerys = [], selectedBakeryId, onSelectBakery }) => {
+const MapBakeryList = ({ bakerys = [], selectedBakeryId, onSelectBakery}) => {
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState("distance"); // 'distance' | 'reviews'
 
@@ -38,7 +38,7 @@ const MapBakeryList = ({ bakerys = [], selectedBakeryId, onSelectBakery }) => {
         });
         break;
       case "distance":
-      default:
+ default:
         sorted.sort((a, b) => {
           const aDist = Number.isFinite(a.distanceMeters)
             ? a.distanceMeters
@@ -46,7 +46,18 @@ const MapBakeryList = ({ bakerys = [], selectedBakeryId, onSelectBakery }) => {
           const bDist = Number.isFinite(b.distanceMeters)
             ? b.distanceMeters
             : Number.POSITIVE_INFINITY;
-          return aDist - bDist;
+          
+          // 1차 정렬: 거리순 (오름차순)
+          const distanceDiff = aDist - bDist;
+          
+          // 2차 정렬: 거리가 같으면 리뷰순 (내림차순, 리뷰가 많은 것이 위로)
+          if (distanceDiff !== 0) {
+            return distanceDiff;
+          }
+          
+          const aCnt = Number(a.reviewCount) || 0;
+          const bCnt = Number(b.reviewCount) || 0;
+          return bCnt - aCnt; // 거리가 같을 경우, 리뷰 수가 많은 순으로 정렬
         });
         break;
     }
