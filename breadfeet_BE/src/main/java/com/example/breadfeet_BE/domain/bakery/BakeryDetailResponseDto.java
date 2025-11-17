@@ -13,7 +13,7 @@ public class BakeryDetailResponseDto {
     private Double yCoordinate;
     private String city;
     private String district;
-    private String town;
+    private String roadAddress;
     private double avgRating;
 
     public BakeryDetailResponseDto(Bakery entity) {
@@ -26,7 +26,7 @@ public class BakeryDetailResponseDto {
         this.yCoordinate = entity.getYCoordinate();
         this.city = entity.getCity();
         this.district = entity.getDistrict();
-        this.town = entity.getTown();
+        this.roadAddress = entity.getRoadAddress();
         this.avgRating = entity.getAvgRating();
     }
 }

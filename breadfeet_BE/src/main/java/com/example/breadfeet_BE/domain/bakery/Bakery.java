@@ -18,7 +18,7 @@ public class Bakery extends BaseEntity {
     private Long id;
 
     @Column(nullable = false)
-    private String name; // 빵집 이름
+    private String name;                   // 빵집 이름
 
     private String bestBread;
     private String phoneNumber;
@@ -27,9 +27,9 @@ public class Bakery extends BaseEntity {
     private Double xCoordinate;
     private Double yCoordinate;
 
-    private String city;       // 시, 광역시
-    private String district;   // 구, 군
-    private String town;       // 읍, 면, 동
+    private String roadAddress;   // 도로명 주소
+    private String city;         // 시, 광역시
+    private String district;    // 구, 군
 
     @Transient
     @Setter

@@ -8,13 +8,13 @@ public class BakeryListResponseDto {
     private String name;
     private String city;
     private String district;
-    private String town;
+    private String roadAddress;
 
     public BakeryListResponseDto(Bakery entity) {
         this.bakeryId = entity.getId();
         this.name = entity.getName();
         this.city = entity.getCity();
         this.district = entity.getDistrict();
-        this.town = entity.getTown();
+        this.roadAddress = entity.getRoadAddress();
     }
 }
