@@ -2,55 +2,57 @@ import React, { useMemo, useState } from "react";
 import "./MapBakeryList.css";
 import MapBakeryCard from "./MapBakeryCard";
 
-const MapBakeryList = ({
-  bakerys = [],
-  userMatchRates = [],
-  selectedBakeryId,
-  onSelectBakery,
-}) => {
+const MapBakeryList = ({ bakerys = [], selectedBakeryId, onSelectBakery }) => {
   const [query, setQuery] = useState("");
-  const [sortBy, setSortBy] = useState("distance"); // 'distance' | 'reviews' | 'match'
+  const [sortBy, setSortBy] = useState("distance"); // 'distance' | 'reviews'
 
-  const scoreMap = useMemo(() => {
-    return new Map(
-      userMatchRates.map(({ bakeryId, matchScore }) => [
-        String(bakeryId),
-        matchScore,
-      ])
-    );
-  }, [userMatchRates]);
-
+  // 검색 필터
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return bakerys;
-    return bakerys.filter(
-      (b) =>
-        b.name.toLowerCase().includes(q) ||
-        b.address.toLowerCase().includes(q) ||
-        b.phone.replaceAll(" ", "").includes(q.replaceAll(" ", ""))
-    );
+
+    return bakerys.filter((b) => {
+      const name = (b.name || "").toLowerCase();
+      const address = (b.address || "").toLowerCase();
+      const phone = (b.phone || "").replaceAll(" ", "");
+      const qPhone = q.replaceAll(" ", "");
+
+      return (
+        name.includes(q) ||
+        address.includes(q) ||
+        (phone && phone.includes(qPhone))
+      );
+    });
   }, [query, bakerys]);
 
+  // 정렬
   const results = useMemo(() => {
-    const withMatch = filtered.map((b) => ({
-      ...b,
-      matchScore: scoreMap.get(String(b.id)) ?? 0,
-    }));
+    const sorted = [...filtered];
 
     switch (sortBy) {
       case "reviews":
-        withMatch.sort((a, b) => b.reviewCount - a.reviewCount);
-        break;
-      case "match":
-        withMatch.sort((a, b) => b.matchScore - a.matchScore);
+        sorted.sort((a, b) => {
+          const aCnt = Number(a.reviewCount) || 0;
+          const bCnt = Number(b.reviewCount) || 0;
+          return bCnt - aCnt;
+        });
         break;
       case "distance":
       default:
-        withMatch.sort((a, b) => a.distanceMeters - b.distanceMeters);
+        sorted.sort((a, b) => {
+          const aDist = Number.isFinite(a.distanceMeters)
+            ? a.distanceMeters
+            : Number.POSITIVE_INFINITY;
+          const bDist = Number.isFinite(b.distanceMeters)
+            ? b.distanceMeters
+            : Number.POSITIVE_INFINITY;
+          return aDist - bDist;
+        });
         break;
     }
-    return withMatch;
-  }, [filtered, sortBy, scoreMap]);
+
+    return sorted;
+  }, [filtered, sortBy]);
 
   const handleBakerySelect = (bakeryId) => {
     onSelectBakery?.(bakeryId);
@@ -61,8 +63,7 @@ const MapBakeryList = ({
       <div className="mapToolbar">
         <div className="searchWrapper">
           <div className="mapSearch">
-            <span className="mapSearchIcon" aria-hidden>
-            </span>
+            <span className="mapSearchIcon" aria-hidden />
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -76,7 +77,6 @@ const MapBakeryList = ({
           {[
             { key: "distance", label: "거리순" },
             { key: "reviews", label: "리뷰순" },
-            { key: "match", label: "취향매칭순" },
           ].map((opt) => (
             <button
               key={opt.key}
@@ -99,7 +99,6 @@ const MapBakeryList = ({
             key={bakery.id}
             id={bakery.id}
             bakery={bakery}
-            userData={userMatchRates}
             isSelected={bakery.id === selectedBakeryId}
             onSelect={handleBakerySelect}
           />

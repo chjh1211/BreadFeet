@@ -7,9 +7,6 @@ import { useKakaoLoader } from "../../hooks/useKakaoLoader";
 
 const USER_ID = 1001;
 const BAKERY_ENDPOINT = "http://localhost:3001/bakery";
-const MATCH_ENDPOINT = (userId) =>
-  `http://localhost:3001/matchRates?userId=${userId}`;
-
 const EARTH_RADIUS_METERS = 6371000;
 
 const toRadians = (degree) => (degree * Math.PI) / 180;
@@ -54,7 +51,6 @@ const parseNumber = (value) => {
 const Map = () => {
   const { kakao, status: kakaoStatus, error: kakaoError } = useKakaoLoader();
   const [bakeries, setBakeries] = useState([]);
-  const [userMatchRates, setUserMatchRates] = useState([]);
   const [selectedBakeryId, setSelectedBakeryId] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [locationStatus, setLocationStatus] = useState("idle");
@@ -98,34 +94,9 @@ const Map = () => {
   }, []);
 
   useEffect(() => {
-    const controller = new AbortController();
-
-    const fetchMatchRates = async () => {
-      try {
-        const response = await fetch(MATCH_ENDPOINT(USER_ID), {
-          signal: controller.signal,
-        });
-        if (!response.ok) throw new Error("Failed to fetch match rates");
-        const data = await response.json();
-        setUserMatchRates(Array.isArray(data) ? data : []);
-      } catch (error) {
-        if (error.name === "AbortError") return;
-        console.error(error);
-        setUserMatchRates([]);
-      }
-    };
-
-    fetchMatchRates();
-
-    return () => controller.abort();
-  }, []);
-
-  useEffect(() => {
     if (typeof navigator === "undefined" || !navigator.geolocation) {
       setLocationStatus("error");
-      setLocationErrorMessage(
-        "브라우저에서 위치 정보 사용이 제한되어 있어요."
-      );
+      setLocationErrorMessage("브라우저에서 위치 정보 사용이 제한되어 있어요.");
       return;
     }
 
@@ -145,13 +116,19 @@ const Map = () => {
       console.warn("Geolocation error", error);
       switch (error.code) {
         case error.PERMISSION_DENIED:
-          setLocationErrorMessage("위치 권한이 필요해요. 브라우저 설정을 확인해주세요.");
+          setLocationErrorMessage(
+            "위치 권한이 필요해요. 브라우저 설정을 확인해주세요."
+          );
           break;
         case error.POSITION_UNAVAILABLE:
-          setLocationErrorMessage("현재 위치를 확인할 수 없어요. 네트워크 상태를 확인해주세요.");
+          setLocationErrorMessage(
+            "현재 위치를 확인할 수 없어요. 네트워크 상태를 확인해주세요."
+          );
           break;
         case error.TIMEOUT:
-          setLocationErrorMessage("현재 위치 정보를 가져오는데 시간이 너무 오래 걸려요.");
+          setLocationErrorMessage(
+            "현재 위치 정보를 가져오는데 시간이 너무 오래 걸려요."
+          );
           break;
         default:
           setLocationErrorMessage("위치 정보를 가져오는 중 오류가 발생했어요.");
@@ -197,7 +174,9 @@ const Map = () => {
       return {
         ...bakery,
         distanceMeters:
-          Number.isFinite(distance) && distance !== 0 ? distance : fallbackDistance,
+          Number.isFinite(distance) && distance !== 0
+            ? distance
+            : fallbackDistance,
       };
     });
   }, [bakeries, userLocation]);
@@ -225,19 +204,17 @@ const Map = () => {
         <MapPath />
       </div>
 
-     
-    {/* 빵집 리스트 영역 */}
+      {/* 빵집 리스트 영역 */}
       <aside className="MapListPane" aria-label="빵집 목록">
         <MapBakeryList
           bakerys={bakeriesWithDistance}
-          userMatchRates={userMatchRates}
           selectedBakeryId={selectedBakeryId}
           onSelectBakery={handleSelectBakery}
         />
       </aside>
 
       {/* 지도 영역 */}
-       <section className="MapMainPane" aria-label="지도 영역">
+      <section className="MapMainPane" aria-label="지도 영역">
         <MapView
           kakao={kakao}
           bakeries={bakeriesWithDistance}
