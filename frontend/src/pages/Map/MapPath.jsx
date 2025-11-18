@@ -132,7 +132,7 @@ return (
           <div className="row MapPathControls g-3">
             
             {/* 광역자치단체 */}
-            <div className="col-6">
+            <div>
               <label className="MapPathLabel form-label" htmlFor="region">광역자치단체</label>
               <select
                 id="region"
@@ -149,7 +149,7 @@ return (
             </div>
 
             {/* 세부 지역 */}
-            <div className="col-6">
+            <div>
               <label className="MapPathLabel form-label" htmlFor="subregion">세부 지역</label>
               <select
                 id="subregion"
