@@ -17,7 +17,7 @@ public class Bakery extends BaseEntity {
     private Long id;
 
     @Column(nullable = false)
-    private String name; // 빵집 이름
+    private String name;                   // 빵집 이름
 
     private String bestBread;
     private String phoneNumber;

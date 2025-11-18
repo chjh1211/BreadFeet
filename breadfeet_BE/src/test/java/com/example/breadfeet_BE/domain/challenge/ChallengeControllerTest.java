@@ -1,10 +1,11 @@
 package com.example.breadfeet_BE.domain.challenge;
 
 import com.example.breadfeet_BE.auth.config.auth.dto.CustomOAuth2User;
-import com.example.breadfeet_BE.domain.challenge.dto.MyChallengeResponseDto;
+import com.example.breadfeet_BE.domain.challenge.dto.AllMyChallengesResponseDto;
+import com.example.breadfeet_BE.domain.challenge.dto.ChallengeInfoResponseDto;
+import com.example.breadfeet_BE.domain.challenge.dto.OngoingChallengeInfoResponseDto;
 import com.example.breadfeet_BE.domain.user.User;
-import com.example.breadfeet_BE.domain.user.UserRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -36,65 +35,71 @@ class ChallengeControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @MockBean
     private ChallengeService challengeService;
 
-    @MockBean
-    private UserRepository userRepository;
+    private User mockUser;
 
-    @Test
-    @DisplayName("달성한 챌린지 목록 조회 성공")
-    void getMyAchievedChallenges_success() throws Exception {
+    @BeforeEach
+    void setUp() {
         // given
-        User mockUser = new User("kakao123", "testuser", "profile.jpg");
+        mockUser = new User("kakao123", "testuser", "profile.jpg");
         ReflectionTestUtils.setField(mockUser, "id", 1L);
 
         // Manually set up security context
         CustomOAuth2User principal = new CustomOAuth2User(mockUser, Collections.emptyMap());
         Authentication auth = new UsernamePasswordAuthenticationToken(principal, "password", principal.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(auth);
+    }
 
-        Challenge mockChallenge1 = new Challenge("챌린지1", ChallengeType.REGION, "서울 강남", 1, "설명1", "/img/badges/badge1.png");
-        ReflectionTestUtils.setField(mockChallenge1, "id", 101L);
-        UserChallenge mockUserChallenge1 = new UserChallenge(mockUser, mockChallenge1);
-        ReflectionTestUtils.setField(mockUserChallenge1, "achievedAt", LocalDateTime.of(2023, 1, 1, 10, 0));
+    @Test
+    @DisplayName("내 챌린지 목록 조회 (추천, 진행중, 완료 포함) 성공")
+    void getMyChallenges_success() throws Exception {
+        // given
+        System.out.println(">> 테스트 시작: 내 챌린지 목록 조회");
 
-        Challenge mockChallenge2 = new Challenge("챌린지2", ChallengeType.FREQUENCY, null, 5, "설명2", "/img/badges/badge2.png");
-        ReflectionTestUtils.setField(mockChallenge2, "id", 102L);
-        UserChallenge mockUserChallenge2 = new UserChallenge(mockUser, mockChallenge2);
-        ReflectionTestUtils.setField(mockUserChallenge2, "achievedAt", LocalDateTime.of(2023, 2, 1, 11, 0));
+        // 1. Mock 데이터 생성
+        Challenge recommendedChallenge = new Challenge("추천 챌린지", ChallengeType.REGION, "서울 전체", 10, "서울의 빵집 10곳 방문", "/img/badges/badge_rec.png");
+        Challenge ongoingChallenge = new Challenge("진행중 챌린지", ChallengeType.FREQUENCY, null, 5, "일주일에 빵 5번 먹기", "/img/badges/badge_on.png");
+        Challenge completedChallenge = new Challenge("완료된 챌린지", ChallengeType.REGION, "부산 해운대구", 3, "해운대 빵집 3곳 방문", "/img/badges/badge_com.png");
+
+        ChallengeInfoResponseDto recommendedDto = new ChallengeInfoResponseDto(recommendedChallenge);
+        OngoingChallengeInfoResponseDto ongoingDto = new OngoingChallengeInfoResponseDto(ongoingChallenge, 2); // progress=2
+        ChallengeInfoResponseDto completedDto = new ChallengeInfoResponseDto(completedChallenge);
+
+        AllMyChallengesResponseDto responseDto = new AllMyChallengesResponseDto(
+                List.of(recommendedDto),
+                List.of(ongoingDto),
+                List.of(completedDto)
+        );
+        System.out.println(">> Mock Service 응답 데이터 준비 완료");
+        System.out.println("   - 추천: " + recommendedDto.getTitle());
+        System.out.println("   - 진행중: " + ongoingDto.getTitle() + " (진행도: " + ongoingDto.getProgress() + "/" + ongoingDto.getTotal() + ")");
+        System.out.println("   - 완료: " + completedDto.getTitle());
 
 
-        MyChallengeResponseDto dto1 = MyChallengeResponseDto.builder().userChallenge(mockUserChallenge1).build();
-        MyChallengeResponseDto dto2 = MyChallengeResponseDto.builder().userChallenge(mockUserChallenge2).build();
-
-        List<MyChallengeResponseDto> expectedDtos = List.of(dto1, dto2);
-
-        // userRepository mock is not directly relevant for this test case as User is passed directly from principal
-        // given(userRepository.findById(any(Long.class))).willReturn(Optional.of(mockUser)); // Removed this line
-        given(challengeService.getMyAchievedChallenges(any(User.class))).willReturn(expectedDtos);
+        // 2. Mock Service 설정
+        given(challengeService.getAllMyChallenges(any(User.class))).willReturn(responseDto);
 
         // when & then
-        mockMvc.perform(get("/api/challenges/my-achieved"))
-                .andDo(print()) // Print the response
+        System.out.println(">> /api/challenges/my API 호출 및 검증 시작");
+        mockMvc.perform(get("/api/challenges/my"))
+                .andDo(print()) // 요청/응답 전체 내용 출력
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].challengeId").value(101L))
-                .andExpect(jsonPath("$[0].challengeName").value("챌린지1"))
-                .andExpect(jsonPath("$[0].challengeType").value("REGION"))
-                .andExpect(jsonPath("$[0].challengeRegion").value("서울 강남"))
-                .andExpect(jsonPath("$[0].challengeThreshold").value(1))
-                .andExpect(jsonPath("$[0].challengeDescription").value("설명1"))
-                .andExpect(jsonPath("$[0].achievedAt").exists())
-                .andExpect(jsonPath("$[1].challengeId").value(102L))
-                .andExpect(jsonPath("$[1].challengeName").value("챌린지2"))
-                .andExpect(jsonPath("$[1].challengeType").value("FREQUENCY"))
-                .andExpect(jsonPath("$[1].challengeRegion").isEmpty())
-                .andExpect(jsonPath("$[1].challengeThreshold").value(5))
-                .andExpect(jsonPath("$[1].challengeDescription").value("설명2"))
-                .andExpect(jsonPath("$[1].achievedAt").exists());
+                // 추천 챌린지 검증
+                .andExpect(jsonPath("$.recommended.length()").value(1))
+                .andExpect(jsonPath("$.recommended[0].title").value("추천 챌린지"))
+                .andExpect(jsonPath("$.recommended[0].body").value("서울의 빵집 10곳 방문"))
+                // 진행중 챌린지 검증
+                .andExpect(jsonPath("$.ongoing.length()").value(1))
+                .andExpect(jsonPath("$.ongoing[0].title").value("진행중 챌린지"))
+                .andExpect(jsonPath("$.ongoing[0].progress").value(2))
+                .andExpect(jsonPath("$.ongoing[0].total").value(5))
+                // 완료된 챌린지 검증
+                .andExpect(jsonPath("$.completed.length()").value(1))
+                .andExpect(jsonPath("$.completed[0].title").value("완료된 챌린지"));
+
+        System.out.println(">> 테스트 성공: 모든 검증 완료");
     }
 }
