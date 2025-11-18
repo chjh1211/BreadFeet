@@ -29,12 +29,13 @@ const Regions = {
 
 const Korea = Object.keys(Regions);
 
-const MapPath = () => {
-  const [region, setRegion] = useState(Korea[0] || "서울"); // 기본값을 Korea의 첫 번째 요소로 설정
+// 🟢 Prop으로 onAiPathUpdate 함수를 받습니다.
+const MapPath = ({ onAiPathUpdate }) => { 
+  const [region, setRegion] = useState(Korea[0] || "서울");
   const [subregion, setSubregion] = useState("지역 전체");
 
-  const [aiList, setAiList] = useState([]); // AI 추천 결과 목록
-  const [loading, setLoading] = useState(false); // 로딩 상태
+  const [aiList, setAiList] = useState([]); 
+  const [loading, setLoading] = useState(false); 
 
   const subregions = useMemo(() => {
     const list = Regions[region] || [];
@@ -44,16 +45,14 @@ const MapPath = () => {
   const handleRegionChange = useCallback((e) => {
     const newRegion = e.target.value;
     setRegion(newRegion);
-    setSubregion("지역 전체"); // 광역 변경 시 하위 지역 초기화
+    setSubregion("지역 전체");
   }, []);
 
   function parseAddress(address) {
     if (!address) return { region: "", subregion: "" };
     const parts = address.split(" ");
     
-    // 첫 번째 파트는 광역자치단체 (예: "대구", "경기")
     const r = parts[0]; 
-    // 두 번째 파트는 구/군/시 (예: "북구", "수원시")
     const s = parts[1] || ""; 
     
     return {
@@ -62,14 +61,14 @@ const MapPath = () => {
     };
   }
 
-  // ⭐ AI 경로 생성 (최애빵(bread1_result) 기준으로 필터링)
   const handleAICreatePath = async () => {
-    setLoading(true); // 로딩 시작
-    setAiList([]); // 이전 결과 초기화
+    setLoading(true); 
+    setAiList([]); 
+    onAiPathUpdate?.([]); // 🟢 경로 생성 시작 시 기존 경로 초기화
 
     try {
       const [tasteRes, bakeryRes] = await Promise.all([
-        fetch("http://localhost:3001/tasteFormResults/1"), // userId 1001의 결과 가정
+        fetch("http://localhost:3001/tasteFormResults/1"),
         fetch("http://localhost:3001/bakery"),
       ]);
 
@@ -80,24 +79,18 @@ const MapPath = () => {
       const taste = await tasteRes.json();
       const bakeryList = await bakeryRes.json();
       
-      const topBread = taste.bread1_result; // 최애빵 (예: "크림빵")
+      const topBread = taste.bread1_result;
       
       if (!topBread) {
          alert("최애빵 데이터(bread1_result)를 찾을 수 없습니다.");
          return;
       }
 
-      // 2) 대표빵 + 광역/세부 지역 필터링
       const matched = bakeryList.filter((b) => {
         const { region: r, subregion: s } = parseAddress(b.address);
 
-        // a. 대표빵 일치 확인
         const breadOk = b.representBread === topBread;
-        
-        // b. 광역자치단체 일치 확인
         const regionOk = r === region;
-        
-        // c. 세부 지역 일치 확인 ('지역 전체' 선택 시 무조건 통과)
         const subOk = subregion === "지역 전체" ? true : s === subregion;
 
         return breadOk && regionOk && subOk;
@@ -108,29 +101,34 @@ const MapPath = () => {
         return;
       }
 
-      const count = Math.min(5, matched.length); // 5개 미만이면 있는 개수만큼만
+      const count = Math.min(5, matched.length);
       const randomFive = matched.sort(() => 0.5 - Math.random()).slice(0, count);
+      
       setAiList(randomFive);
+      
     } catch (err) {
       console.error("AI 경로 생성 오류:", err);
       alert("경로 생성 중 오류가 발생했습니다. 콘솔을 확인해주세요.");
+      onAiPathUpdate?.([]);
     } finally {
-      setLoading(false); // 로딩 종료
+      setLoading(false); 
     }
   };
+  
+  const handleShowPathOnMap = useCallback(() => {
+      if (aiList.length > 0) {
+          onAiPathUpdate?.(aiList); 
+      }
+  }, [aiList, onAiPathUpdate]);
 
 return (
-    // ⭐️ 전체 컨테이너를 MapPath 대신 Bootstrap 컨테이너로 감싸고, 기존 MapPath CSS는 유지
     <div className="MapPath container-fluid py-4"> 
       
-      {/* 순례길 추천 제목 (기존 스타일 유지) */}
       <h3 className="MapPathTitle text-center mb-4">순례길 추천</h3>
 
-      {/* ⭐️ 추천 설정 카드 (Card 컴포넌트 사용) */}
       <div className="card shadow-sm mb-4" style={{ backgroundColor: '#f7f2ed', border: 'none' }}>
         <div className="card-body">
           
-          {/* ⭐️ 지역 선택 폼 (Bootstrap Grid를 사용하여 한 줄에 두 개 배치) */}
           <div className="row MapPathControls g-3">
             
             {/* 광역자치단체 */}
@@ -138,7 +136,7 @@ return (
               <label className="MapPathLabel form-label" htmlFor="region">광역자치단체</label>
               <select
                 id="region"
-                className="MapPathSelect form-select" // Bootstrap form-select 클래스 추가
+                className="MapPathSelect form-select"
                 value={region}
                 onChange={handleRegionChange}
               >
@@ -155,7 +153,7 @@ return (
               <label className="MapPathLabel form-label" htmlFor="subregion">세부 지역</label>
               <select
                 id="subregion"
-                className="MapPathSelect form-select" // Bootstrap form-select 클래스 추가
+                className="MapPathSelect form-select"
                 value={subregion}
                 onChange={(e) => setSubregion(e.target.value)}
               >
@@ -170,11 +168,11 @@ return (
         </div>
       </div>
       
-      {/* ⭐️ AI 경로 생성 버튼 (Block 버튼 스타일) */}
+      {/* ⭐️ AI 경로 생성 버튼 */}
       <div className="d-grid gap-2 mb-4">
         <button 
-          className="btn MapPathButton btn-dark" // btn-dark 사용
-          onClick={handleAICreatePath}
+          className="btn MapPathButton btn-dark"
+          onClick={handleAICreatePath} // 🟢 경로 생성 함수 연결
           disabled={loading}
         >
           {loading ? (
@@ -187,12 +185,13 @@ return (
           )}
         </button>
       </div>
+      
 
       {/* ⭐️ AI 추천 빵집 경로 섹션 */}
       {(aiList.length > 0 || loading) && (
         <div className="AIPathSection card shadow-sm" style={{ backgroundColor: '#f7f2ed', border: 'none' }}>
           <div className="card-header MapPathTitle" style={{fontSize: '18px', fontWeight: 'bold', backgroundColor: 'transparent', borderBottom: '1px solid #d6c9bd'}}>
-            나만의 AI 추천 경로
+            나만의 AI 추천 경로 🥨 🔍
           </div>
           <div className="card-body p-0">
             
@@ -231,6 +230,28 @@ return (
           </div>
         </div>
       )}
+
+
+      {/* ⭐️ AI 경로 지도에서 보기 버튼 */}
+      {aiList.length > 0 && ( // 🟢 AI 추천 목록이 있을 때만 버튼 표시
+          <div className="d-grid gap-2 mb-4 mt-4">
+            <button 
+              className="btn MapPathButton btn-dark" 
+              onClick={handleShowPathOnMap} // 🟢 경로 보기 함수 연결
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                  경로 표시 중 ...
+                </>
+              ) : (
+                "AI 경로 지도에서 보기"
+              )}
+            </button>
+          </div>
+      )}
+      
     </div> 
   );
 };
