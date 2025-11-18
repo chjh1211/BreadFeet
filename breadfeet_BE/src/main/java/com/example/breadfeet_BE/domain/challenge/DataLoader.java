@@ -43,10 +43,26 @@ public class DataLoader implements CommandLineRunner {
             challengeRepository.save(new Challenge("대구 군위군 고수", ChallengeType.REGION, "대구광역시 군위군", null, 1000, "대구 군위군에서 1000번 이상 리뷰 작성", "/img/badges/default.png"));
 
             // Frequency Challenges
-            challengeRepository.save(new Challenge("10월의 빵식이", ChallengeType.FREQUENCY, null, 10, 10, "10월 한 달 동안 10번 이상 리뷰 작성", "/img/badges/default.png"));
-            challengeRepository.save(new Challenge("10월의 빵생빵사", ChallengeType.FREQUENCY, null, 10, 100, "10월 한 달 동안 100번 이상 리뷰 작성", "/img/badges/default.png"));
-            challengeRepository.save(new Challenge("11월의 빵식이", ChallengeType.FREQUENCY, null, 11, 10, "11월 한 달 동안 10번 이상 리뷰 작성", "/img/badges/default.png"));
-            challengeRepository.save(new Challenge("11월의 빵생빵사", ChallengeType.FREQUENCY, null, 11, 100, "11월 한 달 동안 100번 이상 리뷰 작성", "/img/badges/default.png"));
+            for (int month = 1; month <= 12; month++) {
+                challengeRepository.save(new Challenge(
+                        month + "월의 빵식이",
+                        ChallengeType.FREQUENCY,
+                        null,
+                        month,
+                        10,
+                        month + "월 한 달 동안 10번 이상 리뷰 작성",
+                        "/img/badges/default.png"
+                ));
+                challengeRepository.save(new Challenge(
+                        month + "월의 빵생빵사",
+                        ChallengeType.FREQUENCY,
+                        null,
+                        month,
+                        100,
+                        month + "월 한 달 동안 100번 이상 리뷰 작성",
+                        "/img/badges/default.png"
+                ));
+            }
         }
     }
 }
