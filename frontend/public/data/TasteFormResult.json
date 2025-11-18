@@ -1,0 +1,47 @@
+{
+  "user_id": 1,
+  "taste_result": {
+    "bread1_result": {
+      "bread": "식빵",
+      "prob": 0.05733809026577294
+    },
+    "bread2_result": {
+      "bread": "크루아상",
+      "prob": 0.05510458664093823
+    },
+    "bread3_result": {
+      "bread": "바게트",
+      "prob": 0.30464207041106417
+    },
+    "bread4_result": {
+      "bread": "크림빵",
+      "prob": 0.8194172892616046
+    },
+    "bread5_result": {
+      "bread": "단팥빵",
+      "prob": 0.25718687379507693
+    },
+    "bread6_result": {
+      "bread": "소보로빵",
+      "prob": 0.33650601039851585
+    },
+    "bread7_result": {
+      "bread": "소시지빵",
+      "prob": 0.9403313913244613
+    },
+    "bread8_result": {
+      "bread": "베이글",
+      "prob": 0.5467729854628107
+    },
+    "bread9_result": {
+      "bread": "도넛",
+      "prob": 0.23243494106632104
+    },
+    "bread10_result": {
+      "bread": "크루아상",
+      "prob": 0.05510458664093823
+    }
+  },
+  "top1_bread": "소시지빵",
+  "top1_prob": 0.9403313913244613
+}
