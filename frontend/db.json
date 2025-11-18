@@ -81,7 +81,6 @@
       "lat": 35.8894,
       "lng": 128.6125,
       "representBread": "크림빵"
-
     },
     {
       "id": "3",
@@ -112,7 +111,6 @@
       "lat": 35.842,
       "lng": 128.6139,
       "representBread": "크림빵"
-
     },
     {
       "id": "5",
@@ -151,7 +149,7 @@
       "nickname": "감자도리",
       "profile": "/img/profile/default.jpg",
       "rating": 4.5,
-      "likes": 34,
+      "likes": 35,
       "dislikes": 2,
       "date": "2025-03-21",
       "text": "맛있네요"
@@ -192,7 +190,7 @@
       "profile": "/img/profile/default.jpg",
       "rating": 5,
       "likes": 52,
-      "dislikes": 3,
+      "dislikes": 4,
       "date": "2025-05-12",
       "text": "크로와상이 진짜 맛있음. 재방문 의사 100%"
     },
@@ -208,19 +206,78 @@
     }
   ],
   "matchRates": [
-    { "id": 1, "userId": 1001, "bakeryId": 1, "matchScore": 93 },
-    { "id": 2, "userId": 1001, "bakeryId": 2, "matchScore": 85 },
-    { "id": 3, "userId": 1001, "bakeryId": 3, "matchScore": 70 },
-    { "id": 4, "userId": 1001, "bakeryId": 4, "matchScore": 60 },
-    { "id": 5, "userId": 1001, "bakeryId": 5, "matchScore": 50 },
-    { "id": 6, "userId": 1001, "bakeryId": 6, "matchScore": 30 },
-
-    { "id": 7, "userId": 2002, "bakeryId": 1, "matchScore": 44 },
-    { "id": 8, "userId": 2002, "bakeryId": 2, "matchScore": 72 },
-    { "id": 9, "userId": 2002, "bakeryId": 3, "matchScore": 55 },
-    { "id": 10, "userId": 2002, "bakeryId": 4, "matchScore": 88 },
-    { "id": 11, "userId": 2002, "bakeryId": 5, "matchScore": 33 },
-    { "id": 12, "userId": 2002, "bakeryId": 6, "matchScore": 61 }
+    {
+      "id": "1",
+      "userId": 1001,
+      "bakeryId": 1,
+      "matchScore": 93
+    },
+    {
+      "id": "2",
+      "userId": 1001,
+      "bakeryId": 2,
+      "matchScore": 85
+    },
+    {
+      "id": "3",
+      "userId": 1001,
+      "bakeryId": 3,
+      "matchScore": 70
+    },
+    {
+      "id": "4",
+      "userId": 1001,
+      "bakeryId": 4,
+      "matchScore": 60
+    },
+    {
+      "id": "5",
+      "userId": 1001,
+      "bakeryId": 5,
+      "matchScore": 50
+    },
+    {
+      "id": "6",
+      "userId": 1001,
+      "bakeryId": 6,
+      "matchScore": 30
+    },
+    {
+      "id": "7",
+      "userId": 2002,
+      "bakeryId": 1,
+      "matchScore": 44
+    },
+    {
+      "id": "8",
+      "userId": 2002,
+      "bakeryId": 2,
+      "matchScore": 72
+    },
+    {
+      "id": "9",
+      "userId": 2002,
+      "bakeryId": 3,
+      "matchScore": 55
+    },
+    {
+      "id": "10",
+      "userId": 2002,
+      "bakeryId": 4,
+      "matchScore": 88
+    },
+    {
+      "id": "11",
+      "userId": 2002,
+      "bakeryId": 5,
+      "matchScore": 33
+    },
+    {
+      "id": "12",
+      "userId": 2002,
+      "bakeryId": 6,
+      "matchScore": 61
+    }
   ],
   "topBakeries": [
     {
@@ -272,53 +329,53 @@
     ],
     "mapUrl": "/map?courseId=1"
   },
-   "Questions": [
+  "Questions": [
     {
-      "id": 1,
+      "id": "1",
       "question": "버터 풍미가 느껴지는 빵을 얼마나 선호하십니까?"
     },
     {
-      "id": 2,
+      "id": "2",
       "question": "페이스트리류(크루아상 등 겹겹이 결이 있는 버터 반죽 빵)을 얼마나 선호하십니까?"
     },
     {
-      "id": 3,
+      "id": "3",
       "question": "단맛(설탕, 크림 등)이 강한 빵을 얼마나 선호하십니까?"
     },
     {
-      "id": 4,
+      "id": "4",
       "question": "짭짤하거나 고소한(치즈, 소시지 등) 속 재료가 있는 빵을 얼마나 선호하십니까?"
     },
     {
-      "id": 5,
+      "id": "5",
       "question": "씹을 때 바삭한 식감을 얼마나 선호하십니까?"
     },
     {
-      "id": 6,
+      "id": "6",
       "question": "빵의 속이 촉촉하고 부드러운 식감을 얼마나 선호하십니까?"
     },
     {
-      "id": 7,
+      "id": "7",
       "question": "쫄깃한 식감을 얼마나 선호하십니까?"
     },
     {
-      "id": 8,
+      "id": "8",
       "question": "건강(통밀, 저당, 곡물 함유 등) 또는 기능성 빵을 얼마나 선호하십니까?"
     },
     {
-      "id": 9,
+      "id": "9",
       "question": "속에 재료(밤, 초코칩, 견과류 등)가 들어 있는 빵을 얼마나 선호하십니까?"
     },
     {
-      "id": 10,
+      "id": "10",
       "question": "신선한(당일 제조된 빵)을 얼마나 중시하십니까?"
     }
   ],
   "tasteFormResults": [
     {
-      "id":1,
+      "id": "1",
       "userId": 1001,
-      "bread1_result":"크림빵",
+      "bread1_result": "크림빵",
       "breadTop3": ["크림빵", "소보로빵", "바게트빵"]
     }
   ]

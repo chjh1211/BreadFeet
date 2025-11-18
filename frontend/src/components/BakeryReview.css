@@ -69,16 +69,17 @@
   background: var(--chip-bg);
   border-radius: 30px;
   padding: 5px 10px;
-  font-size: 12px;
+  font-size: 16px;
   cursor: pointer;
   margin-left: 8px;
 }
 .bdw-review-toggle:hover {
-  border-color: var(--brand-brown);
+  /* font-size: 16px; */
+  /* border-color: var(--brand-brown); */
 }
 .bdw-review-toggle[aria-expanded="true"] {
-  border-color: var(--brand-brown);
-  box-shadow: 0 0 0 1px var(--brand-brown) inset;
+  /* border-color: var(--brand-brown); */
+  /* box-shadow: 0 0 0 1px var(--brand-brown) inset; */
 }
 
 .bdw-review-stars {
@@ -97,6 +98,28 @@
   background: #fdfbf9;
   border-radius: 30px;
   padding: 1px 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.bdw-review-meta > button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.bdw-review-likes.is-active {
+  background: #e0f0ff;
+  color: #1a73e8;
+  font-weight: 600;
+}
+
+.bdw-review-dislikes.is-active {
+  background: #ffe0e0;
+  color: #d93025;
+  font-weight: 600;
 }
 
 @media (min-width: 640px) {
