@@ -44,13 +44,15 @@ public class ChallengeService {
     }
 
     private void checkFrequencyChallenges(User user) {
-        LocalDateTime thirtyDaysAgo = LocalDateTime.now().minusDays(30);
-        long reviewCount = reviewRepository.countByUserAndCreatedAtAfter(user, thirtyDaysAgo);
-
         List<Challenge> frequencyChallenges = challengeRepository.findByType(ChallengeType.FREQUENCY);
+        int currentYear = LocalDateTime.now().getYear();
+
         for (Challenge challenge : frequencyChallenges) {
-            if (reviewCount >= challenge.getThreshold()) {
-                awardChallenge(user, challenge);
+            if (challenge.getMonth() != null) {
+                long reviewCount = reviewRepository.countByUserAndCreatedAtYearAndMonth(user, currentYear, challenge.getMonth());
+                if (reviewCount >= challenge.getThreshold()) {
+                    awardChallenge(user, challenge);
+                }
             }
         }
     }
@@ -108,8 +110,10 @@ public class ChallengeService {
             String district = parts[1];
             return (int) reviewRepository.countByUserAndBakery_CityAndBakery_District(user, city, district);
         } else if (challenge.getType() == ChallengeType.FREQUENCY) {
-            LocalDateTime thirtyDaysAgo = LocalDateTime.now().minusDays(30);
-            return (int) reviewRepository.countByUserAndCreatedAtAfter(user, thirtyDaysAgo);
+            if (challenge.getMonth() != null) {
+                int currentYear = LocalDateTime.now().getYear();
+                return (int) reviewRepository.countByUserAndCreatedAtYearAndMonth(user, currentYear, challenge.getMonth());
+            }
         }
         return 0;
     }

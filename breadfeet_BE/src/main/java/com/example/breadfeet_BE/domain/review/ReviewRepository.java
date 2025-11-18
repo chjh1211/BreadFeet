@@ -20,4 +20,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     long countByUserAndBakery_CityAndBakery_District(User user, String city, String district);
 
     long countByUserAndCreatedAtAfter(User user, LocalDateTime dateTime);
+
+    @Query("SELECT COUNT(r) FROM Review r WHERE r.user = :user AND FUNCTION('YEAR', r.createdAt) = :year AND FUNCTION('MONTH', r.createdAt) = :month")
+    long countByUserAndCreatedAtYearAndMonth(@Param("user") User user, @Param("year") int year, @Param("month") int month);
 }
