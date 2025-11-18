@@ -13,7 +13,7 @@ export default function TopBakeries({
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch("http://localhost:3001/topBakeries", { signal: controller.signal })
+    fetch("/data/topBakeries.json", { signal: controller.signal })
       .then((res) => res.json())
       .then((data) => setItems(Array.isArray(data) ? data : []))
       .catch(() => setItems([]));
