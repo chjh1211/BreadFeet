@@ -61,8 +61,16 @@
       "distanceMeters": 3,
       "phone": "053 123 4567",
       "hours": "매일 09:00 - 20:00",
-      "popMenu": ["소금빵", "크림빵", "크루아상"],
-      "tags": ["매장 내 취식 가능", "테이크아웃", "커피"],
+      "popMenu": [
+        "소금빵",
+        "크림빵",
+        "크루아상"
+      ],
+      "tags": [
+        "매장 내 취식 가능",
+        "테이크아웃",
+        "커피"
+      ],
       "lat": 35.888,
       "lng": 128.6106,
       "representBread": "크림빵"
@@ -76,12 +84,18 @@
       "distanceMeters": 50,
       "phone": "053 999 1234",
       "hours": "매일 09:00 - 20:00",
-      "popMenu": ["크루아상", "크림빵", "식빵"],
-      "tags": ["매장 내 취식 불가능", "테이크아웃"],
+      "popMenu": [
+        "크루아상",
+        "크림빵",
+        "식빵"
+      ],
+      "tags": [
+        "매장 내 취식 불가능",
+        "테이크아웃"
+      ],
       "lat": 35.8894,
       "lng": 128.6125,
       "representBread": "크림빵"
-
     },
     {
       "id": "3",
@@ -92,8 +106,15 @@
       "distanceMeters": 10,
       "phone": "053 321 7890",
       "hours": "매일 09:00 - 20:00",
-      "popMenu": ["감자빵", "바게트", "크루아상"],
-      "tags": ["한정 메뉴", "예약 가능"],
+      "popMenu": [
+        "감자빵",
+        "바게트",
+        "크루아상"
+      ],
+      "tags": [
+        "한정 메뉴",
+        "예약 가능"
+      ],
       "lat": 35.8814,
       "lng": 128.6079,
       "representBread": "크림빵"
@@ -107,12 +128,18 @@
       "distanceMeters": 500,
       "phone": "053 222 3333",
       "hours": "매일 09:00 - 20:00",
-      "popMenu": ["식빵", "소시지빵", "크림빵"],
-      "tags": ["테이크아웃", "커피"],
+      "popMenu": [
+        "식빵",
+        "소시지빵",
+        "크림빵"
+      ],
+      "tags": [
+        "테이크아웃",
+        "커피"
+      ],
       "lat": 35.842,
       "lng": 128.6139,
       "representBread": "크림빵"
-
     },
     {
       "id": "5",
@@ -123,8 +150,16 @@
       "distanceMeters": 1000,
       "phone": "053 777 0000",
       "hours": "매일 09:00 - 20:00",
-      "popMenu": ["크루아상", "도넛", "소금빵"],
-      "tags": ["매장 내 취식 가능", "테이크아웃", "커피"],
+      "popMenu": [
+        "크루아상",
+        "도넛",
+        "소금빵"
+      ],
+      "tags": [
+        "매장 내 취식 가능",
+        "테이크아웃",
+        "커피"
+      ],
       "lat": 35.8684,
       "lng": 128.5985,
       "representBread": "크림빵"
@@ -138,8 +173,16 @@
       "distanceMeters": 1500,
       "phone": "053 456 7890",
       "hours": "매일 09:00 - 20:00",
-      "popMenu": ["식빵", "바게트", "도넛"],
-      "tags": ["매장 내 취식 가능", "테이크아웃", "커피"],
+      "popMenu": [
+        "식빵",
+        "바게트",
+        "도넛"
+      ],
+      "tags": [
+        "매장 내 취식 가능",
+        "테이크아웃",
+        "커피"
+      ],
       "lat": 35.8465,
       "lng": 128.5957,
       "representBread": "소보로빵"
@@ -208,19 +251,78 @@
     }
   ],
   "matchRates": [
-    { "id": 1, "userId": 1001, "bakeryId": 1, "matchScore": 93 },
-    { "id": 2, "userId": 1001, "bakeryId": 2, "matchScore": 85 },
-    { "id": 3, "userId": 1001, "bakeryId": 3, "matchScore": 70 },
-    { "id": 4, "userId": 1001, "bakeryId": 4, "matchScore": 60 },
-    { "id": 5, "userId": 1001, "bakeryId": 5, "matchScore": 50 },
-    { "id": 6, "userId": 1001, "bakeryId": 6, "matchScore": 30 },
-
-    { "id": 7, "userId": 2002, "bakeryId": 1, "matchScore": 44 },
-    { "id": 8, "userId": 2002, "bakeryId": 2, "matchScore": 72 },
-    { "id": 9, "userId": 2002, "bakeryId": 3, "matchScore": 55 },
-    { "id": 10, "userId": 2002, "bakeryId": 4, "matchScore": 88 },
-    { "id": 11, "userId": 2002, "bakeryId": 5, "matchScore": 33 },
-    { "id": 12, "userId": 2002, "bakeryId": 6, "matchScore": 61 }
+    {
+      "id": 1,
+      "userId": 1001,
+      "bakeryId": 1,
+      "matchScore": 93
+    },
+    {
+      "id": 2,
+      "userId": 1001,
+      "bakeryId": 2,
+      "matchScore": 85
+    },
+    {
+      "id": 3,
+      "userId": 1001,
+      "bakeryId": 3,
+      "matchScore": 70
+    },
+    {
+      "id": 4,
+      "userId": 1001,
+      "bakeryId": 4,
+      "matchScore": 60
+    },
+    {
+      "id": 5,
+      "userId": 1001,
+      "bakeryId": 5,
+      "matchScore": 50
+    },
+    {
+      "id": 6,
+      "userId": 1001,
+      "bakeryId": 6,
+      "matchScore": 30
+    },
+    {
+      "id": 7,
+      "userId": 2002,
+      "bakeryId": 1,
+      "matchScore": 44
+    },
+    {
+      "id": 8,
+      "userId": 2002,
+      "bakeryId": 2,
+      "matchScore": 72
+    },
+    {
+      "id": 9,
+      "userId": 2002,
+      "bakeryId": 3,
+      "matchScore": 55
+    },
+    {
+      "id": 10,
+      "userId": 2002,
+      "bakeryId": 4,
+      "matchScore": 88
+    },
+    {
+      "id": 11,
+      "userId": 2002,
+      "bakeryId": 5,
+      "matchScore": 33
+    },
+    {
+      "id": 12,
+      "userId": 2002,
+      "bakeryId": 6,
+      "matchScore": 61
+    }
   ],
   "topBakeries": [
     {
@@ -232,8 +334,16 @@
       "distanceMeters": 3,
       "phone": "053 123 4567",
       "hours": "매일 09:00 - 20:00",
-      "popMenu": ["소금빵", "크림빵", "크루아상"],
-      "tags": ["매장 내 취식 가능", "테이크아웃", "커피"]
+      "popMenu": [
+        "소금빵",
+        "크림빵",
+        "크루아상"
+      ],
+      "tags": [
+        "매장 내 취식 가능",
+        "테이크아웃",
+        "커피"
+      ]
     },
     {
       "id": "2",
@@ -244,8 +354,15 @@
       "distanceMeters": 50,
       "phone": "053 999 1234",
       "hours": "매일 09:00 - 20:00",
-      "popMenu": ["크루아상", "크림빵", "식빵"],
-      "tags": ["매장 내 취식 불가능", "테이크아웃"]
+      "popMenu": [
+        "크루아상",
+        "크림빵",
+        "식빵"
+      ],
+      "tags": [
+        "매장 내 취식 불가능",
+        "테이크아웃"
+      ]
     },
     {
       "id": "3",
@@ -256,8 +373,15 @@
       "distanceMeters": 10,
       "phone": "053 321 7890",
       "hours": "매일 09:00 - 20:00",
-      "popMenu": ["감자빵", "바게트", "크루아상"],
-      "tags": ["한정 메뉴", "예약 가능"]
+      "popMenu": [
+        "감자빵",
+        "바게트",
+        "크루아상"
+      ],
+      "tags": [
+        "한정 메뉴",
+        "예약 가능"
+      ]
     }
   ],
   "editor": {
@@ -272,7 +396,7 @@
     ],
     "mapUrl": "/map?courseId=1"
   },
-   "Questions": [
+  "Questions": [
     {
       "id": 1,
       "question": "버터 풍미가 느껴지는 빵을 얼마나 선호하십니까?"
@@ -316,10 +440,294 @@
   ],
   "tasteFormResults": [
     {
-      "id":1,
+      "id": 1,
       "userId": 1001,
-      "bread1_result":"크림빵",
-      "breadTop3": ["크림빵", "소보로빵", "바게트빵"]
+      "bread1_result": "크림빵",
+      "breadTop3": [
+        "크림빵",
+        "소보로빵",
+        "바게트빵"
+      ]
+    }
+  ],
+  "TasteFormAnswer": [
+    {
+      "user_id": 1,
+      "answers": [
+        {
+          "question_id": 1,
+          "answer": 4
+        },
+        {
+          "question_id": 2,
+          "answer": 2
+        },
+        {
+          "question_id": 3,
+          "answer": 5
+        },
+        {
+          "question_id": 4,
+          "answer": 3
+        },
+        {
+          "question_id": 5,
+          "answer": 1
+        },
+        {
+          "question_id": 6,
+          "answer": 4
+        },
+        {
+          "question_id": 7,
+          "answer": 2
+        },
+        {
+          "question_id": 8,
+          "answer": 5
+        },
+        {
+          "question_id": 9,
+          "answer": 3
+        },
+        {
+          "question_id": 10,
+          "answer": 4
+        }
+      ]
+    },
+    {
+      "id": "29e9",
+      "user_id": 2,
+      "answers": [
+        {
+          "question_id": 1,
+          "answer": 1
+        },
+        {
+          "question_id": 2,
+          "answer": 1
+        },
+        {
+          "question_id": 3,
+          "answer": 1
+        },
+        {
+          "question_id": 4,
+          "answer": 1
+        },
+        {
+          "question_id": 5,
+          "answer": 1
+        },
+        {
+          "question_id": 6,
+          "answer": 5
+        },
+        {
+          "question_id": 7,
+          "answer": 5
+        },
+        {
+          "question_id": 8,
+          "answer": 5
+        },
+        {
+          "question_id": 9,
+          "answer": 5
+        },
+        {
+          "question_id": 10,
+          "answer": 5
+        }
+      ]
+    },
+    {
+      "id": "e2f7",
+      "user_id": 2,
+      "answers": [
+        {
+          "question_id": 1,
+          "answer": 1
+        },
+        {
+          "question_id": 2,
+          "answer": 1
+        },
+        {
+          "question_id": 3,
+          "answer": 1
+        },
+        {
+          "question_id": 4,
+          "answer": 1
+        },
+        {
+          "question_id": 5,
+          "answer": 1
+        },
+        {
+          "question_id": 6,
+          "answer": 5
+        },
+        {
+          "question_id": 7,
+          "answer": 5
+        },
+        {
+          "question_id": 8,
+          "answer": 5
+        },
+        {
+          "question_id": 9,
+          "answer": 5
+        },
+        {
+          "question_id": 10,
+          "answer": 5
+        }
+      ]
+    },
+    {
+      "id": "1cc6",
+      "user_id": 2,
+      "answers": [
+        {
+          "question_id": 1,
+          "answer": 1
+        },
+        {
+          "question_id": 2,
+          "answer": 1
+        },
+        {
+          "question_id": 3,
+          "answer": 1
+        },
+        {
+          "question_id": 4,
+          "answer": 1
+        },
+        {
+          "question_id": 5,
+          "answer": 1
+        },
+        {
+          "question_id": 6,
+          "answer": 5
+        },
+        {
+          "question_id": 7,
+          "answer": 5
+        },
+        {
+          "question_id": 8,
+          "answer": 5
+        },
+        {
+          "question_id": 9,
+          "answer": 5
+        },
+        {
+          "question_id": 10,
+          "answer": 5
+        }
+      ]
+    },
+    {
+      "id": "9782",
+      "user_id": 2,
+      "answers": [
+        {
+          "question_id": 1,
+          "answer": 1
+        },
+        {
+          "question_id": 2,
+          "answer": 1
+        },
+        {
+          "question_id": 3,
+          "answer": 1
+        },
+        {
+          "question_id": 4,
+          "answer": 1
+        },
+        {
+          "question_id": 5,
+          "answer": 1
+        },
+        {
+          "question_id": 6,
+          "answer": 5
+        },
+        {
+          "question_id": 7,
+          "answer": 5
+        },
+        {
+          "question_id": 8,
+          "answer": 5
+        },
+        {
+          "question_id": 9,
+          "answer": 5
+        },
+        {
+          "question_id": 10,
+          "answer": 5
+        }
+      ]
+    }
+  ],
+  "TasteFormResult": [
+    {
+      "user_id": 2,
+      "taste_result": {
+        "bread1_result": {
+          "bread": "식빵",
+          "prob": 0.05733809026577294
+        },
+        "bread2_result": {
+          "bread": "크루아상",
+          "prob": 0.05510458664093823
+        },
+        "bread3_result": {
+          "bread": "바게트",
+          "prob": 0.30464207041106417
+        },
+        "bread4_result": {
+          "bread": "크림빵",
+          "prob": 0.8194172892616046
+        },
+        "bread5_result": {
+          "bread": "단팥빵",
+          "prob": 0.25718687379507693
+        },
+        "bread6_result": {
+          "bread": "소보로빵",
+          "prob": 0.33650601039851585
+        },
+        "bread7_result": {
+          "bread": "소시지빵",
+          "prob": 0.9403313913244613
+        },
+        "bread8_result": {
+          "bread": "베이글",
+          "prob": 0.5467729854628107
+        },
+        "bread9_result": {
+          "bread": "도넛",
+          "prob": 0.23243494106632104
+        },
+        "bread10_result": {
+          "bread": "크루아상",
+          "prob": 0.05510458664093823
+        }
+      },
+      "top1_bread": "소시지빵",
+      "top1_prob": 0.9403313913244613
     }
   ]
 }

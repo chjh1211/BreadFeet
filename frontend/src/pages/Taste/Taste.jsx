@@ -35,6 +35,30 @@ const Taste = () => {
     return <div className="loading-message">질문을 불러오는 중...</div>;
   }
 
+  //제출 POST 요청
+  const handleSubmit = async () => {
+  // payload 생성
+  const payload = {
+    user_id: 2, // 필요 시 동적으로!!! userID바꾸기!!
+    answers: answers.map((answer, index) => ({
+      question_id: questions[index].id,
+      answer
+    }))
+  };
+
+  try {
+    // 1️⃣ DB에 POST 요청
+    await axios.post('http://localhost:3001/TasteFormAnswer', payload);
+    
+    // 2️⃣ 요청이 성공하면 결과 페이지로 이동
+    navigate('/tasteResult');
+  } catch (err) {
+    console.error("❌ 설문 저장 실패:", err);
+    alert("설문 저장에 실패했습니다. 다시 시도해주세요.");
+  }
+};
+
+
   // 8. 데이터가 있을 때 설문지 UI 렌더링
   return (
     <div className="bread-survey">
@@ -62,14 +86,15 @@ const Taste = () => {
           </div>
         </div>
       ))}
-
+      
       <button
         type="button"
         className="submit-button"
-        onClick={() => navigate('/tasteResult')}
+        onClick={handleSubmit} // 함수 연결
       >
         제출하기
       </button>
+
     </div>
   );    
 }
